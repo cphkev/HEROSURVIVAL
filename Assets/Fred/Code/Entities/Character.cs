@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable, IEntity
 {
+    private ImmolationAura immolationAura;
+    
     private string characterName; // Name of the character (Player, Enemy, etc.)
     private Stats stats;          // The character's stats (e.g., Strength, Dexterity, etc.)
     private int currentHP;        // The character's current health
@@ -12,6 +14,13 @@ public class Character : MonoBehaviour, IDamageable, IEntity
     public int Intelligence => stats.Intelligence;
     public int Luck => stats.Luck;
 
+    
+    public ImmolationAura ImmolationAura
+    {
+        get => immolationAura;
+        set => immolationAura = value;
+    }
+    
     // Properties for HP and Mana
     public int CurrentHP
     {
@@ -83,4 +92,6 @@ public class Character : MonoBehaviour, IDamageable, IEntity
         target.TakeDamage(damage); // Apply damage to the target
         Debug.Log($"{characterName} attacks target for {damage} damage.");
     }
+    
+    
 }

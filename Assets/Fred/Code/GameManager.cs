@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject playerPrefab;
+    public GameObject enemyPrefab;
     public Stats playerStats;
     public Stats enemyStats;
 
@@ -10,30 +12,49 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Find Player and Enemy in the scene based on tags
+        // Try to find existing Player and Enemy, or spawn them if missing
         player = GameObject.FindGameObjectWithTag("Player");
         enemy = GameObject.FindGameObjectWithTag("Enemy");
 
+        if (player == null && playerPrefab != null)
+        {
+            player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+            player.tag = "Player";
+            Debug.Log("Player spawned.");
+        }
+
+        if (enemy == null && enemyPrefab != null)
+        {
+            enemy = Instantiate(enemyPrefab, new Vector3(5, 0, 0), Quaternion.identity);
+            enemy.tag = "Enemy";
+            Debug.Log("Enemy spawned.");
+        }
+
+        // Initialize Player
         if (player != null)
         {
-            // Initialize player stats
-            playerStats = new Stats(55, 5, 3, 2);  // Example: Strength = 10, Dexterity = 5, Intelligence = 3, Luck = 2
+            playerStats = new Stats(55, 5, 3, 2); // Example Stats
             Character playerCharacter = player.GetComponent<Character>();
             if (playerCharacter != null)
             {
                 playerCharacter.InitializeCharacter("Player", playerStats);
                 Debug.Log("Player initialized.");
             }
-        }
-        else
-        {
-            Debug.LogWarning("Player not found! Make sure the Player has the correct tag.");
+
+            // Add Immolation Aura to Player
+            ImmolationAura aura = player.GetComponent<ImmolationAura>();
+            if (aura == null)
+            {
+                aura = player.AddComponent<ImmolationAura>();
+                Debug.Log("Immolation Aura added to Player.");
+            }
+            playerCharacter.ImmolationAura = aura;
         }
 
+        // Initialize Enemy
         if (enemy != null)
         {
-            // Initialize enemy stats
-            enemyStats = new Stats(8, 6, 2, 1);  // Example stats for enemy
+            enemyStats = new Stats(8, 6, 2, 1);
             Character enemyCharacter = enemy.GetComponent<Character>();
             if (enemyCharacter != null)
             {
@@ -41,34 +62,32 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Enemy initialized.");
             }
         }
-        else
-        {
-            Debug.LogWarning("Enemy not found! Make sure the Enemy has the correct tag.");
-        }
     }
 
-    // Example of player attacking the enemy
+    // Player Attacks Enemy
     public void PlayerAttack()
     {
-        if (enemy != null)
+        if (player != null && enemy != null)
         {
+            Character playerCharacter = player.GetComponent<Character>();
             Character enemyCharacter = enemy.GetComponent<Character>();
-            if (enemyCharacter != null)
+            if (playerCharacter != null && enemyCharacter != null)
             {
-                player.GetComponent<Character>().Attack(enemyCharacter);
+                playerCharacter.Attack(enemyCharacter);
             }
         }
     }
 
-    // Example of enemy attacking the player
+    // Enemy Attacks Player
     public void EnemyAttack()
     {
-        if (player != null)
+        if (player != null && enemy != null)
         {
             Character playerCharacter = player.GetComponent<Character>();
-            if (playerCharacter != null)
+            Character enemyCharacter = enemy.GetComponent<Character>();
+            if (playerCharacter != null && enemyCharacter != null)
             {
-                enemy.GetComponent<Character>().Attack(playerCharacter);
+                enemyCharacter.Attack(playerCharacter);
             }
         }
     }

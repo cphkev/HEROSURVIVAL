@@ -74,6 +74,7 @@ public class Stats
         critDamage = 1.5f + (dexterity * 0.02f);
         manaRegen = intelligence * 0.1f;
         dodgeChance = luck * 0.01f;
+        maxMana = 100;
     }
 
     // Method to update stats dynamically
