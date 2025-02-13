@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         // Example: Assume enemy has 100 HP
-        if (damage >= 100) 
+        if (damage >= 1) 
         {
             Die();
         }

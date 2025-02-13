@@ -48,7 +48,9 @@ public class GameManager : MonoBehaviour
                 aura = player.AddComponent<ImmolationAura>();
                 Debug.Log("Immolation Aura added to Player.");
             }
-            playerCharacter.ImmolationAura = aura;
+
+            // Activate the Immolation Aura
+            playerCharacter.ActivateImmolationAura(aura);
         }
 
         // Initialize Enemy

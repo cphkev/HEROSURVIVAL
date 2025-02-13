@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable, IEntity
 {
-    private ImmolationAura immolationAura;
-    
     private string characterName; // Name of the character (Player, Enemy, etc.)
     private Stats stats;          // The character's stats (e.g., Strength, Dexterity, etc.)
     private int currentHP;        // The character's current health
@@ -14,13 +12,9 @@ public class Character : MonoBehaviour, IDamageable, IEntity
     public int Intelligence => stats.Intelligence;
     public int Luck => stats.Luck;
 
-    
-    public ImmolationAura ImmolationAura
-    {
-        get => immolationAura;
-        set => immolationAura = value;
-    }
-    
+    private ImmolationAura immolationAura;
+    private bool isAuraActive = false; // Flag to track if Immolation Aura is active
+
     // Properties for HP and Mana
     public int CurrentHP
     {
@@ -92,6 +86,54 @@ public class Character : MonoBehaviour, IDamageable, IEntity
         target.TakeDamage(damage); // Apply damage to the target
         Debug.Log($"{characterName} attacks target for {damage} damage.");
     }
-    
-    
+
+ // Method to activate Immolation Aura
+    public void ActivateImmolationAura(ImmolationAura aura)
+    {
+        immolationAura = aura;
+
+        if (immolationAura.CanCast(CurrentMana))
+        {
+            immolationAura.CastSpell();  // Activate aura
+            isAuraActive = true;
+            Debug.Log("Immolation Aura activated.");
+        }
+        else
+        {
+            Debug.Log("Not enough mana to activate Immolation Aura.");
+        }
+    }
+
+    // Method to deactivate Immolation Aura
+    public void DeactivateImmolationAura()
+    {
+        if (isAuraActive)
+        {
+            immolationAura.StopAura();
+            isAuraActive = false;
+            Debug.Log("Immolation Aura deactivated.");
+        }
+    }
+
+    // Method to update mana (e.g., regen or use)
+    public void UpdateMana(float amount)
+    {
+        CurrentMana += amount;
+        Debug.Log($"Mana updated. Current Mana: {CurrentMana}/{MaxMana}");
+    }
+
+    // Update method to continuously drain mana when aura is active
+    void Update()
+    {
+        if (isAuraActive && CurrentMana > 0)
+        {
+            // Drain mana over time
+            CurrentMana -= immolationAura.ManaCost * Time.deltaTime;
+            if (CurrentMana <= 0)
+            {
+                DeactivateImmolationAura();
+                Debug.Log("Out of mana. Immolation Aura deactivated.");
+            }
+        }
+    }
 }
