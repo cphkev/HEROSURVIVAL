@@ -3,14 +3,17 @@ using TMPro; // Make sure to import TextMeshPro
 
 public class HPDisplay : MonoBehaviour
 {
-    public TMP_Text hpText; // Reference to the TextMeshPro component
+    public TMP_Text hpText;   // Reference to the TextMeshPro component for HP
+    public TMP_Text manaText; // Reference to the TextMeshPro component for Mana
 
     private Character playerCharacter;
 
     void Start()
     {
+        // Find the player object by tag
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
+        // If the player is found, get the Character component
         if (player != null)
         {
             playerCharacter = player.GetComponent<Character>();
@@ -24,32 +27,41 @@ public class HPDisplay : MonoBehaviour
             Debug.LogWarning("Player not found! Make sure the Player has the correct tag.");
         }
 
-        UpdateHPDisplay();
+        // Initial update of the UI
+        UpdateStatsDisplay();
     }
 
     void Update()
     {
+        // If the player character is valid, update the stats display
         if (playerCharacter != null)
         {
-            UpdateHPDisplay();
+            UpdateStatsDisplay();
         }
     }
 
-   
-
-    void UpdateHPDisplay()
-{
-    if (playerCharacter != null && hpText != null)
+    // Method to update both HP and Mana UI text
+    void UpdateStatsDisplay()
     {
-        // Log the current HP to check its value
-        Debug.Log("Updating HP: " + playerCharacter.currentHP);
+        if (playerCharacter != null)
+        {
+            if (hpText != null)
+            {
+                // Update the HP text
+                hpText.text = "HP: " + playerCharacter.currentHP.ToString();
+            }
 
-        // Update the UI text
-        hpText.text = "HP: " + playerCharacter.currentHP.ToString();
+            if (manaText != null)
+            {
+                // Update the Mana text
+                manaText.text = "Mana: " + playerCharacter.currentMana.ToString();
+            }
 
-        // Force an immediate UI refresh
-        Canvas.ForceUpdateCanvases();
+            // Log the values for debugging
+            Debug.Log("Updating HP: " + playerCharacter.currentHP + " | Mana: " + playerCharacter.currentMana);
+
+            // Force immediate UI update (if necessary)
+            Canvas.ForceUpdateCanvases();
+        }
     }
-}
-
 }

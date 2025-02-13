@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             // Initialize player stats
-            playerStats = new Stats(10, 5, 3, 2);  // Example: Strength = 10, Dexterity = 5, Intelligence = 3, Luck = 2
+            playerStats = new Stats(55, 5, 3, 2);  // Example: Strength = 10, Dexterity = 5, Intelligence = 3, Luck = 2
             Character playerCharacter = player.GetComponent<Character>();
             if (playerCharacter != null)
             {
