@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     {
         SetSprinting();
         AxesMovement();
-        YOrientation();
+       
         
         if (m_characterController.velocity.y > .25f)
         {
@@ -72,22 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetSprinting() => m_sprinting = Input.GetKey(KeyCode.LeftShift) ? true : false;
 
-    private void YOrientation()
-    {
-        if (Input.GetKey(KeyCode.Q))
-        {
-            Rotate(true);
-        }
-        else if (Input.GetKey(KeyCode.E))
-        {
-            Rotate(false);
-        }
-        else 
-        {
-            yaw += RotateSpeed * 0.035f * Input.GetAxis("Mouse X");
-            transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
-        }
-    }
+   
 
     private void AxesMovement()
     {

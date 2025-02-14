@@ -30,7 +30,7 @@ public class StatDisplay : MonoBehaviour
     }
 
     // Method to update the UI texts
-    void UpdateStatsDisplay()
+    public void UpdateStatsDisplay()
     {
         if (strengthText != null)
         {

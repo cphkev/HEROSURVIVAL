@@ -1,18 +1,48 @@
+using Fred.Code.Interfaces;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance; // Singleton instance
+
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
+
     public Stats playerStats;
     public Stats enemyStats;
 
     private GameObject player;
     private GameObject enemy;
 
+    private Character playerCharacter;
+    private Character enemyCharacter;
+
+    public List<ISpell> availableSpells = new List<ISpell>();
+
+    void Awake()
+    {
+        // Singleton setup
+        if (Instance == null)
+        {
+            Instance = this; // Set the instance
+            DontDestroyOnLoad(gameObject); // Optional: Don't destroy the GameManager on scene changes
+        }
+        else
+        {
+            Destroy(gameObject); // Ensure there's only one GameManager in the scene
+        }
+    }
+
     void Start()
     {
-        // Try to find existing Player and Enemy, or spawn them if missing
+        SpawnCharacters();
+        InitializeCharacters();
+        Invoke("UpdateUI", 0.5f); // Delayed UI update
+    }
+
+    private void SpawnCharacters()
+    {
         player = GameObject.FindGameObjectWithTag("Player");
         enemy = GameObject.FindGameObjectWithTag("Enemy");
 
@@ -29,68 +59,57 @@ public class GameManager : MonoBehaviour
             enemy.tag = "Enemy";
             Debug.Log("Enemy spawned.");
         }
+    }
 
-        // Initialize Player
+    private void InitializeCharacters()
+    {
         if (player != null)
         {
-            playerStats = new Stats(55, 5, 3, 2); // Example Stats
-            Character playerCharacter = player.GetComponent<Character>();
-            if (playerCharacter != null)
-            {
-                playerCharacter.InitializeCharacter("Player", playerStats);
-                Debug.Log("Player initialized.");
-            }
+            playerStats = new Stats(55, 5, 3, 2);
+            playerCharacter = player.GetComponent<Character>() ?? player.AddComponent<Character>();
+            playerCharacter.InitializeCharacter("Player", playerStats);
 
-            // Add Immolation Aura to Player
-            ImmolationAura aura = player.GetComponent<ImmolationAura>();
-            if (aura == null)
-            {
-                aura = player.AddComponent<ImmolationAura>();
-                Debug.Log("Immolation Aura added to Player.");
-            }
-
-            // Activate the Immolation Aura
-            playerCharacter.ActivateImmolationAura(aura);
+            availableSpells.Add(new Fireball());
+            availableSpells.Add(new ImmolationAura());
+            Debug.Log("Player initialized.");
         }
 
-        // Initialize Enemy
         if (enemy != null)
         {
             enemyStats = new Stats(8, 6, 2, 1);
-            Character enemyCharacter = enemy.GetComponent<Character>();
-            if (enemyCharacter != null)
-            {
-                enemyCharacter.InitializeCharacter("Enemy", enemyStats);
-                Debug.Log("Enemy initialized.");
-            }
+            enemyCharacter = enemy.GetComponent<Character>() ?? enemy.AddComponent<Character>();
+            enemyCharacter.InitializeCharacter("Enemy", enemyStats);
+            Debug.Log("Enemy initialized.");
         }
     }
 
-    // Player Attacks Enemy
+    private void UpdateUI()
+    {
+        HPDisplay ui = FindObjectOfType<HPDisplay>();
+        if (ui != null)
+        {
+            Debug.Log("UI Found. Updating Stats.");
+            ui.UpdateStatsDisplay();
+        }
+        else
+        {
+            Debug.LogWarning("HPDisplay not found! Make sure it exists in the scene.");
+        }
+    }
+
     public void PlayerAttack()
     {
-        if (player != null && enemy != null)
+        if (playerCharacter != null && enemyCharacter != null)
         {
-            Character playerCharacter = player.GetComponent<Character>();
-            Character enemyCharacter = enemy.GetComponent<Character>();
-            if (playerCharacter != null && enemyCharacter != null)
-            {
-                playerCharacter.Attack(enemyCharacter);
-            }
+            playerCharacter.Attack(enemyCharacter);
         }
     }
 
-    // Enemy Attacks Player
     public void EnemyAttack()
     {
-        if (player != null && enemy != null)
+        if (playerCharacter != null && enemyCharacter != null)
         {
-            Character playerCharacter = player.GetComponent<Character>();
-            Character enemyCharacter = enemy.GetComponent<Character>();
-            if (playerCharacter != null && enemyCharacter != null)
-            {
-                enemyCharacter.Attack(playerCharacter);
-            }
+            enemyCharacter.Attack(playerCharacter);
         }
     }
 }

@@ -1,5 +1,6 @@
-using Fred.Code.Interfaces;
+using System.Collections.Generic;
 using UnityEngine;
+using Fred.Code.Interfaces;
 
 public class Character : MonoBehaviour, IDamageable, IEntity
 {
@@ -7,13 +8,13 @@ public class Character : MonoBehaviour, IDamageable, IEntity
     private Stats stats;          // The character's stats (e.g., Strength, Dexterity, etc.)
     private int currentHP;        // The character's current health
     private float currentMana;    // The character's current mana
+
+    private List<ISpell> learnedSpells = new List<ISpell>(); // List of learned spells
+
     public int Strength => stats.Strength;
     public int Dexterity => stats.Dexterity;
     public int Intelligence => stats.Intelligence;
     public int Luck => stats.Luck;
-
-    private ImmolationAura immolationAura;
-    private bool isAuraActive = false; // Flag to track if Immolation Aura is active
 
     // Properties for HP and Mana
     public int CurrentHP
@@ -22,7 +23,7 @@ public class Character : MonoBehaviour, IDamageable, IEntity
         set => currentHP = Mathf.Clamp(value, 0, MaxHP);
     }
 
-    public int MaxHP => stats.MaxHP; // Derived from Stats
+    public int MaxHP => stats.MaxHP;
 
     public float CurrentMana
     {
@@ -30,9 +31,9 @@ public class Character : MonoBehaviour, IDamageable, IEntity
         set => currentMana = Mathf.Clamp(value, 0, MaxMana);
     }
 
-    public float MaxMana => stats.MaxMana; // Derived from Stats
+    public float MaxMana => stats.MaxMana;
 
-    // Constructor to initialize the character with stats
+    // Constructor
     public Character(string name, Stats initialStats)
     {
         InitializeCharacter(name, initialStats);
@@ -43,8 +44,8 @@ public class Character : MonoBehaviour, IDamageable, IEntity
     {
         characterName = name;
         stats = initialStats;
-        CurrentHP = MaxHP;  // Ensure HP is set correctly
-        CurrentMana = MaxMana; // Ensure Mana is set correctly
+        CurrentHP = MaxHP;
+        CurrentMana = MaxMana;
     }
 
     // Method to take damage (from IDamageable interface)
@@ -83,57 +84,45 @@ public class Character : MonoBehaviour, IDamageable, IEntity
     public void Attack(IDamageable target)
     {
         int damage = stats.BaseDamage;
-        target.TakeDamage(damage); // Apply damage to the target
+        target.TakeDamage(damage);
         Debug.Log($"{characterName} attacks target for {damage} damage.");
     }
 
- // Method to activate Immolation Aura
-    public void ActivateImmolationAura(ImmolationAura aura)
+    // Method to learn a new spell
+    public void LearnSpell(ISpell spell)
     {
-        immolationAura = aura;
-
-        if (immolationAura.CanCast(CurrentMana))
+        if (!learnedSpells.Contains(spell))
         {
-            immolationAura.CastSpell();  // Activate aura
-            isAuraActive = true;
-            Debug.Log("Immolation Aura activated.");
+            learnedSpells.Add(spell);
+            Debug.Log($"{characterName} learned {spell.SpellName}.");
         }
         else
         {
-            Debug.Log("Not enough mana to activate Immolation Aura.");
+            Debug.Log($"{characterName} already knows {spell.SpellName}.");
         }
     }
 
-    // Method to deactivate Immolation Aura
-    public void DeactivateImmolationAura()
+    // Method to cast a spell
+    public void CastSpell(string spellName)
     {
-        if (isAuraActive)
-        {
-            immolationAura.StopAura();
-            isAuraActive = false;
-            Debug.Log("Immolation Aura deactivated.");
-        }
-    }
+        ISpell spell = learnedSpells.Find(s => s.SpellName == spellName);
 
-    // Method to update mana (e.g., regen or use)
-    public void UpdateMana(float amount)
-    {
-        CurrentMana += amount;
-        Debug.Log($"Mana updated. Current Mana: {CurrentMana}/{MaxMana}");
-    }
-
-    // Update method to continuously drain mana when aura is active
-    void Update()
-    {
-        if (isAuraActive && CurrentMana > 0)
+        if (spell != null)
         {
-            // Drain mana over time
-            CurrentMana -= immolationAura.ManaCost * Time.deltaTime;
-            if (CurrentMana <= 0)
+            if (spell.CanCast(CurrentMana))
             {
-                DeactivateImmolationAura();
-                Debug.Log("Out of mana. Immolation Aura deactivated.");
+                int damage = spell.CastSpell();
+                CurrentMana -= spell.ManaCost;
+                Debug.Log($"{characterName} cast {spellName}, dealing {damage} damage.");
             }
+            else
+            {
+                Debug.Log($"Not enough mana to cast {spellName}.");
+            }
+        }
+        else
+        {
+            Debug.Log($"{characterName} has not learned {spellName}.");
         }
     }
 }

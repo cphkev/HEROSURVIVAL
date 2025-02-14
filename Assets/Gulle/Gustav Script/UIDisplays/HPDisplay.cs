@@ -41,7 +41,7 @@ public class HPDisplay : MonoBehaviour
     }
 
     // Method to update both HP and Mana UI text
-    void UpdateStatsDisplay()
+    public void UpdateStatsDisplay()
     {
         if (playerCharacter != null)
         {
