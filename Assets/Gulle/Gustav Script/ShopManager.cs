@@ -27,7 +27,7 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
-        // Check if the availableSpells list from GameManager is assigned
+        // Check if GameManager and available spells exist
         if (GameManager.Instance == null || GameManager.Instance.availableSpells == null || GameManager.Instance.availableSpells.Count == 0)
         {
             Debug.LogError("No available spells assigned to the shop!");
@@ -38,45 +38,65 @@ public class ShopManager : MonoBehaviour
         InitializeShop();
     }
 
-    private void InitializeShop()
+  private void InitializeShop()
+{
+    // Populate the spell inventory from availableSpells in GameManager
+    List<ISpell> availableSpells = GameManager.Instance.availableSpells;
+
+    for (int i = 0; i < availableSpells.Count; i++)
     {
-        // Populate the spell inventory from availableSpells in GameManager
-        List<ISpell> availableSpells = GameManager.Instance.availableSpells;
+        spellInventory[i + 1] = availableSpells[i];
+    }
 
-        for (int i = 0; i < availableSpells.Count; i++)
-        {
-            spellInventory[i + 1] = availableSpells[i];
-        }
+    // Initialize buttons dynamically with spell names and images
+    for (int i = 0; i < ShopSlots.Count; i++)
+    {
+        int index = i + 1; // 1-based index
 
-        // Initialize buttons dynamically with spell names and actions
-        for (int i = 0; i < ShopSlots.Count; i++)
+        if (spellInventory.ContainsKey(index))
         {
-            int index = i + 1; // 1-based index
-            if (spellInventory.ContainsKey(index))
+            ISpell spell = spellInventory[index];
+
+            // Update button text
+            TextMeshProUGUI buttonText = ShopSlots[i].GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonText != null)
             {
-                // Update button text
-                TextMeshProUGUI buttonText = ShopSlots[i].GetComponentInChildren<TextMeshProUGUI>();
-                if (buttonText != null)
-                {
-                    buttonText.text = spellInventory[index].SpellName;
-                }
-                else
-                {
-                    Debug.LogWarning($"Button {i} doesn't have a TextMeshProUGUI component.");
-                }
+                buttonText.text = spell.SpellName;
+            }
 
-                // Assign BuySpell method to button click
-                ShopSlots[i].onClick.AddListener(() => BuySpell(index));
+            // Update button image
+            // Update button image
+             Image buttonImage = ShopSlots[i].transform.Find("Spellicon")?.GetComponent<Image>();
+            if (buttonImage != null && spell.SpellIcon != null)
+            {
+            buttonImage.sprite = spell.SpellIcon;
+            buttonImage.enabled = true; // Ensure it's visible
             }
             else
             {
-                Debug.LogWarning($"No spell assigned for slot {index}");
+            Debug.LogWarning($"No Image component found in 'Spellicon' for button {i} or missing icon.");
             }
+
+
+            // Assign BuySpell method to button click
+            ShopSlots[i].onClick.AddListener(() => BuySpell(index));
+        }
+        else
+        {
+            Debug.LogWarning($"No spell assigned for slot {index}");
         }
     }
+}
+
 
     public void BuySpell(int slotIndex)
     {
+        if (player == null)
+        {
+            Debug.LogWarning("Player not found!");
+            return;
+        }
+
         Character playerCharacter = player.GetComponent<Character>();
 
         if (playerCharacter != null && spellInventory.ContainsKey(slotIndex))
