@@ -26,7 +26,9 @@ public class HeroSurvCam : MonoBehaviour
         if (!target) return;
 
         // Get the player's movement direction
-        Vector3 playerVelocity = target.GetComponent<Rigidbody>()?.linearVelocity ?? Vector3.zero;
+        Rigidbody rb = target.GetComponent<Rigidbody>();
+        Vector3 playerVelocity = rb != null ? rb.linearVelocity : Vector3.zero;
+
         Vector3 leadOffset = playerVelocity.normalized * leadStrength;
 
         // Desired camera position with a fixed angle

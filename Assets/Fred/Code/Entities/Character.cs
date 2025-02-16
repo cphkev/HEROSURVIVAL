@@ -9,8 +9,6 @@ public class Character : MonoBehaviour, IDamageable, IEntity
     private int currentHP;        // The character's current health
     private float currentMana;    // The character's current mana
 
-    private List<ISpell> learnedSpells = new List<ISpell>(); // List of learned spells
-
     public int Strength => stats.Strength;
     public int Dexterity => stats.Dexterity;
     public int Intelligence => stats.Intelligence;
@@ -32,6 +30,8 @@ public class Character : MonoBehaviour, IDamageable, IEntity
     }
 
     public float MaxMana => stats.MaxMana;
+    
+    public string CharacterName => characterName;
 
     // Constructor
     public Character(string name, Stats initialStats)
@@ -77,7 +77,7 @@ public class Character : MonoBehaviour, IDamageable, IEntity
     // Placeholder for UpdateHPUIDisplay() from IDamageable interface
     public void UpdateHPUIDisplay()
     {
-        Debug.Log($"Updating HP UI: {CurrentHP}/{MaxHP}");
+        //Debug.Log($"Updating HP UI: {CurrentHP}/{MaxHP}");
     }
 
     // Method for performing a basic attack
@@ -87,42 +87,6 @@ public class Character : MonoBehaviour, IDamageable, IEntity
         target.TakeDamage(damage);
         Debug.Log($"{characterName} attacks target for {damage} damage.");
     }
-
-    // Method to learn a new spell
-    public void LearnSpell(ISpell spell)
-    {
-        if (!learnedSpells.Contains(spell))
-        {
-            learnedSpells.Add(spell);
-            Debug.Log($"{characterName} learned {spell.SpellName}.");
-        }
-        else
-        {
-            Debug.Log($"{characterName} already knows {spell.SpellName}.");
-        }
-    }
-
-    // Method to cast a spell
-    public void CastSpell(string spellName)
-    {
-        ISpell spell = learnedSpells.Find(s => s.SpellName == spellName);
-
-        if (spell != null)
-        {
-            if (spell.CanCast(CurrentMana))
-            {
-                int damage = spell.CastSpell();
-                CurrentMana -= spell.ManaCost;
-                Debug.Log($"{characterName} cast {spellName}, dealing {damage} damage.");
-            }
-            else
-            {
-                Debug.Log($"Not enough mana to cast {spellName}.");
-            }
-        }
-        else
-        {
-            Debug.Log($"{characterName} has not learned {spellName}.");
-        }
-    }
+    
+   
 }

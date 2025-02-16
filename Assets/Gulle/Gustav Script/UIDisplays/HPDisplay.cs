@@ -58,7 +58,7 @@ public class HPDisplay : MonoBehaviour
             }
 
             // Log the values for debugging
-            Debug.Log("Updating HP: " + playerCharacter.CurrentHP + " | Mana: " + playerCharacter.CurrentMana);
+           // Debug.Log("Updating HP: " + playerCharacter.CurrentHP + " | Mana: " + playerCharacter.CurrentMana);
 
             // Force immediate UI update (if necessary)
             Canvas.ForceUpdateCanvases();

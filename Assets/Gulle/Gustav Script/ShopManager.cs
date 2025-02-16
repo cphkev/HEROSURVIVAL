@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using Fred.Code;
 
 public class ShopManager : MonoBehaviour
 {
     public GameObject player;  // Reference to the player
     public GameObject shopUI;  // Reference to the Shop UI
     public List<Button> ShopSlots; // List of Shop Slot buttons
-
+    
     private Dictionary<int, ISpell> spellInventory = new Dictionary<int, ISpell>();
 
     private void Start()
@@ -79,7 +80,7 @@ public class ShopManager : MonoBehaviour
 
 
             // Assign BuySpell method to button click
-            ShopSlots[i].onClick.AddListener(() => BuySpell(index));
+            //ShopSlots[i].onClick.AddListener(() => BuySpell(index));
         }
         else
         {
@@ -98,16 +99,19 @@ public class ShopManager : MonoBehaviour
         }
 
         Character playerCharacter = player.GetComponent<Character>();
+        PlayerSpells playerSpells = player.GetComponent<PlayerSpells>();
 
         if (playerCharacter != null && spellInventory.ContainsKey(slotIndex))
         {
             ISpell spellToBuy = spellInventory[slotIndex];
-            playerCharacter.LearnSpell(spellToBuy);
+            playerSpells.EquipSpell(spellToBuy);
             Debug.Log($"Player bought {spellToBuy.SpellName}!");
         }
         else
         {
             Debug.LogWarning($"Could not buy spell for slot {slotIndex}. Invalid slot or missing player.");
         }
+        
     }
+    
 }
