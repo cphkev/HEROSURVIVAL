@@ -5,12 +5,45 @@ namespace Fred.Code.CharacterComponents
     {
         private float currentMana;
         private float maxMana;
+        private float manaRegen;
         
         public float CurrentMana
         {
             get => currentMana;
-            set => currentMana = Mathf.Clamp(value, 0, MaxMana);
+            set => currentMana = Mathf.Clamp(value, 0, maxMana);
         }
+        public float MaxMana
+        {
+            get => maxMana;
+            set => maxMana = value;
+        }
+        
+        private void AdjustMana(float amount)
+        {
+            currentMana += amount;
+        }
+        
+        public void spendMana(float mana)
+        {
+            if(currentMana-mana>=0){
+                AdjustMana(-mana);
+            }else{
+                Debug.Log("Not enough mana");
+            }
+        }
+        
+        public void gainMana(float mana)
+        {
+            if (currentMana + mana <= maxMana)
+            {
+                AdjustMana(mana);
+            }else{
+                currentMana = maxMana;
+                Debug.Log("Mana is full");
+            }
+        }
+        
+        
         
     }
 }

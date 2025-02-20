@@ -9,32 +9,45 @@ namespace Fred.Code.CharacterComponents
         public int CurrentHP
         {
             get => currentHP;
-            set => currentHP = Mathf.Clamp(value, 0, MaxHP);
+            set => currentHP = Mathf.Clamp(value, 0, maxHP);
+        }
+        public int MaxHP
+        {
+            get => maxHP;
+            set => maxHP = value;
+        }
+        
+        private void AdjustHP(int amount)
+        {
+            currentHP += amount;
         }
         
         public void TakeDamage(int damage)
         {
-            CurrentHP -= damage;
-
-            if (CurrentHP == 0)
+            if (currentHP - damage >= 0)
             {
+                AdjustHP(-damage);
+            }else{
+                currentHP = 0;
                 Die();
             }
-
-            Debug.Log($"{characterName} took {damage} damage. Current HP: {CurrentHP}");
         }
 
         // Method to heal the character
         public void Heal(int amount)
         {
-            CurrentHP += amount;
-            Debug.Log($"{characterName} healed by {amount}. Current HP: {CurrentHP}");
+            if (currentHP + amount <= maxHP)
+            {
+            AdjustHP(amount);
+            }else{
+                currentHP = maxHP;
+                Debug.Log("HP is full");
+            }
         }
-
-        // Placeholder for Die() from IDamageable interface
+        
         public void Die()
         {
-            Debug.Log($"{characterName} has died.");
+            Debug.Log("die");
         }
         
         
