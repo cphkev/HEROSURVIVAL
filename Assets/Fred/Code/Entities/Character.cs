@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fred.Code.Interfaces;
 
-public class Character : MonoBehaviour, IDamageable, IEntity
+public class Character : MonoBehaviour, IDamageable
 {
     private string characterName; // Name of the character (Player, Enemy, etc.)
     private Stats stats;          // The character's stats (e.g., Strength, Dexterity, etc.)
