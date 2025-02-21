@@ -70,9 +70,9 @@ public class GameManager : MonoBehaviour
     {
         if (player != null)
         {
-            playerStats = new Stats(55, 5, 3, 2);
-            playerHealth = new Health(200);
-            playerMana = new Mana(100);
+            playerStats.Initialize(55, 5, 3, 2);
+            playerHealth.Initialize(200);
+            playerMana.Initialize(100);
 
             availableSpells.Add(new Fireball());
             availableSpells.Add(new ImmolationAura());
@@ -81,9 +81,9 @@ public class GameManager : MonoBehaviour
 
         if (enemy != null)
         {
-            enemyStats = new Stats(8, 6, 2, 1);
-            enemyHealth = new Health(100);
-            enemyMana = new Mana(50);
+            enemyStats.Initialize(8, 6, 2, 1);
+            enemyHealth.Initialize(100);
+            enemyMana.Initialize(50);
             
             Debug.Log("Enemy initialized.");
         }

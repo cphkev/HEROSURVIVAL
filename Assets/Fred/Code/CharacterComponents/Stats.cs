@@ -36,7 +36,7 @@ public class Stats: MonoBehaviour
     
 
     // Constructor to initialize stats
-    public Stats(int strength, int dexterity, int intelligence, int luck)
+    public void Initialize(int strength, int dexterity, int intelligence, int luck)
     {
         this.strength = strength;
         this.dexterity = dexterity;

@@ -30,7 +30,7 @@ namespace Fred.Code.CharacterComponents
         
         public int RegenInterval { get => regenInterval;}
 
-        public Mana(float maxMana)
+        public void Initialize(float maxMana)
         {
             this.currentMana = maxMana;
             this.maxMana = maxMana;
