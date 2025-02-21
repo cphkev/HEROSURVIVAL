@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Fred.Code.Interfaces;
 namespace Fred.Code.CharacterComponents
 {
     public class Health: MonoBehaviour
@@ -47,7 +48,13 @@ namespace Fred.Code.CharacterComponents
         
         public void Die()
         {
-            Debug.Log("die");
+            var destructibles = GetComponents<IDestructible>();
+            foreach (var destructible in destructibles)
+            {
+                destructible.OnDestruction();
+            }
+            
+            Debug.Log("die lol");
         }
         
         

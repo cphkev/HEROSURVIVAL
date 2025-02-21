@@ -23,7 +23,7 @@ namespace Fred.Code.CharacterComponents
             currentMana += amount;
         }
         
-        public void spendMana(float mana)
+        public void SpendMana(float mana)
         {
             if(currentMana-mana>=0){
                 AdjustMana(-mana);
@@ -32,7 +32,7 @@ namespace Fred.Code.CharacterComponents
             }
         }
         
-        public void gainMana(float mana)
+        public void GainMana(float mana)
         {
             if (currentMana + mana <= maxMana)
             {
