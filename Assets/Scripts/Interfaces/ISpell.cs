@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Fred.Code.Interfaces
+namespace Scripts.Interfaces
 {
     public interface ISpell
     {

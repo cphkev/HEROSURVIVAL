@@ -1,6 +1,6 @@
-using Fred.Code.Interfaces;
+using Scripts.Interfaces;
 using System.Collections.Generic;
-using Fred.Code.CharacterComponents;
+using Scripts.CharacterComponents;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour

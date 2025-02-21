@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Fred.Code.Interfaces;
+using Scripts.Interfaces;
 
 public class ImmolationAura : MonoBehaviour, ISpell
 {

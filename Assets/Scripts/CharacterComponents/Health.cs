@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using Fred.Code.Interfaces;
-namespace Fred.Code.CharacterComponents
+using Scripts.Interfaces;
+namespace Scripts.CharacterComponents
 {
     public class Health: MonoBehaviour
     {

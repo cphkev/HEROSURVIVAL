@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Fred.Code.CharacterComponents
+namespace Scripts.CharacterComponents
 {
     public class Mana : MonoBehaviour
     {

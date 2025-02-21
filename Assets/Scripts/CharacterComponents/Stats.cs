@@ -1,47 +1,50 @@
 using UnityEngine;
 
-[System.Serializable] // Makes it visible in the Unity Inspector
-public class Stats: MonoBehaviour
+
+namespace Scripts.CharacterComponents
 {
-    // Base stats for the character
-    private int strength;
-    private int dexterity; 
-    private int intelligence;
-    private int luck;
-
-    // Public properties for controlled access
-    public int Strength
+    [System.Serializable] // Makes it visible in the Unity Inspector
+    public class Stats : MonoBehaviour
     {
-        get => strength;
-        set { strength = value;}
-    }
+        // Base stats for the character
+        private int strength;
+        private int dexterity;
+        private int intelligence;
+        private int luck;
 
-    public int Dexterity
-    {
-        get => dexterity;
-        set { dexterity = value; }
-    }
+        // Public properties for controlled access
+        public int Strength
+        {
+            get => strength;
+            set { strength = value; }
+        }
 
-    public int Intelligence
-    {
-        get => intelligence;
-        set { intelligence = value; }
-    }
+        public int Dexterity
+        {
+            get => dexterity;
+            set { dexterity = value; }
+        }
 
-    public int Luck
-    {
-        get => luck;
-        set { luck = value; }
-    }
-    
+        public int Intelligence
+        {
+            get => intelligence;
+            set { intelligence = value; }
+        }
 
-    // Constructor to initialize stats
-    public void Initialize(int strength, int dexterity, int intelligence, int luck)
-    {
-        this.strength = strength;
-        this.dexterity = dexterity;
-        this.intelligence = intelligence;
-        this.luck = luck;
+        public int Luck
+        {
+            get => luck;
+            set { luck = value; }
+        }
+
+
+        // Constructor to initialize stats
+        public void Initialize(int strength, int dexterity, int intelligence, int luck)
+        {
+            this.strength = strength;
+            this.dexterity = dexterity;
+            this.intelligence = intelligence;
+            this.luck = luck;
+        }
     }
-    
 }

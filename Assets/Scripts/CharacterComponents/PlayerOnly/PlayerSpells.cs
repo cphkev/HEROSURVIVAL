@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using Fred.Code.Interfaces;
-using Fred.Code.CharacterComponents;
+using Scripts.Interfaces;
+using Scripts.CharacterComponents;
 
 namespace Scripts.CharacterComponents.PlayerOnly
 {
