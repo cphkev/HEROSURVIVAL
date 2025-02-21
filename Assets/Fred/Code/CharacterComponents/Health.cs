@@ -17,7 +17,14 @@ namespace Fred.Code.CharacterComponents
             get => maxHP;
             set => maxHP = value;
         }
+
+        public Health(int maxHP)
+        {
+            currentHP = maxHP;
+            this.maxHP = maxHP;
+        }
         
+
         private void AdjustHP(int amount)
         {
             currentHP += amount;

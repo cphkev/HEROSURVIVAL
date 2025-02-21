@@ -1,5 +1,6 @@
 using Fred.Code.Interfaces;
 using System.Collections.Generic;
+using Fred.Code.CharacterComponents;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,14 +10,18 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
-    public Stats playerStats;
-    public Stats enemyStats;
+    private Stats playerStats;
+    private Health playerHealth;
+    private Mana playerMana;
+    
+    private Stats enemyStats;
+    private Health enemyHealth;
+    private Mana enemyMana;
+    
 
     private GameObject player;
     private GameObject enemy;
-
-    private Character playerCharacter;
-    private Character enemyCharacter;
+    
 
     public List<ISpell> availableSpells = new List<ISpell>();
 
@@ -66,8 +71,8 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             playerStats = new Stats(55, 5, 3, 2);
-            playerCharacter = player.GetComponent<Character>() ?? player.AddComponent<Character>();
-            playerCharacter.InitializeCharacter("Player", playerStats);
+            playerHealth = new Health(200);
+            playerMana = new Mana(100);
 
             availableSpells.Add(new Fireball());
             availableSpells.Add(new ImmolationAura());
@@ -77,8 +82,9 @@ public class GameManager : MonoBehaviour
         if (enemy != null)
         {
             enemyStats = new Stats(8, 6, 2, 1);
-            enemyCharacter = enemy.GetComponent<Character>() ?? enemy.AddComponent<Character>();
-            enemyCharacter.InitializeCharacter("Enemy", enemyStats);
+            enemyHealth = new Health(100);
+            enemyMana = new Mana(50);
+            
             Debug.Log("Enemy initialized.");
         }
     }
@@ -97,19 +103,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PlayerAttack()
-    {
-        if (playerCharacter != null && enemyCharacter != null)
-        {
-            playerCharacter.Attack(enemyCharacter);
-        }
-    }
-
-    public void EnemyAttack()
-    {
-        if (playerCharacter != null && enemyCharacter != null)
-        {
-            enemyCharacter.Attack(playerCharacter);
-        }
-    }
+   
 }
