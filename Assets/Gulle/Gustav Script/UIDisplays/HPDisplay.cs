@@ -1,3 +1,4 @@
+using Fred.Code.CharacterComponents;
 using UnityEngine;
 using TMPro; // Make sure to import TextMeshPro
 
@@ -6,7 +7,8 @@ public class HPDisplay : MonoBehaviour
     public TMP_Text hpText;   // Reference to the TextMeshPro component for HP
     public TMP_Text manaText; // Reference to the TextMeshPro component for Mana
 
-    private Character playerCharacter;
+    private Health playerHealth;
+    private Mana playerMana;
 
     void Start()
     {
@@ -16,10 +18,15 @@ public class HPDisplay : MonoBehaviour
         // If the player is found, get the Character component
         if (player != null)
         {
-            playerCharacter = player.GetComponent<Character>();
-            if (playerCharacter == null)
+            playerHealth = player.GetComponent<Health>();
+            playerMana = player.GetComponent<Mana>();
+            if (playerHealth == null)
             {
-                Debug.LogWarning("Player does not have a Character component!");
+                Debug.LogWarning("Player does not have a Health component!");
+            }
+            if (playerMana == null)
+            {
+                Debug.LogWarning("Player does not have a Mana component!");
             }
         }
         else
@@ -34,7 +41,7 @@ public class HPDisplay : MonoBehaviour
     void Update()
     {
         // If the player character is valid, update the stats display
-        if (playerCharacter != null)
+        if (playerHealth != null && playerMana != null)
         {
             UpdateStatsDisplay();
         }
@@ -43,25 +50,24 @@ public class HPDisplay : MonoBehaviour
     // Method to update both HP and Mana UI text
     public void UpdateStatsDisplay()
     {
-        if (playerCharacter != null)
-        {
+       
             if (hpText != null)
             {
                 // Update the HP text
-                hpText.text = "HP: " + playerCharacter.CurrentHP.ToString();
+                hpText.text = "HP: " + playerHealth.CurrentHP.ToString();
             }
 
             if (manaText != null)
             {
                 // Update the Mana text
-                manaText.text = "Mana: " + playerCharacter.CurrentMana.ToString();
+                manaText.text = "Mana: " + playerMana.CurrentMana.ToString();
             }
 
             // Log the values for debugging
-           // Debug.Log("Updating HP: " + playerCharacter.CurrentHP + " | Mana: " + playerCharacter.CurrentMana);
+           // Debug.Log("Updating HP: " + playerHealth.CurrentHP + " | Mana: " + playerMana.CurrentMana);
 
             // Force immediate UI update (if necessary)
             Canvas.ForceUpdateCanvases();
-        }
+        
     }
 }

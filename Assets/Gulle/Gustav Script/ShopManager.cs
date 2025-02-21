@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using Fred.Code;
+using Fred.Code.CharacterComponents.PlayerOnly;
 
 public class ShopManager : MonoBehaviour
 {
@@ -97,11 +97,10 @@ public class ShopManager : MonoBehaviour
             Debug.LogWarning("Player not found!");
             return;
         }
-
-        Character playerCharacter = player.GetComponent<Character>();
+        
         PlayerSpells playerSpells = player.GetComponent<PlayerSpells>();
 
-        if (playerCharacter != null && spellInventory.ContainsKey(slotIndex))
+        if (spellInventory.ContainsKey(slotIndex))
         {
             ISpell spellToBuy = spellInventory[slotIndex];
             playerSpells.EquipSpell(spellToBuy);

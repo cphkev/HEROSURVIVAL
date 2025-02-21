@@ -8,7 +8,7 @@ public class StatDisplay : MonoBehaviour
     public TMP_Text intelligenceText; // Reference to Intelligence UI TextMeshPro component
     public TMP_Text luckText;       // Reference to Luck UI TextMeshPro component
 
-    private Character playerCharacter; // Reference to the player character
+    private Stats playerStats; // Reference to the player character
 
     void Start()
     {
@@ -16,13 +16,13 @@ public class StatDisplay : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            playerCharacter = player.GetComponent<Character>();
+            playerStats = player.GetComponent<Stats>();
         }
     }
 
     void Update()
     {
-        if (playerCharacter != null)
+        if (playerStats != null)
         {
             // Update the UI TextMeshPro components with the current stats of the player
             UpdateStatsDisplay();
@@ -34,19 +34,19 @@ public class StatDisplay : MonoBehaviour
     {
         if (strengthText != null)
         {
-            strengthText.text = "Strength: " + playerCharacter.Strength.ToString();
+            strengthText.text = "Strength: " + playerStats.Strength.ToString();
         }
         if (dexterityText != null)
         {
-            dexterityText.text = "Dexterity: " + playerCharacter.Dexterity.ToString();
+            dexterityText.text = "Dexterity: " + playerStats.Dexterity.ToString();
         }
         if (intelligenceText != null)
         {
-            intelligenceText.text = "Intelligence: " + playerCharacter.Intelligence.ToString();
+            intelligenceText.text = "Intelligence: " + playerStats.Intelligence.ToString();
         }
         if (luckText != null)
         {
-            luckText.text = "Luck: " + playerCharacter.Luck.ToString();
+            luckText.text = "Luck: " + playerStats.Luck.ToString();
         }
     }
 
