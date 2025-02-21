@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using Fred.Code.Interfaces;
 using Fred.Code.CharacterComponents;
 
-namespace Fred.Code.CharacterComponents.PlayerOnly
+namespace Scripts.CharacterComponents.PlayerOnly
 {
     public class PlayerSpells : MonoBehaviour
     {
