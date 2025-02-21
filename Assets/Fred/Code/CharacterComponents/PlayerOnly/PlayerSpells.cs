@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Fred.Code.Interfaces;
+using Fred.Code.CharacterComponents;
 
-namespace Fred.Code
+namespace Fred.Code.CharacterComponents.PlayerOnly
 {
     public class PlayerSpells : MonoBehaviour
     {
         private GameObject player; // Reference to the player
         private List<Button> SpellSlots; // List of Spell Slot buttons
-        private Character playerCharacter;
 
         private List<ISpell> equippedSpells = new List<ISpell>(); // List of learned spells
 
@@ -81,7 +81,7 @@ namespace Fred.Code
             }
             else
             {
-                Debug.Log($"{playerCharacter.CharacterName} already equipped {spell.SpellName}.");
+                Debug.Log($"Player already equipped {spell.SpellName}.");
             }
         }
 
@@ -89,16 +89,16 @@ namespace Fred.Code
         // Method to cast a spell
         private void CastSpell(ISpell spell)
         {
-            Character playerCharacter = player.GetComponent<Character>();
+            Mana playerMana = player.GetComponent<Mana>();
             
             if (spell != null)
             {
                 
-                if (spell.CanCast(playerCharacter.CurrentMana))
+                if (spell.CanCast(playerMana.CurrentMana))
                 {
                     int damage = spell.CastSpell();
-                    playerCharacter.CurrentMana -= spell.ManaCost;
-                    Debug.Log($"{playerCharacter.CharacterName} cast {spell.SpellName}, dealing {damage} damage.");
+                    playerMana.CurrentMana -= spell.ManaCost;
+                    Debug.Log($"Player cast {spell.SpellName}, dealing {damage} damage.");
                 }
                 else
                 {
@@ -107,7 +107,7 @@ namespace Fred.Code
             }
             else
             {
-                Debug.Log($"{playerCharacter.CharacterName} has not learned {spell.SpellName}.");
+                Debug.Log($"Player has not learned {spell.SpellName}.");
             }
             
         }
