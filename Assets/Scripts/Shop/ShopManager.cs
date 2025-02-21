@@ -1,9 +1,9 @@
-using Fred.Code.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using Fred.Code.CharacterComponents.PlayerOnly;
+using Scripts.Interfaces;
+using Scripts.CharacterComponents.PlayerOnly;
 
 public class ShopManager : MonoBehaviour
 {

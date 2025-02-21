@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro; // Import TextMeshPro namespace
+using Scripts.CharacterComponents;
 
 public class StatDisplay : MonoBehaviour
 {

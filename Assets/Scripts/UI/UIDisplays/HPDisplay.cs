@@ -1,5 +1,5 @@
-using Fred.Code.CharacterComponents;
 using UnityEngine;
+using Scripts.CharacterComponents;
 using TMPro; // Make sure to import TextMeshPro
 
 public class HPDisplay : MonoBehaviour
