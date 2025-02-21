@@ -8,7 +8,7 @@ namespace Fred.Code.CharacterComponents
         private float currentMana;
         private float maxMana;
         private float manaRegen = 5f; // Amount of mana to regen per interval
-        private int regenInterval = 3; // Time in seconds between regens
+        private float regenInterval = 2f; // Time in seconds between regens
 
         public float CurrentMana
         {
@@ -28,7 +28,7 @@ namespace Fred.Code.CharacterComponents
             set => manaRegen = value;
         }
         
-        public int RegenInterval { get => regenInterval;}
+        public float RegenInterval { get => regenInterval;}
 
         public void Initialize(float maxMana)
         {

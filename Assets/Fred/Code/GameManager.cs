@@ -70,6 +70,10 @@ public class GameManager : MonoBehaviour
     {
         if (player != null)
         {
+            playerStats = player.GetComponent<Stats>();
+            playerHealth = player.GetComponent<Health>();
+            playerMana = player.GetComponent<Mana>();
+            
             playerStats.Initialize(55, 5, 3, 2);
             playerHealth.Initialize(200);
             playerMana.Initialize(100);
@@ -81,6 +85,10 @@ public class GameManager : MonoBehaviour
 
         if (enemy != null)
         {
+            enemyStats = enemy.GetComponent<Stats>();
+            enemyHealth = enemy.GetComponent<Health>();
+            enemyMana = enemy.GetComponent<Mana>();
+            
             enemyStats.Initialize(8, 6, 2, 1);
             enemyHealth.Initialize(100);
             enemyMana.Initialize(50);
