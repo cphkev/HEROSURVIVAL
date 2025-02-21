@@ -1,49 +1,69 @@
 ﻿using UnityEngine;
+using System.Collections;
+
 namespace Fred.Code.CharacterComponents
 {
-    public class Mana: MonoBehaviour
+    public class Mana : MonoBehaviour
     {
         private float currentMana;
         private float maxMana;
-        private float manaRegen;
-        
+        private float manaRegen = 5f; // Amount of mana to regen per interval
+        private int regenInterval = 3; // Time in seconds between regens
+
         public float CurrentMana
         {
             get => currentMana;
             set => currentMana = Mathf.Clamp(value, 0, maxMana);
         }
+
         public float MaxMana
         {
             get => maxMana;
             set => maxMana = value;
         }
         
-        private void AdjustMana(float amount)
+        public float ManaRegen
         {
-            currentMana += amount;
+            get => manaRegen;
+            set => manaRegen = value;
         }
         
+        public int RegenInterval { get => regenInterval;}
+
+        private void Start()
+        {
+            StartCoroutine(RegenerateMana());
+        }
+
+        private IEnumerator RegenerateMana()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(regenInterval);
+                GainMana(manaRegen);
+            }
+        }
+
+        private void AdjustMana(float amount)
+        {
+            currentMana = Mathf.Clamp(currentMana + amount, 0, maxMana);
+        }
+
         public void SpendMana(float mana)
         {
-            if(currentMana-mana>=0){
+            if (currentMana - mana >= 0)
+            {
                 AdjustMana(-mana);
-            }else{
+            }
+            else
+            {
                 Debug.Log("Not enough mana");
             }
         }
-        
+
         public void GainMana(float mana)
         {
-            if (currentMana + mana <= maxMana)
-            {
-                AdjustMana(mana);
-            }else{
-                currentMana = maxMana;
-                Debug.Log("Mana is full");
-            }
+            AdjustMana(mana);
         }
-        
-        
-        
     }
 }
