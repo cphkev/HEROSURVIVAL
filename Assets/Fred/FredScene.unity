@@ -208,6 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 628813701}
+  - component: {fileID: 628813702}
   m_Layer: 0
   m_Name: Wand
   m_TagString: Untagged
@@ -231,6 +232,20 @@ Transform:
   - {fileID: 1138504505}
   m_Father: {fileID: 2028259939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &628813702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628813700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4773aebddec6a49a544a55594145f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 966856349100293167, guid: c2d39a2fc39eb6f47beccc1ca0031e93, type: 3}
+  muzzle: {fileID: 1138504505}
 --- !u!1 &677220566
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +501,7 @@ Transform:
   m_GameObject: {fileID: 1138504504}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.21266718, y: 0.81371045, z: 0.37519926}
+  m_LocalPosition: {x: 0.007, y: -0.034, z: 0.388}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -800,6 +815,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5492875869947428157, guid: afe5ef0a97780f843a1dc18344fd1b48, type: 3}
+      propertyPath: m_TagString
+      value: EnemyHitbox
+      objectReference: {fileID: 0}
     - target: {fileID: 5977813368104118113, guid: afe5ef0a97780f843a1dc18344fd1b48, type: 3}
       propertyPath: m_Type
       value: 0
@@ -819,6 +838,10 @@ PrefabInstance:
     - target: {fileID: 8367490868415301861, guid: afe5ef0a97780f843a1dc18344fd1b48, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850277509859857833, guid: afe5ef0a97780f843a1dc18344fd1b48, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5726133501972318226, guid: afe5ef0a97780f843a1dc18344fd1b48, type: 3}
