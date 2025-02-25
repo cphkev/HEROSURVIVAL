@@ -47,7 +47,7 @@ public class ImmolationAura : MonoBehaviour, ISpell
         if (!isActive)
         {
             isActive = true;
-            auraCoroutine = StartCoroutine(ApplyAura());
+            //auraCoroutine = StartCoroutine(ApplyAura());
             Debug.Log($"{SpellName} activated!");
         }
         return 0; // Direct damage not applicable
@@ -64,7 +64,10 @@ public class ImmolationAura : MonoBehaviour, ISpell
         }
     }
 
-    private IEnumerator ApplyAura()
+
+
+    //private IEnumerator ApplyAura()
+    /*
     {
         while (isActive)
         {
@@ -79,4 +82,6 @@ public class ImmolationAura : MonoBehaviour, ISpell
             yield return new WaitForSeconds(tickRate);
         }
     }
+    */
+ 
 }
