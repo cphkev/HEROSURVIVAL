@@ -26,17 +26,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasCollided) return;
-
-        if (other.CompareTag("EnemyHitbox"))
+        if (other.CompareTag("EnemyHitbox") && !hasCollided)
         {
+            Debug.Log("Projectile collided with enemy.");
             hasCollided = true;
             Destroy(gameObject);
-            Collider projectileCollider = GetComponent<Collider>();
-            if (projectileCollider != null)
-            {
-                projectileCollider.enabled = false;
-            }
 
             Health enemyHealth = other.GetComponentInParent<Health>();
 

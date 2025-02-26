@@ -10,13 +10,16 @@ public class Shooting : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
             ProjectileShooting();
-            
-            //RaycastShooting();
+           
         } 
     }
-    
+
+    void ProjectileShooting()
+    {
+        Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
+    }
+
     private void RaycastShooting()
     {
         Vector3 direction = muzzle.forward;
@@ -25,11 +28,6 @@ public class Shooting : MonoBehaviour
         {
             
         }
-    }
-    
-    void ProjectileShooting()
-    {
-        Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
     }
 }
 
