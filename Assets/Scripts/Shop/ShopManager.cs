@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections.Generic;
 using Scripts.Interfaces;
 using Scripts.CharacterComponents.PlayerOnly;
+using Scripts.Spells;
 
 public class ShopManager : MonoBehaviour
 {
