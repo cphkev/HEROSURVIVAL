@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class Shop : MonoBehaviour
 {
@@ -6,37 +8,40 @@ public class Shop : MonoBehaviour
     private bool isPlayerNear = false;
     private bool isShopOpen = false;
     private ShopManager shopManager;
+    private PlayerInputActions playerInputActions;
+    private InputAction interactAction;
+    private InputAction buyAction;
 
+    private int hoveredSpellSlot = -1; // Store hovered spell index
+
+    void Awake()
+    {
+        playerInputActions = new PlayerInputActions();
+        interactAction = playerInputActions.Player.Interact;
+        buyAction = playerInputActions.Player.Buy;
+
+        interactAction.performed += ctx => ToggleShop();
+        buyAction.performed += BuyFromShop;
+    }
     
     void Start()
     {
-        // Ensure ShopManager is assigned
         if (shopManager == null)
         {
             shopManager = GetComponent<ShopManager>();
         }
     }
-    void Update()
+    
+    void OnEnable()
     {
-        // Toggle shop UI when player presses "P" and is near the shop
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.P))
-        {
-            ToggleShop();
-        }
-        
-        if(!isPlayerNear && isShopOpen)
-        {
-            ToggleShop();
-        }
-
-        if (isShopOpen)
-        {
-            BuyFromShop();
-        }
-        
+        playerInputActions.Enable();
+    }
+    
+    void OnDisable()
+    {
+        playerInputActions.Disable();
     }
 
-    // Called when player enters the shop area
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -45,48 +50,52 @@ public class Shop : MonoBehaviour
         }
     }
 
-    // Called when player exits the shop area
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
+            if (isShopOpen)
+            {
+                ToggleShop();
+            }
         }
     }
 
     private void ToggleShop()
     {
-        if (shopUI != null)
+        if (isPlayerNear && shopUI != null)
         {
             isShopOpen = !isShopOpen;
             shopUI.SetActive(isShopOpen);
         }
-        else
+        else if (shopUI == null)
         {
             Debug.LogError("Shop UI is not assigned in the Shop script!");
         }
     }
 
-    private void BuyFromShop()
+    private void BuyFromShop(InputAction.CallbackContext context)
     {
-        if (Input.anyKeyDown)
+        if (isShopOpen && hoveredSpellSlot != -1) // Buy only if hovering a valid slot
         {
-            switch (Input.inputString)
-            {
-                case "1":
-                    shopManager.BuySpell(1);
-                    Debug.Log("1 key pressed");
-                    break;
-                case "2":
-                    shopManager.BuySpell(2);
-                    Debug.Log("2 key pressed");
-                    break;
-                default:
-                    // Code to execute when any other key is pressed
-                    break;
-            }
+            shopManager.BuySpell(hoveredSpellSlot);
+            Debug.Log($"Bought spell in slot {hoveredSpellSlot}");
+        }
+        else
+        {
+            Debug.LogWarning("No spell Selected to buy.");
         }
     }
-    
-    
+
+    // Methods to track hovered spell slot
+    public void OnHoverEnter(int slotIndex)
+    {
+        hoveredSpellSlot = slotIndex;
+    }
+
+    public void OnHoverExit()
+    {
+        hoveredSpellSlot = -1;
+    }
 }
