@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject fireBallPrefab;
+    
     public static GameManager Instance; // Singleton instance
 
     public GameObject playerPrefab;
@@ -78,8 +80,20 @@ public class GameManager : MonoBehaviour
             playerHealth.Initialize(200);
             playerMana.Initialize(100);
 
-            availableSpells.Add(new Fireball());
-            availableSpells.Add(new ImmolationAura());
+            
+            Fireball fireball = FindObjectOfType<Fireball>();
+
+            if (fireball != null)
+            {
+                availableSpells.Add(fireball); // ✅ Add instantiated Fireball to the spell list
+            }
+            else
+            {
+                Debug.LogError("Fireball prefab is missing a Fireball component!");
+            }
+            
+                availableSpells.Add(new ImmolationAura());
+            
             Debug.Log("Player initialized.");
         }
 
