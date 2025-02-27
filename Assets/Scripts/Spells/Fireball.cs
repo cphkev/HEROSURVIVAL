@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using Scripts.Interfaces;
+using System;
 
-public class Fireball : ISpell
+public class Fireball : MonoBehaviour, ISpell
 {
-    public event System.Action OnCastFireball;
+    public event Action OnCastFireball;
     private string spellName => "Fireball";  // The spell name
     private int manaCost => 10;
     private int spellDamage => 20;
@@ -41,9 +42,9 @@ public class Fireball : ISpell
         return currentMana >= manaCost;
     }
 
-    public int  CastSpell()
+    public int CastSpell()
     {
-        this.OnCastFireball?.Invoke();
+        OnCastFireball?.Invoke();
         
         return spellDamage;
     }

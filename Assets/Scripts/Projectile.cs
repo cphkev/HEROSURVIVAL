@@ -5,15 +5,15 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
    [SerializeField] private float speed = 10;
-   Fireball fireball = new Fireball();
+   private Fireball fireball;
    private void Awake()
    {
-      
-      fireball.OnCastFireball += () =>
-      {
-        Shoot();
-      };
-      
+       fireball = FindObjectOfType<Fireball>();
+       if (fireball == null)
+       {
+           Debug.LogError("Fireball component is missing from the projectile prefab!");
+       }
+       Shoot();
    }
     private void Shoot()
     {

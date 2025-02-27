@@ -2,32 +2,27 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject fireBallPrefab;
     [SerializeField] private Transform muzzle;
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ProjectileShooting();
-           
-        } 
-    }
+    private Fireball fireball;
 
-    void ProjectileShooting()
+    private void Start()
     {
-        Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
-    }
+        // Get Fireball component from prefab or existing object
+        fireball = FindObjectOfType<Fireball>();
 
-    private void RaycastShooting()
-    {
-        Vector3 direction = muzzle.forward;
-        RaycastHit hit;
-        if (Physics.Raycast(muzzle.position, direction, out hit, 1000))
+        if (fireball != null)
         {
-            
+            fireball.OnCastFireball += FireBallPrefabShooting;
+        }
+        else
+        {
+            Debug.LogError("No Fireball instance found in the scene!");
         }
     }
-}
 
+    private void FireBallPrefabShooting()
+    {
+        Instantiate(fireBallPrefab, muzzle.position, muzzle.rotation);
+    }
+}
