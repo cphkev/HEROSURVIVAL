@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+
+
 
 public class Shop : MonoBehaviour
 {
@@ -13,7 +17,7 @@ public class Shop : MonoBehaviour
     private InputAction interactAction;
     private InputAction buyAction;
     
-    public Button shopSlotButton;
+    public List<Button> shopSlotButtons;
 
     private int hoveredSpellSlot = -1; // Store hovered spell index
 
@@ -32,20 +36,20 @@ public class Shop : MonoBehaviour
         if (shopManager == null)
         {
             shopManager = GetComponent<ShopManager>();
+            AddListeners();
         }
-    }
-
-    void Update()
-    {
-        shopSlotButton.onClick.AddListener(returnshopslot);
-    }
-
-    void returnshopslot()
-    {
-        int num = 0;
-        Debug.Log("Button Clicked"+num);
         
     }
+
+    void AddListeners()
+{
+    for (int i = 0; i < shopSlotButtons.Count; i++)
+    {
+        int index = i; // Capture the current value of 'i' in a local variable
+        shopSlotButtons[i].onClick.AddListener(() => BuyFromShop(index));
+    }
+}
+  
     
     void OnEnable()
     {
