@@ -6,37 +6,39 @@ namespace Scripts.Spells
 {
     public class Spellbook : MonoBehaviour
     {
-        private static List<ISpell> availableSpells;
+        private static List<ISpell> allSpells;
+        
+        private Fireball fireBall;
 
         private void Start()
         {
-            availableSpells = new List<ISpell>();
+            allSpells = new List<ISpell>();
             InitializeSpells();
         }
 
         private void InitializeSpells()
         {
 
-            Fireball fireball = FindObjectOfType<Fireball>();
+            Fireball fireball = GetComponent<Fireball>();
             if (fireball != null)
             {
-                availableSpells.Add(fireball);
+                allSpells.Add(fireball);
             }
             else
             {
                 Debug.LogError("Fireball prefab is missing a Fireball component!");
             }
 
-            availableSpells.Add(new ImmolationAura());
-            //availableSpells.Add(new Regeneration());
+            allSpells.Add(new ImmolationAura());
+            //allSpells.Add(new Regeneration());
             Debug.Log("Spells initialized.");
         }
 
-        public static List<ISpell> GetAvailableSpells()
+        public static List<ISpell> GetAllSpells()
         {
-            Debug.Log("Getting available spells.");
+            Debug.Log("Getting all spells.");
 
-            return availableSpells;
+            return allSpells;
         }
 
 

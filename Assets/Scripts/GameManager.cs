@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject fireBallPrefab;
     
     public static GameManager Instance; // Singleton instance
 
