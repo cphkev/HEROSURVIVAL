@@ -13,6 +13,7 @@ public class ShopManager : MonoBehaviour
     public List<Button> ShopSlots; // List of Shop Slot buttons
     
     private Dictionary<int, ISpell> spellInventory = new Dictionary<int, ISpell>();
+    
 
     private void Start()
     {
@@ -28,9 +29,8 @@ public class ShopManager : MonoBehaviour
             Debug.LogError("ShopUI not assigned in the Inspector!");
             return;
         }
-
-        // Check if GameManager and available spells exist
-        if (GameManager.Instance == null || GameManager.Instance.availableSpells == null || GameManager.Instance.availableSpells.Count == 0)
+        
+        if (GameManager.Instance == null || Spellbook.GetAvailableSpells() == null || Spellbook.GetAvailableSpells().Count == 0)
         {
             Debug.LogError("No available spells assigned to the shop!");
             return;
@@ -43,7 +43,7 @@ public class ShopManager : MonoBehaviour
   private void InitializeShop()
 {
     // Populate the spell inventory from availableSpells in GameManager
-    List<ISpell> availableSpells = GameManager.Instance.availableSpells;
+    List<ISpell> availableSpells = Spellbook.GetAvailableSpells();
 
     for (int i = 0; i < availableSpells.Count; i++)
     {
