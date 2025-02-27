@@ -6,7 +6,6 @@ namespace Scripts.Interfaces
     {
         string SpellName { get; }
         int ManaCost { get; }
-        int SpellDamage { get; }
         Sprite SpellIcon { get; }
 
         bool CanCast(float currentMana);
