@@ -32,6 +32,9 @@ namespace Scripts.CharacterComponents
         
         public void TakeDamage(int damage)
         {
+            Debug.Log(damage);
+            Debug.Log(currentHP);
+            
             if (currentHP - damage >= 0)
             {
                 AdjustHP(-damage);
@@ -61,7 +64,8 @@ namespace Scripts.CharacterComponents
                 destructible.OnDestruction();
             }
             
-            Debug.Log("die lol");
+            Destroy(gameObject);
+            
         }
         
         

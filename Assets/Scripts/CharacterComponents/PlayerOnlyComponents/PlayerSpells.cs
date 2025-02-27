@@ -37,23 +37,23 @@ namespace Scripts.CharacterComponents.PlayerOnly
                 {
                     case "q":
                         CastSpell(equippedSpells[0]);
-                        Debug.Log("Q key pressed");
+                        //Debug.Log("Q key pressed");
                         break;
                     case "e":
                         CastSpell(equippedSpells[1]);
-                        Debug.Log("E key pressed");
+                        //Debug.Log("E key pressed");
                         break;
                     case "r":
                         CastSpell(equippedSpells[2]);
-                        Debug.Log("R key pressed");
+                        //Debug.Log("R key pressed");
                         break;
                     case "f":
                         CastSpell(equippedSpells[3]);
-                        Debug.Log("F key pressed");
+                        //Debug.Log("F key pressed");
                         break;
                     case "t":
                         CastSpell(equippedSpells[4]);
-                        Debug.Log("T key pressed");
+                        //Debug.Log("T key pressed");
                         break;
                     default:
                         // Code to execute when any other key is pressed
