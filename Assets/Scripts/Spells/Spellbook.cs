@@ -27,7 +27,7 @@ namespace Scripts.Spells
                 Debug.LogError("Fireball prefab is missing a Fireball component!");
             }
 
-            //availableSpells.Add(new ImmolationAura());
+            availableSpells.Add(new ImmolationAura());
             //availableSpells.Add(new Regeneration());
             Debug.Log("Spells initialized.");
         }
