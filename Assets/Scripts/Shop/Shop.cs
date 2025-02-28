@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Shop : MonoBehaviour
 {
-    public GameObject shopUI; // Reference to the Shop UI (assign in Inspector)
+    public GameObject shopUI; 
     private bool isPlayerNear = false;
     private bool isShopOpen = false;
     private ShopManager shopManager;
@@ -18,7 +18,7 @@ public class Shop : MonoBehaviour
     {
         playerInputActions = new PlayerInputActions();
         interactAction = playerInputActions.Player.Interact;
-        interactAction.performed += ctx => ToggleShop(); // Trigger shop toggle when interact button is pressed
+        interactAction.performed += ctx => ToggleShop(); 
     }
 
     void Start()
@@ -28,34 +28,34 @@ public class Shop : MonoBehaviour
             shopManager = GetComponent<ShopManager>();
         }
         
-        AddListeners(); // Add listeners for each spell slot button
+        AddListeners(); 
     }
 
     void AddListeners()
     {
-        // Adding listeners for each spell slot button
+        
         for (int i = 0; i < shopSlotButtons.Count; i++)
         {
-            int buttonIndex = i; // Store the index of the button to prevent closure issues
-            shopSlotButtons[i].onClick.AddListener(() => BuyFromShop(buttonIndex)); // Pass index to BuyFromShop when clicked
+            int buttonIndex = i; 
+            shopSlotButtons[i].onClick.AddListener(() => BuyFromShop(buttonIndex)); 
         }
     }
 
     void OnEnable()
     {
-        playerInputActions.Enable(); // Enable input actions
+        playerInputActions.Enable(); 
     }
 
     void OnDisable()
     {
-        playerInputActions.Disable(); // Disable input actions
+        playerInputActions.Disable(); 
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNear = true; // Player is near the shop
+            isPlayerNear = true; 
         }
     }
 
@@ -63,10 +63,10 @@ public class Shop : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNear = false; // Player left the shop
+            isPlayerNear = false; 
             if (isShopOpen)
             {
-                ToggleShop(); // Close shop if player leaves
+                ToggleShop(); 
             }
         }
     }
@@ -75,7 +75,7 @@ public class Shop : MonoBehaviour
     {
         if (isPlayerNear && shopUI != null)
         {
-            isShopOpen = !isShopOpen; // Toggle shop visibility
+            isShopOpen = !isShopOpen; 
             shopUI.SetActive(isShopOpen);
         }
         else if (shopUI == null)
@@ -86,9 +86,9 @@ public class Shop : MonoBehaviour
 
     private void BuyFromShop(int slotIndex)
     {
-        if (isShopOpen && slotIndex != -1) // Ensure the shop is open and the slot index is valid
+        if (isShopOpen && slotIndex != -1) 
         {
-            shopManager.BuySpell(slotIndex); // Call the shop manager's BuySpell method with the slot index
+            shopManager.BuySpell(slotIndex); 
             Debug.Log($"Bought spell in slot {slotIndex}");
         }
         else

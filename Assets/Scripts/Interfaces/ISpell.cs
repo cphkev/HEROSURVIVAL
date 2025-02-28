@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Scripts.CharacterComponents;
+using UnityEngine;
 
 namespace Scripts.Interfaces
 {
