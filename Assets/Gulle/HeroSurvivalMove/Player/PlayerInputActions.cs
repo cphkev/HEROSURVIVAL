@@ -120,9 +120,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Buy"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""ce0ca47e-df4f-4668-a639-788047b6b5ba"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true

@@ -79,20 +79,37 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void BuySpell(int slotIndex)
+        public void BuySpell(int slotIndex)
+{
+    // Check if the spell list is valid and if the slotIndex is valid
+    if (allSpells == null || allSpells.Count == 0 || slotIndex < 0 || slotIndex >= allSpells.Count)
     {
-
-        PlayerSpells playerSpells = player.GetComponent<PlayerSpells>();
-
-        if (allSpells[slotIndex] != null)
-        {
-            ISpell spellToBuy = allSpells[slotIndex];
-            playerSpells.EquipSpell(spellToBuy);
-            Debug.Log($"Player bought {spellToBuy.SpellName}!");
-        }
-        else
-        {
-            Debug.LogWarning($"Could not buy spell for slot {slotIndex}. Invalid slot or missing player.");
-        }
+        Debug.LogWarning($"Invalid spell list or slot index: {slotIndex}. Cannot buy spell.");
+        return;
     }
+
+    // Ensure the player exists and has the PlayerSpells component
+    PlayerSpells playerSpells = player?.GetComponent<PlayerSpells>();
+    if (playerSpells == null)
+    {
+        Debug.LogWarning("Player or PlayerSpells component not found!");
+        return;
+    }
+
+    // If the spell exists at the given index, equip it
+    ISpell spellToBuy = allSpells[slotIndex];
+    if (spellToBuy != null)
+    {
+        playerSpells.EquipSpell(spellToBuy, slotIndex); // Equip the spell in the right slot
+        Debug.Log($"Player bought {spellToBuy.SpellName}!");
+    }
+    else
+    {
+        Debug.LogWarning($"Spell is null for slot {slotIndex}. Cannot buy spell.");
+    }
+}
+
+
+
+    
 }

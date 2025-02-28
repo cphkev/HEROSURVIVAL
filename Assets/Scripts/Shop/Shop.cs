@@ -1,11 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-
-
 
 public class Shop : MonoBehaviour
 {
@@ -15,57 +11,51 @@ public class Shop : MonoBehaviour
     private ShopManager shopManager;
     private PlayerInputActions playerInputActions;
     private InputAction interactAction;
-    private InputAction buyAction;
-    
-    public List<Button> shopSlotButtons;
 
-    private int hoveredSpellSlot = -1; // Store hovered spell index
+    public List<Button> shopSlotButtons;
 
     void Awake()
     {
         playerInputActions = new PlayerInputActions();
         interactAction = playerInputActions.Player.Interact;
-        buyAction = playerInputActions.Player.Buy;
-
-        interactAction.performed += ctx => ToggleShop();
-        buyAction.performed += BuyFromShop;
+        interactAction.performed += ctx => ToggleShop(); // Trigger shop toggle when interact button is pressed
     }
-    
+
     void Start()
     {
         if (shopManager == null)
         {
             shopManager = GetComponent<ShopManager>();
-            AddListeners();
         }
         
+        AddListeners(); // Add listeners for each spell slot button
     }
 
     void AddListeners()
-{
-    for (int i = 0; i < shopSlotButtons.Count; i++)
     {
-        int index = i; // Capture the current value of 'i' in a local variable
-        shopSlotButtons[i].onClick.AddListener(() => BuyFromShop(index));
+        // Adding listeners for each spell slot button
+        for (int i = 0; i < shopSlotButtons.Count; i++)
+        {
+            int buttonIndex = i; // Store the index of the button to prevent closure issues
+            shopSlotButtons[i].onClick.AddListener(() => BuyFromShop(buttonIndex)); // Pass index to BuyFromShop when clicked
+        }
     }
-}
-  
-    
+
     void OnEnable()
     {
-        playerInputActions.Enable();
+        playerInputActions.Enable(); // Enable input actions
     }
-    
+
     void OnDisable()
     {
-        playerInputActions.Disable();
+        playerInputActions.Disable(); // Disable input actions
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNear = true;
+            isPlayerNear = true; // Player is near the shop
         }
     }
 
@@ -73,10 +63,10 @@ public class Shop : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNear = false;
+            isPlayerNear = false; // Player left the shop
             if (isShopOpen)
             {
-                ToggleShop();
+                ToggleShop(); // Close shop if player leaves
             }
         }
     }
@@ -85,7 +75,7 @@ public class Shop : MonoBehaviour
     {
         if (isPlayerNear && shopUI != null)
         {
-            isShopOpen = !isShopOpen;
+            isShopOpen = !isShopOpen; // Toggle shop visibility
             shopUI.SetActive(isShopOpen);
         }
         else if (shopUI == null)
@@ -94,27 +84,16 @@ public class Shop : MonoBehaviour
         }
     }
 
-    private void BuyFromShop(InputAction.CallbackContext context)
+    private void BuyFromShop(int slotIndex)
     {
-        if (isShopOpen && hoveredSpellSlot != -1) // Buy only if hovering a valid slot
+        if (isShopOpen && slotIndex != -1) // Ensure the shop is open and the slot index is valid
         {
-            shopManager.BuySpell(hoveredSpellSlot);
-            Debug.Log($"Bought spell in slot {hoveredSpellSlot}");
+            shopManager.BuySpell(slotIndex); // Call the shop manager's BuySpell method with the slot index
+            Debug.Log($"Bought spell in slot {slotIndex}");
         }
         else
         {
-            Debug.LogWarning("No spell Selected to buy.");
+            Debug.LogWarning("No valid spell selected to buy.");
         }
-    }
-
-    // Methods to track hovered spell slot
-    public void OnHoverEnter(int slotIndex)
-    {
-        hoveredSpellSlot = slotIndex;
-    }
-
-    public void OnHoverExit()
-    {
-        hoveredSpellSlot = -1;
     }
 }
