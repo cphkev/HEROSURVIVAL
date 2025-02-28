@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        HPDisplay ui = FindObjectOfType<HPDisplay>();
+        HPMPDisplay ui = FindFirstObjectByType<HPMPDisplay>();
         if (ui != null)
         {
             Debug.Log("UI Found. Updating Stats.");
