@@ -49,7 +49,7 @@ public class ShopManager : MonoBehaviour
         // Initialize buttons dynamically with spell names and images
         for (int i = 0; i < ShopSlots.Count; i++)
         {
-            if (allSpells[i] != null)
+            if (i < allSpells.Count && allSpells[i] != null)
             {
                 ISpell spell = allSpells[i];
 
