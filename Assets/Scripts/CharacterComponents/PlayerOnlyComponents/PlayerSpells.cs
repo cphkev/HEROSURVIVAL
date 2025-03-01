@@ -29,10 +29,10 @@ namespace Scripts.CharacterComponents.PlayerOnly
 
         private void OnEnable()
         {
-            playerInputActions.Player.Spell1.performed += ctx => CastSpellAtIndex(0);
-            playerInputActions.Player.Spell2.performed += ctx => CastSpellAtIndex(1);
-            playerInputActions.Player.Spell3.performed += ctx => CastSpellAtIndex(2);
-            playerInputActions.Player.Spell4.performed += ctx => CastSpellAtIndex(3);
+            playerInputActions.Player.Spell0.performed += ctx => CastSpellAtIndex(0);
+            playerInputActions.Player.Spell1.performed += ctx => CastSpellAtIndex(1);
+            playerInputActions.Player.Spell2.performed += ctx => CastSpellAtIndex(2);
+            playerInputActions.Player.Spell3.performed += ctx => CastSpellAtIndex(3);
 
             playerInputActions.Enable();
         }

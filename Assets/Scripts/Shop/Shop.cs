@@ -17,7 +17,7 @@ public class Shop : MonoBehaviour
     void Awake()
     {
         playerInputActions = new PlayerInputActions();
-        interactAction = playerInputActions.Player.Interact;
+        interactAction = playerInputActions.Player.ShopKey;
         interactAction.performed += ctx => ToggleShop(); 
     }
 

@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
+                    "name": "ShopKey",
                     "type": "Button",
                     "id": "f17bd51d-50b3-46df-836f-c6f5d65d6fad",
                     "expectedControlType": "",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Buy",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "ce0ca47e-df4f-4668-a639-788047b6b5ba",
                     "expectedControlType": "",
@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Spell1",
+                    "name": "Spell0",
                     "type": "Button",
                     "id": "c2943ba7-9596-4ac9-84f7-4249a1313303",
                     "expectedControlType": "",
@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Spell2",
+                    "name": "Spell1",
                     "type": "Button",
                     "id": "5273522d-5899-41aa-be33-ed1b1935f3ed",
                     "expectedControlType": "",
@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Spell3",
+                    "name": "Spell2",
                     "type": "Button",
                     "id": "be220d99-16f0-494a-ba82-0906460e4d69",
                     "expectedControlType": "",
@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Spell4",
+                    "name": "Spell3",
                     "type": "Button",
                     "id": "a463f6e2-4d9f-409f-907d-7c60f5ed2eae",
                     "expectedControlType": "",
@@ -152,7 +152,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
+                    "action": "ShopKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -163,7 +163,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Buy",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -174,7 +174,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Spell1",
+                    "action": "Spell0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -185,7 +185,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Spell2",
+                    "action": "Spell1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -196,7 +196,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Spell3",
+                    "action": "Spell2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -207,7 +207,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Spell4",
+                    "action": "Spell3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -53,12 +53,6 @@ public class ShopManager : MonoBehaviour
             {
                 ISpell spell = allSpells[i];
 
-                // Update button text
-                TextMeshProUGUI buttonText = ShopSlots[i].GetComponentInChildren<TextMeshProUGUI>();
-                if (buttonText != null)
-                {
-                    buttonText.text = spell.SpellName;
-                }
 
                 // Update button image
                 Image buttonImage = ShopSlots[i].transform.Find("Spellicon")?.GetComponent<Image>();
