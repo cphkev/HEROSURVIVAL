@@ -94,7 +94,7 @@ public class ShopManager : MonoBehaviour
     ISpell spellToBuy = allSpells[slotIndex];
     if (spellToBuy != null)
     {
-        playerSpells.EquipSpell(spellToBuy, slotIndex); // Equip the spell in the right slot
+        //playerSpells.EquipSpell(spellToBuy, slotIndex); // Equip the spell in the right slot
         Debug.Log($"Player bought {spellToBuy.SpellName}!");
     }
     else

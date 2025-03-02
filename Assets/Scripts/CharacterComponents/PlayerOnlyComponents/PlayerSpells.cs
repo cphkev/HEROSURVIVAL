@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Scripts.Interfaces;
@@ -9,7 +10,12 @@ namespace Scripts.CharacterComponents.PlayerOnly
 {
     public class PlayerSpells : MonoBehaviour
     {
-        private GameObject player;
+        [SerializeField] private Transform castPoint;
+        private bool isCasting;
+        [SerializeField] private float timeBetweenCasts = 0.25f;
+        private float currentCastTimer;
+        
+        //private GameObject player;
 
         // List of buttons for the spell slots in the UI
         public List<Button> SpellSlots; // Make sure these buttons are assigned in Unity Inspector
@@ -18,10 +24,7 @@ namespace Scripts.CharacterComponents.PlayerOnly
         private List<ISpell> equippedSpells = new List<ISpell>();
 
         private PlayerInputActions playerInputActions;
-
         
-        
-
         private void Awake()
         {
             playerInputActions = new PlayerInputActions();
@@ -29,11 +32,13 @@ namespace Scripts.CharacterComponents.PlayerOnly
 
         private void OnEnable()
         {
+            /*
             playerInputActions.Player.Spell0.performed += ctx => CastSpellAtIndex(0);
             playerInputActions.Player.Spell1.performed += ctx => CastSpellAtIndex(1);
             playerInputActions.Player.Spell2.performed += ctx => CastSpellAtIndex(2);
             playerInputActions.Player.Spell3.performed += ctx => CastSpellAtIndex(3);
-
+            */
+            
             playerInputActions.Enable();
         }
 
@@ -42,6 +47,35 @@ namespace Scripts.CharacterComponents.PlayerOnly
             playerInputActions.Disable();
         }
 
+
+        private void Update()
+        {
+            bool isSpellHeldDown = playerInputActions.Player.Spell0.ReadValue<float>() > 0.1;
+            if(!isCasting && isSpellHeldDown)
+            {
+                isCasting = true;
+                currentCastTimer = 0;
+                CastSpell();
+            }
+            
+            if(isCasting)
+            {
+                currentCastTimer += Time.deltaTime;
+                if(currentCastTimer >= timeBetweenCasts)
+                {
+                    isCasting = false;
+                }
+            }
+        }
+        
+        
+        void CastSpell()
+        {
+            // Cast the spell
+            
+        }
+
+        /*
         private void Start()
         {
             if (player == null)
@@ -129,6 +163,7 @@ namespace Scripts.CharacterComponents.PlayerOnly
                 Debug.Log($"Not enough mana to cast {spell.SpellName}.");
             }
         }
+        */
     }
     
 }

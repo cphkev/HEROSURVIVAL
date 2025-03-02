@@ -5,8 +5,8 @@ namespace Scripts.CharacterComponents
 {
     public class Mana : MonoBehaviour
     {
-        private float currentMana;
-        private float maxMana;
+        [SerializeField] float currentMana;
+        [SerializeField] private float maxMana;
         private float manaRegen = 5f; // Amount of mana to regen per interval
         private float regenInterval = 2f; // Time in seconds between regens
 
