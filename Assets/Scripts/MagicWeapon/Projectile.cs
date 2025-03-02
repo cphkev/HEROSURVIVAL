@@ -1,5 +1,7 @@
-using System;
 using Scripts.CharacterComponents;
+using System.Collections.Generic;
+using Scripts.Interfaces;
+using Scripts.Spells;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -8,7 +10,8 @@ public class Projectile : MonoBehaviour
    private Fireball fireball;
    private void Awake()
    {
-       fireball = FindObjectOfType<Fireball>();
+       List<ISpell> spells = Spellbook.GetAllSpells();
+       fireball = (Fireball) spells[0];
        if (fireball == null)
        {
            Debug.LogError("Fireball component is missing from the projectile prefab!");

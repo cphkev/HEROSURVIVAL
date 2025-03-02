@@ -8,7 +8,7 @@ namespace Scripts.Spells
     public class Spellbook : MonoBehaviour
     {
         private static List<ISpell> allSpells;
-        
+
         private Fireball fireBall;
 
         private void Start()
@@ -46,9 +46,8 @@ namespace Scripts.Spells
 
     }
 }
+
 */
-
-
 using Scripts.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,21 +56,22 @@ namespace Scripts.Spells
 {
     public class Spellbook : MonoBehaviour
     {
-        private static List<ISpell> allSpells = new List<ISpell>(); 
-
+        private static List<ISpell> allSpells = new List<ISpell>();
         private void Start()
         {
-            InitializeSpells(); 
+            allSpells = new List<ISpell>();
+            InitializeSpells();
         }
 
         private static void InitializeSpells()
         {
-            if (allSpells == null || allSpells.Count == 0) 
+            if (allSpells == null || allSpells.Count == 0)
             {
-                allSpells = new List<ISpell>(); 
-                allSpells.Add(new ImmolationAura()); 
+                
+                
                 allSpells.Add(new Fireball());
-                allSpells.Add(new Regeneration());
+                allSpells.Add(new ImmolationAura());
+                //allSpells.Add(new Regeneration());
                 Debug.Log("Spells initialized.");
             }
         }
