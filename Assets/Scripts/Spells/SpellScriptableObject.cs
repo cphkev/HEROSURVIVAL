@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+[CreateAssetMenu(fileName = "New Spell", menuName = "Spells")]
+public class SpellScriptableObject : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int DamageAmount = 10;
+    public float ManaCost = 5f;
+    public float Lifetime = 2f;
+    public float Speed = 15f;
+    public float SpellRadius = 0.5f;
+  
+   //Status effects
+   //Iconer /sprite
+   //Time between casts
+    
 }

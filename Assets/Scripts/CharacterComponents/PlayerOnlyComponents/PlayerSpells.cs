@@ -10,6 +10,8 @@ namespace Scripts.CharacterComponents.PlayerOnly
 {
     public class PlayerSpells : MonoBehaviour
     {
+        [SerializeField] private Spell spellToCast0;
+        
         [SerializeField] private Transform castPoint;
         private bool isCasting;
         [SerializeField] private float timeBetweenCasts = 0.25f;
@@ -71,7 +73,7 @@ namespace Scripts.CharacterComponents.PlayerOnly
         
         void CastSpell()
         {
-            // Cast the spell
+            Instantiate(spellToCast0, castPoint.position, castPoint.rotation);
             
         }
 
