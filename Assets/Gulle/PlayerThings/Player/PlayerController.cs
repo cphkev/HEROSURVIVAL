@@ -3,7 +3,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;  
+    public float moveSpeed = 10f;
+    public float acceleration = 20f;
+    public float deceleration = 25f;
+    public float rotationSpeed = 10f;
     public Camera mainCamera;
 
     private Vector2 moveInput;
@@ -14,20 +17,39 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
-        rb.interpolation = RigidbodyInterpolation.Interpolate; // Smooth movement
+        
+      
     }
 
     private void Update()
     {
-        if (playerInput == null) return; 
+        if (playerInput == null) return;
         moveInput = playerInput.actions["Move"]?.ReadValue<Vector2>() ?? Vector2.zero;
-        RotateTowardsMouse();
+        
     }
 
     private void FixedUpdate()
     {
+        MovePlayer();
+        RotateTowardsMouse();
+    }
+
+    private void MovePlayer()
+    {
         Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
-        rb.linearVelocity = moveDirection * moveSpeed; // Use velocity instead of MovePosition
+        
+        if (moveDirection.magnitude > 0.1f)
+        {
+            Vector3 targetVelocity = moveDirection * moveSpeed;
+            Vector3 velocityDiff = targetVelocity - rb.linearVelocity;
+            Vector3 force = velocityDiff * acceleration;
+
+            rb.AddForce(force, ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, deceleration * Time.fixedDeltaTime);
+        }
     }
 
     private void RotateTowardsMouse()
@@ -38,8 +60,12 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
             Vector3 targetPosition = hit.point;
-            targetPosition.y = transform.position.y; // Keep player on the same Y-axis
-            transform.LookAt(targetPosition);
+            targetPosition.y = transform.position.y;
+
+            Vector3 direction = (targetPosition - transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }
