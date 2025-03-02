@@ -4,8 +4,8 @@ namespace Scripts.CharacterComponents
 {
     public class Health: MonoBehaviour
     {
-        private int currentHP;
-        private int maxHP;
+       [SerializeField] private int currentHP;
+       [SerializeField] private int maxHP;
         
         public int CurrentHP
         {

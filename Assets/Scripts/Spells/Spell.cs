@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Scripts.CharacterComponents;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -31,26 +32,13 @@ public class Spell : MonoBehaviour
    
    private void OnTriggerEnter(Collider other)
    {
-       if (other.CompareTag("EnemyHitbox"))
+       if (other.CompareTag("Enemy"))
        {
            
            Destroy(this.gameObject);
-           /*
-           Debug.Log("Projectile collided with enemy.");
-           hasCollided = true;
-           Destroy(gameObject);
-
            Health enemyHealth = other.GetComponentInParent<Health>();
-
-           if (enemyHealth != null)
-           {
-               enemyHealth.TakeDamage(fireball.SpellDamage);
-           }
-           else
-           {
-               Debug.LogWarning("Enemy does not have a Health component.");
-           }
-           */
+           enemyHealth.TakeDamage(SpellToCast.DamageAmount);
+           
        }
    }
    

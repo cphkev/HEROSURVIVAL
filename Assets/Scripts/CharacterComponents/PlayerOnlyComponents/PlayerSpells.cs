@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine.UI;
 using Scripts.Interfaces;
 using Scripts.CharacterComponents;
@@ -10,7 +11,7 @@ namespace Scripts.CharacterComponents.PlayerOnly
 {
     public class PlayerSpells : MonoBehaviour
     {
-        [SerializeField] private Spell spellToCast0;
+        [SerializeField] private Spell spell0;
         
         [SerializeField] private Transform castPoint;
         private bool isCasting;
@@ -53,7 +54,9 @@ namespace Scripts.CharacterComponents.PlayerOnly
         private void Update()
         {
             bool isSpellHeldDown = playerInputActions.Player.Spell0.ReadValue<float>() > 0.1;
-            if(!isCasting && isSpellHeldDown)
+            bool hasManaEnough = gameObject.GetComponent<Mana>().CurrentMana >= spell0.SpellToCast.ManaCost;
+            
+            if (!isCasting && isSpellHeldDown && hasManaEnough)
             {
                 isCasting = true;
                 currentCastTimer = 0;
@@ -73,8 +76,8 @@ namespace Scripts.CharacterComponents.PlayerOnly
         
         void CastSpell()
         {
-            Instantiate(spellToCast0, castPoint.position, castPoint.rotation);
-            
+            gameObject.GetComponent<Mana>().SpendMana(spell0.SpellToCast.ManaCost);
+            Instantiate(spell0, castPoint.position, castPoint.rotation);
         }
 
         /*
