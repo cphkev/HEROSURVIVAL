@@ -12,20 +12,23 @@ namespace Scripts.CharacterComponents.PlayerOnly
     public class PlayerSpells : MonoBehaviour
     {
         [SerializeField] private Spell spell0;
+        [SerializeField] private Spell spell1;
+        [SerializeField] private Spell spell2;
+        [SerializeField] private Spell spell3;
         
         [SerializeField] private Transform castPoint;
-        private bool isCasting;
-        [SerializeField] private float timeBetweenCasts = 0.25f;
-        private float currentCastTimer;
+        private bool isCasting0;
+        private bool isCasting1;
+        private bool isCasting2;
+        private bool isCasting3;
         
-        //private GameObject player;
-
-        // List of buttons for the spell slots in the UI
-        public List<Button> SpellSlots; // Make sure these buttons are assigned in Unity Inspector
-
-        // List to hold the equipped spells
-        private List<ISpell> equippedSpells = new List<ISpell>();
-
+        [SerializeField] private float timeBetweenCasts = 0.25f;
+        private float currentCastTimer0;
+        private float currentCastTimer1;
+        private float currentCastTimer2;
+        private float currentCastTimer3;
+        
+        
         private PlayerInputActions playerInputActions;
         
         private void Awake()
@@ -35,13 +38,6 @@ namespace Scripts.CharacterComponents.PlayerOnly
 
         private void OnEnable()
         {
-            /*
-            playerInputActions.Player.Spell0.performed += ctx => CastSpellAtIndex(0);
-            playerInputActions.Player.Spell1.performed += ctx => CastSpellAtIndex(1);
-            playerInputActions.Player.Spell2.performed += ctx => CastSpellAtIndex(2);
-            playerInputActions.Player.Spell3.performed += ctx => CastSpellAtIndex(3);
-            */
-            
             playerInputActions.Enable();
         }
 
@@ -53,122 +49,38 @@ namespace Scripts.CharacterComponents.PlayerOnly
 
         private void Update()
         {
-            bool isSpellHeldDown = playerInputActions.Player.Spell0.ReadValue<float>() > 0.1;
-            bool hasManaEnough = gameObject.GetComponent<Mana>().CurrentMana >= spell0.SpellToCast.ManaCost;
-            
+            HandleSpellCasting(spell0, ref isCasting0, playerInputActions.Player.Spell0.ReadValue<float>() > 0.1f, ref currentCastTimer0);
+            HandleSpellCasting(spell1, ref isCasting1, playerInputActions.Player.Spell1.ReadValue<float>() > 0.1f, ref currentCastTimer1);
+            HandleSpellCasting(spell2, ref isCasting2, playerInputActions.Player.Spell2.ReadValue<float>() > 0.1f, ref currentCastTimer2);
+            HandleSpellCasting(spell3, ref isCasting3, playerInputActions.Player.Spell3.ReadValue<float>() > 0.1f, ref currentCastTimer3);
+        }
+
+        private void HandleSpellCasting(Spell spell, ref bool isCasting, bool isSpellHeldDown, ref float currentCastTimer)
+        {
+            bool hasManaEnough = gameObject.GetComponent<Mana>().CurrentMana >= spell.SpellToCast.ManaCost;
+    
             if (!isCasting && isSpellHeldDown && hasManaEnough)
             {
                 isCasting = true;
                 currentCastTimer = 0;
-                CastSpell();
+                CastSpell(spell);
             }
-            
-            if(isCasting)
+    
+            if (isCasting)
             {
                 currentCastTimer += Time.deltaTime;
-                if(currentCastTimer >= timeBetweenCasts)
+                if (currentCastTimer >= timeBetweenCasts)
                 {
                     isCasting = false;
                 }
             }
         }
-        
-        
-        void CastSpell()
+        private void CastSpell(Spell spell)
         {
-            gameObject.GetComponent<Mana>().SpendMana(spell0.SpellToCast.ManaCost);
-            Instantiate(spell0, castPoint.position, castPoint.rotation);
+            gameObject.GetComponent<Mana>().SpendMana(spell.SpellToCast.ManaCost);
+            Instantiate(spell, castPoint.position, castPoint.rotation);
         }
-
-        /*
-        private void Start()
-        {
-            if (player == null)
-            {
-                player = GameObject.FindGameObjectWithTag("Player");
-            }
-
-        }
-
-        // Method to equip a spell
-        public void EquipSpell(ISpell spell, int slotIndex)
-{
-        if (equippedSpells.Count >= 4)
-    {
-        Debug.LogWarning("Cannot equip more than 4 spells.");
-        return;
-    }
-        if (equippedSpells.Count <= slotIndex)
-    {
-        equippedSpells.Add(spell);
-    }
-         else
-    {
-        equippedSpells[slotIndex] = spell;
-    }
-    Debug.Log($"Equipped {spell.SpellName} in slot {slotIndex + 1}.");
-    UpdateSpellSlotUI(); 
-}
-
-        
-
-
-        private void UpdateSpellSlotUI()
-        {
-            for (int i = 0; i < equippedSpells.Count; i++)
-            {
-                if (SpellSlots[i] != null && equippedSpells[i] != null)
-                {
-                    // Update spell icon (Image component)
-                    Image spellIcon = SpellSlots[i].transform.Find("SpellIcon")?.GetComponent<Image>(); 
-                    if (spellIcon != null)
-                    {
-                        spellIcon.sprite = equippedSpells[i].SpellIcon; // Assuming each spell has an icon
-                        spellIcon.enabled = true; // Ensure the image is visible
-                    }
-                }
-            }
-        }
-
-
-
-        // Cast the spell at the index
-        private void CastSpellAtIndex(int index)
-        {
-            if (index >= equippedSpells.Count)
-            {
-                Debug.LogWarning("No spell equipped in this slot.");
-                return;
-            }
-
-            CastSpell(equippedSpells[index]);
-        }
-
-        // Method to cast a spell
-        private void CastSpell(ISpell spell)
-        {
-            if (player == null) return;
-
-            Mana playerMana = player.GetComponent<Mana>();
-
-            if (spell == null)
-            {
-                Debug.LogWarning("Spell is null.");
-                return;
-            }
-
-            if (spell.CanCast(playerMana.CurrentMana))
-            {
-                int damage = spell.CastSpell();
-                playerMana.CurrentMana -= spell.ManaCost;
-                Debug.Log($"Player cast {spell.SpellName}, dealing {damage} damage.");
-            }
-            else
-            {
-                Debug.Log($"Not enough mana to cast {spell.SpellName}.");
-            }
-        }
-        */
+      
     }
     
 }

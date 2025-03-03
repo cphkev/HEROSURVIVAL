@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3096734848141404041}
   - component: {fileID: 9148794809046109082}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: Frostbolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b6817803c4384dd4ea2d5726da953555, type: 2}
+  - {fileID: 2100000, guid: 7443aa43d3cae6e44b088737e11df573, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,4 +149,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4291404ba8e789e4bae0ecb7751a7a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellToCast: {fileID: 11400000, guid: 79406e05047209340b2db21f979963b5, type: 2}
+  SpellToCast: {fileID: 11400000, guid: 84ea91ce50a73b44490c54a2d12381e2, type: 2}
