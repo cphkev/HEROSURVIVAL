@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using Scripts.Interfaces;
+using TMPro;
+
+
 namespace Scripts.CharacterComponents
+
 {
     public class Health: MonoBehaviour
     {
        [SerializeField] private int currentHP;
        [SerializeField] private int maxHP;
+       public GameObject damageNumberPrefab;  
+
         
         public int CurrentHP
         {
@@ -31,18 +37,19 @@ namespace Scripts.CharacterComponents
         }
         
         public void TakeDamage(int damage)
+        {       
+             currentHP = Mathf.Max(0, currentHP - damage);
+        if (currentHP == 0) Die();
+
+        if (damageNumberPrefab)
         {
-            Debug.Log(damage);
-            Debug.Log(currentHP);
-            
-            if (currentHP - damage >= 0)
-            {
-                AdjustHP(-damage);
-            }else{
-                currentHP = 0;
-                Die();
-            }
+             var dmgText = Instantiate(damageNumberPrefab, transform.position, Quaternion.identity)
+                .GetComponent<DamageNumbers>();
+                dmgText?.SetDamage(damage);
+         }
         }
+
+
 
         // Method to heal the character
         public void Heal(int amount)
