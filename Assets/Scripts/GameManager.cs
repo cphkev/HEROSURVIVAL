@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject fireBallPrefab;
     
     public static GameManager Instance; // Singleton instance
 
@@ -24,9 +23,6 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private GameObject enemy;
     
-
-    public List<ISpell> availableSpells = new List<ISpell>();
-
     void Awake()
     {
         // Singleton setup
@@ -79,20 +75,6 @@ public class GameManager : MonoBehaviour
             playerStats.Initialize(55, 5, 3, 2);
             playerHealth.Initialize(200);
             playerMana.Initialize(100);
-
-            
-            Fireball fireball = FindObjectOfType<Fireball>();
-
-            if (fireball != null)
-            {
-                availableSpells.Add(fireball); // ✅ Add instantiated Fireball to the spell list
-            }
-            else
-            {
-                Debug.LogError("Fireball prefab is missing a Fireball component!");
-            }
-            
-                availableSpells.Add(new ImmolationAura());
             
             Debug.Log("Player initialized.");
         }
@@ -113,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        HPDisplay ui = FindObjectOfType<HPDisplay>();
+        HPMPDisplay ui = FindFirstObjectByType<HPMPDisplay>();
         if (ui != null)
         {
             Debug.Log("UI Found. Updating Stats.");

@@ -1,116 +1,174 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine.UI;
 using Scripts.Interfaces;
 using Scripts.CharacterComponents;
+using UnityEngine.InputSystem;
 
 namespace Scripts.CharacterComponents.PlayerOnly
 {
     public class PlayerSpells : MonoBehaviour
     {
-        private GameObject player; // Reference to the player
-        private List<Button> SpellSlots; // List of Spell Slot buttons
+        [SerializeField] private Spell spell0;
+        
+        [SerializeField] private Transform castPoint;
+        private bool isCasting;
+        [SerializeField] private float timeBetweenCasts = 0.25f;
+        private float currentCastTimer;
+        
+        //private GameObject player;
 
-        private List<ISpell> equippedSpells = new List<ISpell>(); // List of learned spells
+        // List of buttons for the spell slots in the UI
+        public List<Button> SpellSlots; // Make sure these buttons are assigned in Unity Inspector
 
+        // List to hold the equipped spells
+        private List<ISpell> equippedSpells = new List<ISpell>();
+
+        private PlayerInputActions playerInputActions;
+        
+        private void Awake()
+        {
+            playerInputActions = new PlayerInputActions();
+        }
+
+        private void OnEnable()
+        {
+            /*
+            playerInputActions.Player.Spell0.performed += ctx => CastSpellAtIndex(0);
+            playerInputActions.Player.Spell1.performed += ctx => CastSpellAtIndex(1);
+            playerInputActions.Player.Spell2.performed += ctx => CastSpellAtIndex(2);
+            playerInputActions.Player.Spell3.performed += ctx => CastSpellAtIndex(3);
+            */
+            
+            playerInputActions.Enable();
+        }
+
+        private void OnDisable()
+        {
+            playerInputActions.Disable();
+        }
+
+
+        private void Update()
+        {
+            bool isSpellHeldDown = playerInputActions.Player.Spell0.ReadValue<float>() > 0.1;
+            bool hasManaEnough = gameObject.GetComponent<Mana>().CurrentMana >= spell0.SpellToCast.ManaCost;
+            
+            if (!isCasting && isSpellHeldDown && hasManaEnough)
+            {
+                isCasting = true;
+                currentCastTimer = 0;
+                CastSpell();
+            }
+            
+            if(isCasting)
+            {
+                currentCastTimer += Time.deltaTime;
+                if(currentCastTimer >= timeBetweenCasts)
+                {
+                    isCasting = false;
+                }
+            }
+        }
+        
+        
+        void CastSpell()
+        {
+            gameObject.GetComponent<Mana>().SpendMana(spell0.SpellToCast.ManaCost);
+            Instantiate(spell0, castPoint.position, castPoint.rotation);
+        }
+
+        /*
         private void Start()
         {
-            
-            // Ensure player is assigned
             if (player == null)
             {
                 player = GameObject.FindGameObjectWithTag("Player");
             }
-            
+
         }
 
-        private void Update()
-        {
-            ActivateSpell();
-        }
+        // Method to equip a spell
+        public void EquipSpell(ISpell spell, int slotIndex)
+{
+        if (equippedSpells.Count >= 4)
+    {
+        Debug.LogWarning("Cannot equip more than 4 spells.");
+        return;
+    }
+        if (equippedSpells.Count <= slotIndex)
+    {
+        equippedSpells.Add(spell);
+    }
+         else
+    {
+        equippedSpells[slotIndex] = spell;
+    }
+    Debug.Log($"Equipped {spell.SpellName} in slot {slotIndex + 1}.");
+    UpdateSpellSlotUI(); 
+}
 
-        private void ActivateSpell()
+        
+
+
+        private void UpdateSpellSlotUI()
         {
-            if (Input.anyKeyDown)
+            for (int i = 0; i < equippedSpells.Count; i++)
             {
-                switch (Input.inputString)
+                if (SpellSlots[i] != null && equippedSpells[i] != null)
                 {
-                    case "q":
-                        CastSpell(equippedSpells[0]);
-                        //Debug.Log("Q key pressed");
-                        break;
-                    case "e":
-                        CastSpell(equippedSpells[1]);
-                        //Debug.Log("E key pressed");
-                        break;
-                    case "r":
-                        CastSpell(equippedSpells[2]);
-                        //Debug.Log("R key pressed");
-                        break;
-                    case "f":
-                        CastSpell(equippedSpells[3]);
-                        //Debug.Log("F key pressed");
-                        break;
-                    case "t":
-                        CastSpell(equippedSpells[4]);
-                        //Debug.Log("T key pressed");
-                        break;
-                    default:
-                        // Code to execute when any other key is pressed
-                        break;
+                    // Update spell icon (Image component)
+                    Image spellIcon = SpellSlots[i].transform.Find("SpellIcon")?.GetComponent<Image>(); 
+                    if (spellIcon != null)
+                    {
+                        spellIcon.sprite = equippedSpells[i].SpellIcon; // Assuming each spell has an icon
+                        spellIcon.enabled = true; // Ensure the image is visible
+                    }
                 }
             }
         }
 
-        public void EquipSpell(ISpell spell)
-        {
-            
-            //Mangler begræning på hvor mange spells man kan have equiped
-            if (!equippedSpells.Contains(spell))
-            {
-                equippedSpells.Add(spell);
-                /*
-                Image buttonImage = SpellSlots[equippedSpells.Count].transform.Find("Spellicon")
-                    ?.GetComponent<Image>();
-                if (buttonImage != null && spell.SpellIcon != null)
-                {
-                    buttonImage.sprite = spell.SpellIcon;
-                    buttonImage.enabled = true;
-                    Debug.Log($"{playerCharacter.CharacterName} equipped {spell.SpellName}.");
-                    */
-            }
-            else
-            {
-                Debug.Log($"Player already equipped {spell.SpellName}.");
-            }
-        }
 
+
+        // Cast the spell at the index
+        private void CastSpellAtIndex(int index)
+        {
+            if (index >= equippedSpells.Count)
+            {
+                Debug.LogWarning("No spell equipped in this slot.");
+                return;
+            }
+
+            CastSpell(equippedSpells[index]);
+        }
 
         // Method to cast a spell
         private void CastSpell(ISpell spell)
         {
+            if (player == null) return;
+
             Mana playerMana = player.GetComponent<Mana>();
-            
-            if (spell != null)
+
+            if (spell == null)
             {
-                
-                if (spell.CanCast(playerMana.CurrentMana))
-                {
-                    int damage = spell.CastSpell();
-                    playerMana.CurrentMana -= spell.ManaCost;
-                    Debug.Log($"Player cast {spell.SpellName}, dealing {damage} damage.");
-                }
-                else
-                {
-                    Debug.Log($"Not enough mana to cast {spell.SpellName}.");
-                }
+                Debug.LogWarning("Spell is null.");
+                return;
+            }
+
+            if (spell.CanCast(playerMana.CurrentMana))
+            {
+                int damage = spell.CastSpell();
+                playerMana.CurrentMana -= spell.ManaCost;
+                Debug.Log($"Player cast {spell.SpellName}, dealing {damage} damage.");
             }
             else
             {
-                Debug.Log($"Player has not learned {spell.SpellName}.");
+                Debug.Log($"Not enough mana to cast {spell.SpellName}.");
             }
-            
         }
-        
+        */
     }
+    
 }

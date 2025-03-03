@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1062703065760686304}
   - component: {fileID: 8898357359195907957}
   - component: {fileID: -3096734848141404041}
-  - component: {fileID: -4722820653259282683}
+  - component: {fileID: 9148794809046109082}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 966856349100293167}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 577.5, y: 72.9, z: 620.69}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -137,7 +137,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-4722820653259282683
+--- !u!114 &9148794809046109082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 966856349100293167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec7e00c528806142bbe8203d9ebe4bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 4291404ba8e789e4bae0ecb7751a7a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  SpellToCast: {fileID: 11400000, guid: 79406e05047209340b2db21f979963b5, type: 2}

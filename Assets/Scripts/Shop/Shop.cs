@@ -1,92 +1,99 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Shop : MonoBehaviour
 {
-    public GameObject shopUI; // Reference to the Shop UI (assign in Inspector)
+    public GameObject shopUI; 
     private bool isPlayerNear = false;
     private bool isShopOpen = false;
     private ShopManager shopManager;
+    private PlayerInputActions playerInputActions;
+    private InputAction interactAction;
 
-    
+    public List<Button> shopSlotButtons;
+
+    void Awake()
+    {
+        playerInputActions = new PlayerInputActions();
+        interactAction = playerInputActions.Player.ShopKey;
+        interactAction.performed += ctx => ToggleShop(); 
+    }
+
     void Start()
     {
-        // Ensure ShopManager is assigned
         if (shopManager == null)
         {
             shopManager = GetComponent<ShopManager>();
         }
+        
+        AddListeners(); 
     }
-    void Update()
+
+    void AddListeners()
     {
-        // Toggle shop UI when player presses "P" and is near the shop
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.P))
-        {
-            ToggleShop();
-        }
         
-        if(!isPlayerNear && isShopOpen)
+        for (int i = 0; i < shopSlotButtons.Count; i++)
         {
-            ToggleShop();
+            int buttonIndex = i; 
+            shopSlotButtons[i].onClick.AddListener(() => BuyFromShop(buttonIndex)); 
         }
-
-        if (isShopOpen)
-        {
-            BuyFromShop();
-        }
-        
     }
 
-    // Called when player enters the shop area
+    void OnEnable()
+    {
+        playerInputActions.Enable(); 
+    }
+
+    void OnDisable()
+    {
+        playerInputActions.Disable(); 
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNear = true;
+            isPlayerNear = true; 
         }
     }
 
-    // Called when player exits the shop area
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNear = false;
+            isPlayerNear = false; 
+            if (isShopOpen)
+            {
+                ToggleShop(); 
+            }
         }
     }
 
     private void ToggleShop()
     {
-        if (shopUI != null)
+        if (isPlayerNear && shopUI != null)
         {
-            isShopOpen = !isShopOpen;
+            isShopOpen = !isShopOpen; 
             shopUI.SetActive(isShopOpen);
         }
-        else
+        else if (shopUI == null)
         {
             Debug.LogError("Shop UI is not assigned in the Shop script!");
         }
     }
 
-    private void BuyFromShop()
+    private void BuyFromShop(int slotIndex)
     {
-        if (Input.anyKeyDown)
+        if (isShopOpen && slotIndex != -1) 
         {
-            switch (Input.inputString)
-            {
-                case "1":
-                    shopManager.BuySpell(1);
-                    Debug.Log("1 key pressed");
-                    break;
-                case "2":
-                    shopManager.BuySpell(2);
-                    Debug.Log("2 key pressed");
-                    break;
-                default:
-                    // Code to execute when any other key is pressed
-                    break;
-            }
+            shopManager.BuySpell(slotIndex); 
+            Debug.Log($"Bought spell in slot {slotIndex}");
+        }
+        else
+        {
+            Debug.LogWarning("No valid spell selected to buy.");
         }
     }
-    
-    
 }

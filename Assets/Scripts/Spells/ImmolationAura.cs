@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Scripts.Interfaces;
+using System;
 
 public class ImmolationAura : MonoBehaviour, ISpell
 {
-    public string SpellName => "ImmolationAura";
-    public int ManaCost => 5; // Per second
-    public int SpellDamage => 10; // Per second
-    public float radius = 5f;
-    public float tickRate = 1f; // Damage every second
+    public event Action OnCastImmolationAura;
+    private string spellName => "ImmolationAura";  // The spell name
+    private int manaCost => 10;
+    private int spellDamage => 20;
 
-    private bool isActive = false;
-    private Coroutine auraCoroutine;
-
-   private Sprite spellIcon;
+    private Sprite spellIcon;
+    
+    public string SpellName => spellName;
+    public int ManaCost => manaCost;
+    public int SpellDamage => spellDamage;
 
     public Sprite SpellIcon
     {
@@ -21,8 +21,8 @@ public class ImmolationAura : MonoBehaviour, ISpell
         {
             if (spellIcon == null)
             {
-                
-                string path = $"Sprites/{SpellName}";  
+                // Log the exact path we're trying to load
+                string path = $"Sprites/{spellName}"; 
                 Debug.Log($"Attempting to load sprite from path: {path}");
 
                 // Load sprite from Resources folder
@@ -30,7 +30,7 @@ public class ImmolationAura : MonoBehaviour, ISpell
 
                 if (spellIcon == null)
                 {
-                    Debug.LogWarning($"Failed to load sprite for {SpellName} from path: {path}");
+                    Debug.LogWarning($"Failed to load sprite for {spellName} from path: {path}");
                 }
             }
             return spellIcon;
@@ -39,49 +39,13 @@ public class ImmolationAura : MonoBehaviour, ISpell
 
     public bool CanCast(float currentMana)
     {
-        return currentMana >= ManaCost;
+        return currentMana >= manaCost;
     }
 
     public int CastSpell()
     {
-        if (!isActive)
-        {
-            isActive = true;
-            //auraCoroutine = StartCoroutine(ApplyAura());
-            Debug.Log($"{SpellName} activated!");
-        }
-        return 0; // Direct damage not applicable
+        OnCastImmolationAura?.Invoke();
+        
+        return spellDamage;
     }
-
-    public void StopAura()
-    {
-        if (isActive)
-        {
-            isActive = false;
-            if (auraCoroutine != null)
-                StopCoroutine(auraCoroutine);
-            Debug.Log($"{SpellName} deactivated!");
-        }
-    }
-
-
-
-    //private IEnumerator ApplyAura()
-    /*
-    {
-        while (isActive)
-        {
-            Collider[] enemies = Physics.OverlapSphere(transform.position, radius);
-            foreach (Collider enemy in enemies)
-            {
-                if (enemy.CompareTag("Enemy"))
-                {
-                    enemy.GetComponent<Enemy>().TakeDamage(SpellDamage);
-                }
-            }
-            yield return new WaitForSeconds(tickRate);
-        }
-    }
-    */
- 
 }
