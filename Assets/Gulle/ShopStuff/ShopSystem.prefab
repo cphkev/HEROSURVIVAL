@@ -10697,6 +10697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopUI: {fileID: 3936279102655078929}
+  shopSlotButtons: []
 --- !u!114 &810374687743413438
 MonoBehaviour:
   m_ObjectHideFlags: 0
