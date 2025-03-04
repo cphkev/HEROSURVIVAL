@@ -2329,6 +2329,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9148794809046109082, guid: c2d39a2fc39eb6f47beccc1ca0031e93, type: 3}
     - target: {fileID: 5299276826240491791, guid: 7de1ba1c32d191a43939f40dc8f2214a, type: 3}
+      propertyPath: spell1
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: 0cb2d88a42fae134cb9e2c1c3a2f91b3, type: 3}
+    - target: {fileID: 5299276826240491791, guid: 7de1ba1c32d191a43939f40dc8f2214a, type: 3}
+      propertyPath: spell2
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: 8b380fa61cc134f4280988d701394664, type: 3}
+    - target: {fileID: 5299276826240491791, guid: 7de1ba1c32d191a43939f40dc8f2214a, type: 3}
+      propertyPath: spell3
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: 5120815573e14e74db1e0dc2d06231d8, type: 3}
+    - target: {fileID: 5299276826240491791, guid: 7de1ba1c32d191a43939f40dc8f2214a, type: 3}
       propertyPath: castPoint
       value: 
       objectReference: {fileID: 786671369}

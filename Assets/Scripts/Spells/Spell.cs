@@ -7,7 +7,8 @@ using Scripts.CharacterComponents;
 public class Spell : MonoBehaviour
 {
    public SpellScriptableObject SpellToCast;
-
+   public StatusEffectScriptableObject StatusEffect;
+   
    private SphereCollider myCollider;
    private Rigidbody myRigidbody;
     
@@ -38,6 +39,11 @@ public class Spell : MonoBehaviour
            Destroy(this.gameObject);
            Health enemyHealth = other.GetComponentInParent<Health>();
            enemyHealth.TakeDamage(SpellToCast.DamageAmount);
+           if (StatusEffect != null)
+           {
+               StatusEffectable enemyStatus =  other.GetComponentInParent<StatusEffectable>();
+               enemyStatus.ApplyEffect(StatusEffect);
+           }
            
        }
    }

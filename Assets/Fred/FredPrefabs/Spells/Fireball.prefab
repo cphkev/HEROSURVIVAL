@@ -150,3 +150,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpellToCast: {fileID: 11400000, guid: 79406e05047209340b2db21f979963b5, type: 2}
+  StatusEffect: {fileID: 11400000, guid: 3737b3356279fe64eb7595bbe0d06cf8, type: 2}
