@@ -882,6 +882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7792350524a7465a86b8b2190813c617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMana: 0
+  maxMana: 0
 --- !u!114 &1815090331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,6 +896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d5f115470c4b3f8e56341b0417106a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHP: 0
+  maxHP: 0
+  damageNumberPrefab: {fileID: 0}
 --- !u!1 &2028259924 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2649625457770586459, guid: afe5ef0a97780f843a1dc18344fd1b48, type: 3}
@@ -911,6 +916,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a0f3c683e94c63ac4864f6fcc272ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spell0: {fileID: 0}
+  castPoint: {fileID: 0}
+  timeBetweenCasts: 0.25
   SpellSlots: []
 --- !u!114 &2028259936
 MonoBehaviour:
@@ -936,6 +944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7792350524a7465a86b8b2190813c617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMana: 0
+  maxMana: 0
 --- !u!114 &2028259938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,6 +958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d5f115470c4b3f8e56341b0417106a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHP: 0
+  maxHP: 0
+  damageNumberPrefab: {fileID: 0}
 --- !u!4 &2028259939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2652387712836217119, guid: afe5ef0a97780f843a1dc18344fd1b48, type: 3}
