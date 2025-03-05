@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 GetMouseWorldPosition()
 {
-    // Convert the mouse position from screen space to world space
     if (mainCamera == null) return Vector3.zero;
 
     Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
