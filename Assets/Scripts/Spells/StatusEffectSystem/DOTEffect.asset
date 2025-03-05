@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518552b1a2421be458fbca7b82f3ec70, type: 3}
   m_Name: DOTEffect
   m_EditorClassIdentifier: 
-  DOTAmount: 0
-  TickSpeed: 0
+  DOTAmount: 5
+  TickSpeed: 1
   MovementPenalty: 0
-  Lifetime: 0
+  Lifetime: 6
   EffectParticles: {fileID: 0}
