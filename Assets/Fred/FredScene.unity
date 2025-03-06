@@ -917,9 +917,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spell0: {fileID: 0}
+  spell1: {fileID: 0}
+  spell2: {fileID: 0}
+  spell3: {fileID: 0}
   castPoint: {fileID: 0}
   timeBetweenCasts: 0.25
-  SpellSlots: []
 --- !u!114 &2028259936
 MonoBehaviour:
   m_ObjectHideFlags: 0
