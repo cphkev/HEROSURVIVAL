@@ -1402,8 +1402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60423b7df47d5c45adba5cff9269dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 5599153477650996871}
-  enemyPrefab: {fileID: 1277033434}
 --- !u!4 &1126714560
 Transform:
   m_ObjectHideFlags: 0
@@ -3566,6 +3564,22 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5599153477650996871}
+    - target: {fileID: 1349608159809618477, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
+      propertyPath: spell0
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: c2d39a2fc39eb6f47beccc1ca0031e93, type: 3}
+    - target: {fileID: 1349608159809618477, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
+      propertyPath: spell1
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: 0cb2d88a42fae134cb9e2c1c3a2f91b3, type: 3}
+    - target: {fileID: 1349608159809618477, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
+      propertyPath: spell2
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: 8b380fa61cc134f4280988d701394664, type: 3}
+    - target: {fileID: 1349608159809618477, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
+      propertyPath: spell3
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: 5120815573e14e74db1e0dc2d06231d8, type: 3}
     - target: {fileID: 1883455747139101019, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 27.6
@@ -3854,7 +3868,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6092246847177394452, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2103806724679289568, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
     - {fileID: 5787238782270481904, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
@@ -3964,6 +3979,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 6.904131e-24
       objectReference: {fileID: 0}
+    - target: {fileID: 5410460097554224333, guid: b90028809e7a37048b7613541c9444c7, type: 3}
+      propertyPath: maxMana
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410460097554224333, guid: b90028809e7a37048b7613541c9444c7, type: 3}
+      propertyPath: currentMana
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5783967255806116252, guid: b90028809e7a37048b7613541c9444c7, type: 3}
       propertyPath: FollowOffset.y
       value: 31.8
@@ -3981,9 +4004,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9148794809046109082, guid: 8b380fa61cc134f4280988d701394664, type: 3}
     - target: {fileID: 5911066560668743240, guid: b90028809e7a37048b7613541c9444c7, type: 3}
-      propertyPath: spell3
+      propertyPath: spells.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911066560668743240, guid: b90028809e7a37048b7613541c9444c7, type: 3}
+      propertyPath: 'spells.Array.data[0]'
       value: 
-      objectReference: {fileID: 9148794809046109082, guid: 5120815573e14e74db1e0dc2d06231d8, type: 3}
+      objectReference: {fileID: 9148794809046109082, guid: c2d39a2fc39eb6f47beccc1ca0031e93, type: 3}
+    - target: {fileID: 5911066560668743240, guid: b90028809e7a37048b7613541c9444c7, type: 3}
+      propertyPath: 'spells.Array.data[1]'
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: 0cb2d88a42fae134cb9e2c1c3a2f91b3, type: 3}
+    - target: {fileID: 5911066560668743240, guid: b90028809e7a37048b7613541c9444c7, type: 3}
+      propertyPath: 'spells.Array.data[2]'
+      value: 
+      objectReference: {fileID: 9148794809046109082, guid: 8b380fa61cc134f4280988d701394664, type: 3}
     - target: {fileID: 5911066560668743240, guid: b90028809e7a37048b7613541c9444c7, type: 3}
       propertyPath: 'SpellSlots.Array.data[0]'
       value: 

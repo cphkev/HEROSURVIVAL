@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf529182e61d70468e9b3dc2fd05099, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
+  SpellName: Fireball
+  SpellIcon: {fileID: 21300000, guid: 2e425b106db985e49b8fbc6f738eb45e, type: 3}
   DamageAmount: 0
   ManaCost: 5
   Lifetime: 2
