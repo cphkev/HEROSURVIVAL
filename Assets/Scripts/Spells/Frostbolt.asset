@@ -17,3 +17,5 @@ MonoBehaviour:
   Lifetime: 2
   Speed: 10
   SpellRadius: 0.5
+  Cooldown: 0
+  CastTime: 4
