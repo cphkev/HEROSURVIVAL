@@ -24,22 +24,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Invoke("UpdateUI", 0.5f); // Delayed UI update
+       
     }
-    
-    private void UpdateUI()
-    {
-        HPMPDisplay ui = FindFirstObjectByType<HPMPDisplay>();
-        if (ui != null)
-        {
-            Debug.Log("UI Found. Updating Stats.");
-            ui.UpdateStatsDisplay();
-        }
-        else
-        {
-            Debug.LogWarning("HPDisplay not found! Make sure it exists in the scene.");
-        }
-    }
+
 
    
 }
