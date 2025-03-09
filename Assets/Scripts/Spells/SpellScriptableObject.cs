@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Spell", menuName = "Spells")]
 public class SpellScriptableObject : ScriptableObject
 {
+    public string SpellName;
+    public Sprite SpellIcon;
     public int DamageAmount = 10;
     public float ManaCost = 5f;
     public float Lifetime = 2f;

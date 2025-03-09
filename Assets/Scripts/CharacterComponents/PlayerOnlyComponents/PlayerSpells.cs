@@ -54,10 +54,10 @@ namespace Scripts.CharacterComponents.PlayerOnly
         private void Update()
         {
             countDownCooldownTimers();
-            HandleSpellCasting(spell0, ref isCasting0, playerInputActions.Player.Spell0.ReadValue<float>() > 0.1f, ref currentCastTimer0, ref currentCooldownTimer0);
-            HandleSpellCasting(spell1, ref isCasting1, playerInputActions.Player.Spell1.ReadValue<float>() > 0.1f, ref currentCastTimer1, ref currentCooldownTimer1);
-            HandleSpellCasting(spell2, ref isCasting2, playerInputActions.Player.Spell2.ReadValue<float>() > 0.1f, ref currentCastTimer2, ref currentCooldownTimer2);
-            HandleSpellCasting(spell3, ref isCasting3, playerInputActions.Player.Spell3.ReadValue<float>() > 0.1f, ref currentCastTimer3, ref currentCooldownTimer3);
+            if(spell0!=null) HandleSpellCasting(spell0, ref isCasting0, playerInputActions.Player.Spell0.ReadValue<float>() > 0.1f, ref currentCastTimer0, ref currentCooldownTimer0);
+            if(spell1!=null) HandleSpellCasting(spell1, ref isCasting1, playerInputActions.Player.Spell1.ReadValue<float>() > 0.1f, ref currentCastTimer1, ref currentCooldownTimer1);
+            if(spell2!=null) HandleSpellCasting(spell2, ref isCasting2, playerInputActions.Player.Spell2.ReadValue<float>() > 0.1f, ref currentCastTimer2, ref currentCooldownTimer2);
+            if(spell3!=null) HandleSpellCasting(spell3, ref isCasting3, playerInputActions.Player.Spell3.ReadValue<float>() > 0.1f, ref currentCastTimer3, ref currentCooldownTimer3);
         }
 
         private void HandleSpellCasting(Spell spell, ref bool isCasting, bool isSpellHeldDown, ref float currentCastTimer, ref float currentCooldownTimer)
@@ -127,8 +127,30 @@ namespace Scripts.CharacterComponents.PlayerOnly
             }
         }
       
+        //Sorry dette er ikke en pæn løsning
+        public void EquipSpell(Spell spell)
+        {
+            if (spell0 == null)
+            {
+                spell0 = spell;
+            }
+            else if (spell1 == null)
+            {
+                spell1 = spell;
+            }
+            else if (spell2 == null)
+            {
+                spell2 = spell;
+            }
+            else if (spell3 == null)
+            {
+                spell3 = spell;
+            }else
+            {
+                Debug.Log("No more spell slots available");
+            }
+            
+        }
+
     }
-    
-   
-    
 }

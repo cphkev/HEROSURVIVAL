@@ -4,16 +4,26 @@ using TMPro;
 using System.Collections.Generic;
 using Scripts.Interfaces;
 using Scripts.CharacterComponents.PlayerOnly;
-using Scripts.Spells;
+using UnityEngine.Serialization;
+
 
 public class ShopManager : MonoBehaviour
 {
-    public GameObject player; // Reference to the player
-    public GameObject shopUI; // Reference to the Shop UI
-    public List<Button> ShopSlots; // List of Shop Slot buttons
+    private GameObject player; // Reference to the player
+    private GameObject shopUI; // Reference to the Shop UI
+    private List<Button> ShopSlots; // List of Shop Slot buttons
 
-    private List<ISpell> allSpells;
+    [SerializeField] private Spell spell0;
+    [SerializeField] private Spell spell1;
+    [SerializeField] private Spell spell2;
+    [SerializeField] private Spell spell3;
+    [SerializeField] private Spell spell4;
+    [SerializeField] private Spell spell5;
+    [SerializeField] private Spell spell6;
+    [SerializeField] private Spell spell7;
+    [SerializeField] private Spell spell8;
 
+    public List<Spell> AllSpells;
 
     private void Start()
     {
@@ -23,42 +33,34 @@ public class ShopManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
         }
 
+        /*
         // Ensure shop UI is assigned
         if (shopUI == null)
         {
             Debug.LogError("ShopUI not assigned in the Inspector!");
             return;
         }
+        */
 
-        // Get all spells from Spellbook
-        allSpells = Spellbook.GetAllSpells();
-
-        if (GameManager.Instance == null || allSpells == null || allSpells.Count == 0)
-        {
-            Debug.LogError("No available spells assigned to the shop!");
-            return;
-        }
-
-        // Initialize shop with available spells from GameManager
+        InitializeAllSpells();
+        
         InitializeShop();
     }
 
     private void InitializeShop()
     {
-
         // Initialize buttons dynamically with spell names and images
         for (int i = 0; i < ShopSlots.Count; i++)
         {
-            if (i < allSpells.Count && allSpells[i] != null)
+            if (i < AllSpells.Count && AllSpells[i] != null)
             {
-                ISpell spell = allSpells[i];
-
+                Spell spell = AllSpells[i];
 
                 // Update button image
                 Image buttonImage = ShopSlots[i].transform.Find("Spellicon")?.GetComponent<Image>();
-                if (buttonImage != null && spell.SpellIcon != null)
+                if (buttonImage != null && spell.SpellToCast.SpellIcon != null)
                 {
-                    buttonImage.sprite = spell.SpellIcon;
+                    buttonImage.sprite = spell.SpellToCast.SpellIcon;
                     buttonImage.enabled = true; // Ensure it's visible
                 }
                 else
@@ -73,37 +75,46 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-        public void BuySpell(int slotIndex)
-{
-    // Check if the spell list is valid and if the slotIndex is valid
-    if (allSpells == null || allSpells.Count == 0 || slotIndex < 0 || slotIndex >= allSpells.Count)
+    public void BuySpell(int slotIndex)
     {
-        Debug.LogWarning($"Invalid spell list or slot index: {slotIndex}. Cannot buy spell.");
-        return;
+        // Check if the spell list is valid and if the slotIndex is valid
+        if (AllSpells == null || AllSpells.Count == 0 || slotIndex < 0 || slotIndex >= AllSpells.Count)
+        {
+            Debug.LogWarning($"Invalid spell list or slot index: {slotIndex}. Cannot buy spell.");
+            return;
+        }
+
+        // Ensure the player exists and has the PlayerSpells component
+        PlayerSpells playerSpells = player?.GetComponent<PlayerSpells>();
+        if (playerSpells == null)
+        {
+            Debug.LogWarning("Player or PlayerSpells component not found!");
+            return;
+        }
+
+        // If the spell exists at the given index, equip it
+        Spell spellToBuy = AllSpells[slotIndex];
+        if (spellToBuy != null)
+        {
+            playerSpells.EquipSpell(spellToBuy); // Equip the spell in the right slot
+            Debug.Log($"Player bought {spellToBuy.SpellToCast.SpellName}!");
+        }
+        else
+        {
+            Debug.LogWarning($"Spell is null for slot {slotIndex}. Cannot buy spell.");
+        }
     }
 
-    // Ensure the player exists and has the PlayerSpells component
-    PlayerSpells playerSpells = player?.GetComponent<PlayerSpells>();
-    if (playerSpells == null)
+    private void InitializeAllSpells()
     {
-        Debug.LogWarning("Player or PlayerSpells component not found!");
-        return;
+        AllSpells.Add(spell0);
+        AllSpells.Add(spell1);
+        AllSpells.Add(spell2);
+        AllSpells.Add(spell3);
+        AllSpells.Add(spell4);
+        AllSpells.Add(spell5);
+        AllSpells.Add(spell6);
+        AllSpells.Add(spell7);
+        AllSpells.Add(spell8);
     }
-
-    // If the spell exists at the given index, equip it
-    ISpell spellToBuy = allSpells[slotIndex];
-    if (spellToBuy != null)
-    {
-        //playerSpells.EquipSpell(spellToBuy, slotIndex); // Equip the spell in the right slot
-        Debug.Log($"Player bought {spellToBuy.SpellName}!");
-    }
-    else
-    {
-        Debug.LogWarning($"Spell is null for slot {slotIndex}. Cannot buy spell.");
-    }
-}
-
-
-
-    
 }
