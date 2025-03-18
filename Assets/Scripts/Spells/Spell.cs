@@ -33,7 +33,7 @@ public class Spell : MonoBehaviour
    
    private void OnTriggerEnter(Collider other)
    {
-       if (other.CompareTag("Enemy") || other.CompareTag("Player"))
+       if (other.CompareTag("Enemy"))
        {
            
            SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
