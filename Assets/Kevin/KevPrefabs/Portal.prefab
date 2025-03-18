@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangedEnemyPrefab: {fileID: 6582376010747289995, guid: 0460b3fe32371a541a947c910f5d7683, type: 3}
-  meleeEnemyPrefab: {fileID: 0}
+  meleeEnemyPrefab: {fileID: 4861015675423674548, guid: 11cf023c8406abb4d84a47780c847201, type: 3}
   spawnPoint: {fileID: 4609803264612731526}
   spawnDelay: 3
   spawnRate: 6
