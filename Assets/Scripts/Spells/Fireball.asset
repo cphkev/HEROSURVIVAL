@@ -20,4 +20,6 @@ MonoBehaviour:
   Speed: 50
   SpellRadius: 0.5
   Cooldown: 0
-  CastTime: 5
+  CastTime: 4
+  CastSound: {fileID: 8300000, guid: 607d7e694abcbcc48bc60069ce094353, type: 3}
+  ImpactSound: {fileID: 8300000, guid: a4392d0a2358ffc4b8d12ba1774e8556, type: 3}

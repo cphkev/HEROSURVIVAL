@@ -44,7 +44,9 @@ public class Spell : MonoBehaviour
                StatusEffectable enemyStatus =  other.GetComponentInParent<StatusEffectable>();
                enemyStatus.ApplyEffect(StatusEffect);
            }
+           SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, 1f);
            
+
        }
    }
    
