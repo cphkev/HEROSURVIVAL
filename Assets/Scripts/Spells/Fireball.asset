@@ -23,3 +23,4 @@ MonoBehaviour:
   CastTime: 4
   CastSound: {fileID: 8300000, guid: 607d7e694abcbcc48bc60069ce094353, type: 3}
   ImpactSound: {fileID: 8300000, guid: a4392d0a2358ffc4b8d12ba1774e8556, type: 3}
+  ImpactEffect: {fileID: 229090875627610503, guid: c8f758866e6064d49aab3f39a04b3c72, type: 3}

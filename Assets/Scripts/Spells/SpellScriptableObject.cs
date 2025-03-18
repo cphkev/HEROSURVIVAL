@@ -14,5 +14,6 @@ public class SpellScriptableObject : ScriptableObject
     public float CastTime;
     public AudioClip CastSound;
     public AudioClip ImpactSound;
+    public GameObject ImpactEffect;
 
 }
