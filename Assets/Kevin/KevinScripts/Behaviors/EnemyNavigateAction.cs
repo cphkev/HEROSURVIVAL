@@ -52,7 +52,20 @@ public partial class EnemyNavigateAction : Action
             Debug.LogWarning("Target is null");
             return Status.Failure;
         }
+        float distance = Vector3.Distance(_self.transform.position, Target.Value.transform.position);
+        float stopDistance = _agent.stoppingDistance > 0 ? _agent.stoppingDistance : 1.5f; // Default stopping distance
+        Debug.Log($"Distance to target: {distance}, Stopping Distance: {stopDistance}");
+        
+        if (distance <= stopDistance)
+        {
+            Debug.Log("Enemy reached stopping distance. Transitioning to attack.");
+            _agent.ResetPath();
+            return Status.Success;
+        }
 
+        if (_agent.isStopped)
+            _agent.isStopped = false;
+        
         _agent.SetDestination(Target.Value.transform.position);
         return Status.Running;
     }
