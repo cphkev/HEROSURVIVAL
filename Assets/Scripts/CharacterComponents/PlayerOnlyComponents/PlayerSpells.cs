@@ -91,6 +91,7 @@ namespace Scripts.CharacterComponents.PlayerOnly
         private void CastSpell(Spell spell)
         {
             playerMana.SpendMana(spell.SpellToCast.ManaCost);
+            SoundFXManager.Instance.PlaySoundFX(spell.SpellToCast.CastSound, castPoint, 1f);
             Instantiate(spell, castPoint.position, castPoint.rotation);
         }
 

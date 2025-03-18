@@ -12,9 +12,8 @@ public class SpellScriptableObject : ScriptableObject
     public float SpellRadius = 0.5f;
     public float Cooldown;
     public float CastTime;
-
-    //Status effects
-    //Iconer /sprite
-    //Time between casts
+    public AudioClip CastSound;
+    public AudioClip ImpactSound;
+    public GameObject ImpactEffect;
 
 }
