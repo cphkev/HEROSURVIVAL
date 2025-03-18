@@ -36,6 +36,8 @@ public class Spell : MonoBehaviour
        if (other.CompareTag("Enemy") || other.CompareTag("Player"))
        {
            
+           SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
+           SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, 1f);
            Destroy(this.gameObject);
            Health enemyHealth = other.GetComponentInParent<Health>();
            enemyHealth.TakeDamage(SpellToCast.DamageAmount);
@@ -45,6 +47,17 @@ public class Spell : MonoBehaviour
                enemyStatus.ApplyEffect(StatusEffect);
            }
            
+           
+
+       }
+   }
+   
+   private void SpawnEffect(GameObject effectPrefab, Vector3 position, Quaternion rotation, float lifetime)
+   {
+       if (effectPrefab != null)
+       {
+           GameObject effectInstance = Instantiate(effectPrefab, position, rotation);
+           Destroy(effectInstance, lifetime);
        }
    }
    
