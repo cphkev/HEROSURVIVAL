@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a094f17-96fe-4960-865f-08df3f4663b0" name="Changes" comment="" />
+    <list default="true" id="6a094f17-96fe-4960-865f-08df3f4663b0" name="Changes" comment="gg" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +28,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Gulle/PlayerThings/Player/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
   "associatedIndex": 8
@@ -58,15 +59,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1742292232084</updated>
-      <workItem from="1742292233554" duration="1210000" />
+      <workItem from="1742292233554" duration="1365000" />
     </task>
+    <task id="LOCAL-00001" summary="Burde Virke">
+      <option name="closed" value="true" />
+      <created>1742303269072</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742303269072</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Burde Virke" />
+    <option name="LAST_COMMIT_MESSAGE" value="Burde Virke" />
   </component>
 </project>
