@@ -26,7 +26,7 @@ public partial class EnemyNavigateAction : Action
         _agent = _self.GetComponent<NavMeshAgent>();
         if (_agent == null)
         {
-            Debug.LogError("NavMeshAgent component missing!");
+       //     Debug.LogError("NavMeshAgent component missing!");
             return Status.Failure;
         }
 
