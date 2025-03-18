@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - spell0: {fileID: 1205127624110317241, guid: f2053cc8cc46a244b9cb546cbf02359a, type: 3}
+  - spell0: {instanceID: 0}
   - spell1: {instanceID: 0}
   - spell2: {instanceID: 0}
   - spell3: {instanceID: 0}
