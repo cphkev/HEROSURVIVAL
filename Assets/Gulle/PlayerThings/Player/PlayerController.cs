@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour
     public float deceleration = 25f;
     public float rotationSpeed = 10f;
     public Camera mainCamera;
-    public Animator animator; 
-
+    public Animator animator;
+    
+    public bool IsCasting = false;
+    public bool IsHoldingSpell = false;
     private Vector2 moveInput;
     private Rigidbody rb;
     private PlayerInput playerInput;
@@ -35,6 +37,9 @@ public class PlayerController : MonoBehaviour
     // Update the MoveX and MoveY parameters for the animator (for blend tree)
     animator.SetFloat("MoveX", moveInput.x);
     animator.SetFloat("MoveY", moveInput.y);
+
+    //Locks movement while casting
+    HandleCasting();
 
     // If there is input, calculate whether we're backpedaling or running
     if (moveDirection.magnitude > 0.1f)
@@ -91,6 +96,14 @@ public class PlayerController : MonoBehaviour
 
    private void MovePlayer()
 {
+    
+    if (IsCasting) 
+    {
+        // Stop movement when casting
+        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+        return;
+    }
+    
     // Get input from the player (e.g., WASD or left stick)
     Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
 
@@ -124,6 +137,50 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+    }
+
+    private void HandleCasting()
+    {
+        // Check if spell button is being held
+        if (playerInput.actions["Spell0"].ReadValue<float>() > 0.1f ||
+            playerInput.actions["Spell1"].ReadValue<float>() > 0.1f ||
+            playerInput.actions["Spell2"].ReadValue<float>() > 0.1f ||
+            playerInput.actions["Spell3"].ReadValue<float>() > 0.1f)
+        {
+            IsHoldingSpell = true;
+        }
+        else
+        {
+            IsHoldingSpell = false;
+        }
+
+        // Starts or stops casting based on input
+        if (IsHoldingSpell)
+        {
+            if (!IsCasting)
+            {
+                StartCasting();
+            }
+        }
+        else
+        {
+            if (IsCasting)
+            {
+                StopCasting();
+            }
+        }
+    }
+    private void StartCasting()
+    {
+        IsCasting = true;
+        animator.SetBool("IsCasting", true); // Trigger casting animation
+        rb.linearVelocity = Vector3.zero; // Stop movement immediately
+    }
+
+    private void StopCasting()
+    {
+        IsCasting = false;
+        animator.SetBool("IsCasting", false);
     }
 
 }

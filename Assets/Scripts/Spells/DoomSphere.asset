@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf529182e61d70468e9b3dc2fd05099, type: 3}
   m_Name: DoomSphere
   m_EditorClassIdentifier: 
+  SpellName: Doom sphere
+  SpellIcon: {fileID: 0}
   DamageAmount: 70
   ManaCost: 40
   Lifetime: 5
   Speed: 15
   SpellRadius: 0.5
+  Cooldown: 0
+  CastTime: 8

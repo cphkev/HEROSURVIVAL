@@ -1,86 +1,122 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine.UI;
-using Scripts.Interfaces;
-using Scripts.CharacterComponents;
 using UnityEngine.InputSystem;
 
 namespace Scripts.CharacterComponents.PlayerOnly
 {
     public class PlayerSpells : MonoBehaviour
     {
-        [SerializeField] private Spell spell0;
-        [SerializeField] private Spell spell1;
-        [SerializeField] private Spell spell2;
-        [SerializeField] private Spell spell3;
-        
         [SerializeField] private Transform castPoint;
-        private bool isCasting0;
-        private bool isCasting1;
-        private bool isCasting2;
-        private bool isCasting3;
-        
-        [SerializeField] private float timeBetweenCasts = 0.25f;
-        private float currentCastTimer0;
-        private float currentCastTimer1;
-        private float currentCastTimer2;
-        private float currentCastTimer3;
-        
-        
+        [SerializeField] private Spell[] spells = new Spell[4];
+
+        private int currentCastingIndex = -1; // -1 means no spell is being cast
+        private float currentCastTimer = 0;
+        private float[] currentCooldownTimers = new float[4];
+
         private PlayerInputActions playerInputActions;
-        
+        private InputAction[] spellActions; // Store InputActions in an array
+        private Mana playerMana;
+
         private void Awake()
         {
             playerInputActions = new PlayerInputActions();
+            playerMana = GetComponent<Mana>();
+
+            // Initialize spellActions with references to the specific input actions
+            spellActions = new InputAction[]
+            {
+                playerInputActions.Player.Spell0,
+                playerInputActions.Player.Spell1,
+                playerInputActions.Player.Spell2,
+                playerInputActions.Player.Spell3
+            };
         }
 
-        private void OnEnable()
-        {
-            playerInputActions.Enable();
-        }
-
-        private void OnDisable()
-        {
-            playerInputActions.Disable();
-        }
-
+        private void OnEnable() => playerInputActions.Enable();
+        private void OnDisable() => playerInputActions.Disable();
 
         private void Update()
         {
-            HandleSpellCasting(spell0, ref isCasting0, playerInputActions.Player.Spell0.ReadValue<float>() > 0.1f, ref currentCastTimer0);
-            HandleSpellCasting(spell1, ref isCasting1, playerInputActions.Player.Spell1.ReadValue<float>() > 0.1f, ref currentCastTimer1);
-            HandleSpellCasting(spell2, ref isCasting2, playerInputActions.Player.Spell2.ReadValue<float>() > 0.1f, ref currentCastTimer2);
-            HandleSpellCasting(spell3, ref isCasting3, playerInputActions.Player.Spell3.ReadValue<float>() > 0.1f, ref currentCastTimer3);
+            CountDownCooldownTimers();
+
+            if (currentCastingIndex == -1) // No spell is being cast, check for new input
+            {
+                for (int i = 0; i < spells.Length; i++)
+                {
+                    if (spells[i] != null && spellActions[i].ReadValue<float>() > 0.1f && currentCooldownTimers[i] <= 0)
+                    {
+                        StartCasting(i);
+                        break; // Only allow one spell to start casting
+                    }
+                }
+            }
+            else // A spell is currently casting
+            {
+                ContinueCasting();
+            }
         }
 
-        private void HandleSpellCasting(Spell spell, ref bool isCasting, bool isSpellHeldDown, ref float currentCastTimer)
+        private void StartCasting(int spellIndex)
         {
-            bool hasManaEnough = gameObject.GetComponent<Mana>().CurrentMana >= spell.SpellToCast.ManaCost;
-    
-            if (!isCasting && isSpellHeldDown && hasManaEnough)
+            Spell spell = spells[spellIndex];
+            if (playerMana.CurrentMana < spell.SpellToCast.ManaCost) return; // Not enough mana
+
+            currentCastingIndex = spellIndex;
+            currentCastTimer = 0;
+        }
+
+        private void ContinueCasting()
+        {
+            if (currentCastingIndex == -1) return; // No spell is being cast
+
+            Spell spell = spells[currentCastingIndex];
+
+            if (spellActions[currentCastingIndex].ReadValue<float>() <= 0.1f) // If button is released, cancel casting
             {
-                isCasting = true;
+                currentCastingIndex = -1;
                 currentCastTimer = 0;
-                CastSpell(spell);
+                return;
             }
-    
-            if (isCasting)
+
+            currentCastTimer += Time.deltaTime;
+
+            if (currentCastTimer >= spell.SpellToCast.CastTime)
             {
-                currentCastTimer += Time.deltaTime;
-                if (currentCastTimer >= timeBetweenCasts)
+                CastSpell(spell);
+                currentCooldownTimers[currentCastingIndex] = spell.SpellToCast.Cooldown;
+                currentCastingIndex = -1; // Reset casting state
+            }
+        }
+
+        private void CastSpell(Spell spell)
+        {
+            playerMana.SpendMana(spell.SpellToCast.ManaCost);
+            SoundFXManager.Instance.PlaySoundFX(spell.SpellToCast.CastSound, castPoint, 1f);
+            Instantiate(spell, castPoint.position, castPoint.rotation);
+        }
+
+        private void CountDownCooldownTimers()
+        {
+            for (int i = 0; i < currentCooldownTimers.Length; i++)
+            {
+                if (currentCooldownTimers[i] > 0)
                 {
-                    isCasting = false;
+                    currentCooldownTimers[i] -= Time.deltaTime;
                 }
             }
         }
-        private void CastSpell(Spell spell)
+
+        public void EquipSpell(Spell spell)
         {
-            gameObject.GetComponent<Mana>().SpendMana(spell.SpellToCast.ManaCost);
-            Instantiate(spell, castPoint.position, castPoint.rotation);
+            for (int i = 0; i < spells.Length; i++)
+            {
+                if (spells[i] == null)
+                {
+                    spells[i] = spell;
+                    return;
+                }
+            }
+            Debug.Log("No more spell slots available");
         }
-      
     }
-    
 }

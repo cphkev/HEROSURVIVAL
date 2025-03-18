@@ -63,11 +63,11 @@ public class Shop : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNear = false; 
             if (isShopOpen)
             {
                 ToggleShop(); 
             }
+            isPlayerNear = false; 
         }
     }
 
@@ -89,7 +89,6 @@ public class Shop : MonoBehaviour
         if (isShopOpen && slotIndex != -1) 
         {
             shopManager.BuySpell(slotIndex); 
-            Debug.Log($"Bought spell in slot {slotIndex}");
         }
         else
         {

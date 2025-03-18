@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf529182e61d70468e9b3dc2fd05099, type: 3}
   m_Name: RadiantOrb
   m_EditorClassIdentifier: 
+  SpellName: Radiant orb
+  SpellIcon: {fileID: 0}
   DamageAmount: 20
   ManaCost: 10
   Lifetime: 2
   Speed: 80
   SpellRadius: 0.5
+  Cooldown: 5
+  CastTime: 1
