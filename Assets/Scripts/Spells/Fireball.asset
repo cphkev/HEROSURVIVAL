@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellName: Fireball
   SpellIcon: {fileID: 21300000, guid: 2e425b106db985e49b8fbc6f738eb45e, type: 3}
-  DamageAmount: 0
+  DamageAmount: 5
   ManaCost: 5
   Lifetime: 2
   Speed: 50

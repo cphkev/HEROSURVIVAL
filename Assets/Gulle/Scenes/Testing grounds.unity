@@ -4020,6 +4020,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9148794809046109082, guid: 8b380fa61cc134f4280988d701394664, type: 3}
     - target: {fileID: 5911066560668743240, guid: b90028809e7a37048b7613541c9444c7, type: 3}
+      propertyPath: 'spells.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1205127624110317241, guid: f2053cc8cc46a244b9cb546cbf02359a, type: 3}
+    - target: {fileID: 5911066560668743240, guid: b90028809e7a37048b7613541c9444c7, type: 3}
       propertyPath: 'SpellSlots.Array.data[0]'
       value: 
       objectReference: {fileID: 3839685523888557073}

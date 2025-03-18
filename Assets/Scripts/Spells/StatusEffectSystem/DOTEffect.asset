@@ -15,5 +15,5 @@ MonoBehaviour:
   DOTAmount: 5
   TickSpeed: 1
   MovementPenalty: 0
-  Lifetime: 6
+  Lifetime: 3
   EffectParticles: {fileID: 0}
