@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyRangedAttack : MonoBehaviour
 {
-    public Transform player;  
+    private Transform player;  
     public GameObject fireballPrefab; 
     public Transform firePoint;  
     public float attackRange = 10f;
