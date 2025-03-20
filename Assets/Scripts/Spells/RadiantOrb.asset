@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RadiantOrb
   m_EditorClassIdentifier: 
   SpellName: Radiant orb
-  SpellIcon: {fileID: 0}
+  SpellIcon: {fileID: 21300000, guid: 44e755758f86a3b46b5b906531e4056d, type: 3}
   DamageAmount: 20
   ManaCost: 10
   Lifetime: 2
@@ -21,3 +21,6 @@ MonoBehaviour:
   SpellRadius: 0.5
   Cooldown: 5
   CastTime: 1
+  CastSound: {fileID: 8300000, guid: 183a0ab37f32c9142a696e8cffd6baed, type: 3}
+  ImpactSound: {fileID: 8300000, guid: facad1b16bcea374a8bc37ecb9fe230b, type: 3}
+  ImpactEffect: {fileID: 0}
