@@ -8689,7 +8689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  fireballPrefab: {fileID: 966856349100293167, guid: c2d39a2fc39eb6f47beccc1ca0031e93, type: 3}
+  fireballPrefab: {fileID: 7845579322884045894, guid: f2053cc8cc46a244b9cb546cbf02359a, type: 3}
   firePoint: {fileID: 5227650067555425276}
   attackRange: 15
   attackCooldown: 3
