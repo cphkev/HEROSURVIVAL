@@ -24,13 +24,13 @@ public class EnemySpawner : MonoBehaviour
     {
         
         GameObject enemyToSpawn;
-        if (Random.value > 0.5f)
+        if (Random.value > 0.65f)
         {
-            enemyToSpawn = rangedEnemyPrefab;
+            enemyToSpawn = meleeEnemyPrefab;
         }
         else
         {
-            enemyToSpawn = meleeEnemyPrefab;
+            enemyToSpawn = rangedEnemyPrefab;
         }
 
         // Instantiate the selected enemy at the spawn point (portal)
@@ -42,7 +42,6 @@ public class EnemySpawner : MonoBehaviour
         if (currentEnemies >= maxEnemies)
         {
             CancelInvoke("SpawnEnemy");
-            Debug.Log("Max enemies reached");
 
             if (portalObject != null && blackMaterial != null)
             {
