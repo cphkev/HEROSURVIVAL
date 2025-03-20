@@ -102,6 +102,8 @@ namespace Scripts.CharacterComponents.PlayerOnly
             playerMana.SpendMana(spell.SpellToCast.ManaCost);
             SoundFXManager.Instance.PlaySoundFX(spell.SpellToCast.CastSound, castPoint, 1f);
             Instantiate(spell, castPoint.position, castPoint.rotation);
+            currentCastTimer = 0;
+            currentSpellName = "";
         }
 
         private void CountDownCooldownTimers()
