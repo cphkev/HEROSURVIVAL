@@ -13,6 +13,9 @@ namespace Scripts.CharacterComponents.PlayerOnly
 
         private int currentCastingIndex = -1; // -1 means no spell is being cast
         private float currentCastTimer = 0;
+        private float currentMaxCastTime = 0;
+        private String currentSpellName = "";
+        
         private float[] currentCooldownTimers = new float[4];
 
         private PlayerInputActions playerInputActions;
@@ -65,6 +68,8 @@ namespace Scripts.CharacterComponents.PlayerOnly
 
             currentCastingIndex = spellIndex;
             currentCastTimer = 0;
+            currentSpellName = spell.SpellToCast.SpellName;
+            currentMaxCastTime = spell.SpellToCast.CastTime;
         }
 
         private void ContinueCasting()
@@ -77,12 +82,14 @@ namespace Scripts.CharacterComponents.PlayerOnly
             {
                 currentCastingIndex = -1;
                 currentCastTimer = 0;
+                currentSpellName = "";
+                currentMaxCastTime = 0;
                 return;
             }
 
             currentCastTimer += Time.deltaTime;
 
-            if (currentCastTimer >= spell.SpellToCast.CastTime)
+            if (currentCastTimer >= currentMaxCastTime)
             {
                 CastSpell(spell);
                 currentCooldownTimers[currentCastingIndex] = spell.SpellToCast.Cooldown;
@@ -135,5 +142,19 @@ namespace Scripts.CharacterComponents.PlayerOnly
             }
             Debug.Log("No more spell slots available");
         }
+
+        public float CurrentCastTimer
+        {
+            get => currentCastTimer;
+        }
+        public float CurrentMaxCastTime
+        {
+            get => currentMaxCastTime;
+        }
+        public String CurrentSpellName
+        {
+            get => currentSpellName;
+        }
+        
     }
 }
