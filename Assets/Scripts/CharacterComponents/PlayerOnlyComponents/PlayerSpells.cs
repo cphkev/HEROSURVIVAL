@@ -1,13 +1,15 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using System.Collections.Generic;
+using UnityEngine.UI;
 namespace Scripts.CharacterComponents.PlayerOnly
 {
     public class PlayerSpells : MonoBehaviour
     {
         [SerializeField] private Transform castPoint;
         [SerializeField] private Spell[] spells = new Spell[4];
+        [SerializeField] private Button[] playerSpellButtons = new Button[4];
 
         private int currentCastingIndex = -1; // -1 means no spell is being cast
         private float currentCastTimer = 0;
@@ -112,7 +114,22 @@ namespace Scripts.CharacterComponents.PlayerOnly
             {
                 if (spells[i] == null)
                 {
+                    Debug.Log("This works for sure");
                     spells[i] = spell;
+                    
+                    // Update button image
+                    Image buttonImage = playerSpellButtons[i].transform.Find("SpellIcon")?.GetComponent<Image>();
+                    if (buttonImage != null && spell.SpellToCast.SpellIcon != null)
+                    {
+                        Debug.Log("This works");
+                        buttonImage.sprite = spell.SpellToCast.SpellIcon;
+                        buttonImage.enabled = true; // Ensure it's visible
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"No Image component found in 'Spellicon' for button {i} or missing icon.");
+                    }
+                    
                     return;
                 }
             }
