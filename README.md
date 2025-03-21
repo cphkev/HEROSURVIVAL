@@ -11,5 +11,7 @@ Kamera bliver styret med mus
 
 
 Kevin Løvstad Schou - cph-ks427@cphbusiness.dk
+
 Frederik Per Moestrup - cph-fm124@cphbusiness.dk
+
 Gustav Heiner Henriksen - 
