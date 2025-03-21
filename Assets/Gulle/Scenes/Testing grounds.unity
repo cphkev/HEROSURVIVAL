@@ -5561,7 +5561,7 @@ PrefabInstance:
     - target: {fileID: 8328303730776081244, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
       propertyPath: spell5
       value: 
-      objectReference: {fileID: 1205127624110317241, guid: f2053cc8cc46a244b9cb546cbf02359a, type: 3}
+      objectReference: {fileID: 1499142190432031115, guid: 33b99949aecc36443b97a2d8090075a2, type: 3}
     - target: {fileID: 8328303730776081244, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
       propertyPath: spell6
       value: 
