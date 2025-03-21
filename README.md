@@ -1,4 +1,4 @@
-Controlles:
+Controls:
 
 WASD Movement
 
