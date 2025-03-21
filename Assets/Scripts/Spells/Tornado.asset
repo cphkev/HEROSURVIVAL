@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baf529182e61d70468e9b3dc2fd05099, type: 3}
-  m_Name: DoomSphere
+  m_Name: Tornado
   m_EditorClassIdentifier: 
-  SpellName: Doom sphere
-  SpellIcon: {fileID: 21300000, guid: 2a72c584fa822b0439a45cdda886e257, type: 3}
-  DamageAmount: 70
-  ManaCost: 40
+  SpellName: Tornado
+  SpellIcon: {fileID: 21300000, guid: 6430c84c691b3f44693569d4143df74e, type: 3}
+  DamageAmount: 20
+  ManaCost: 10
   Lifetime: 5
-  Speed: 15
-  SpellRadius: 0.5
+  Speed: 10
+  SpellRadius: 0.7
   Cooldown: 0
-  CastTime: 8
-  CastSound: {fileID: 8300000, guid: 6f7b7d52c4d10364fa375d3b26663984, type: 3}
-  ImpactSound: {fileID: 8300000, guid: 7eace0982cfb38943b4feeb99285acd1, type: 3}
+  CastTime: 3
+  CastSound: {fileID: 8300000, guid: 0c481cb0b0864284da77740a54f670da, type: 3}
+  ImpactSound: {fileID: 8300000, guid: dbdf6ba7f51ee7e4593c594c6d546195, type: 3}
   ImpactEffect: {fileID: 0}
