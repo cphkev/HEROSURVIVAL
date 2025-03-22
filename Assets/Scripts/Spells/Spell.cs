@@ -27,7 +27,6 @@ public class Spell : MonoBehaviour
          myRigidbody = GetComponent<Rigidbody>();
          myRigidbody.isKinematic = true;
          
-         Debug.Log(targetTag);
          
          Destroy(this.gameObject, SpellToCast.Lifetime);
     }
@@ -41,6 +40,7 @@ public class Spell : MonoBehaviour
    
    private void OnTriggerEnter(Collider other)
    {
+       //Debug.Log("Spell collided with " + other.name);
        if(targetTag == "Enemy")
        {
            hitEnemy(other);
@@ -59,6 +59,7 @@ public class Spell : MonoBehaviour
            SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, 1f);
            Destroy(this.gameObject);
            Health enemyHealth = other.GetComponentInParent<Health>();
+           enemyHealth.Heal(SpellToCast.HealAmount);
            enemyHealth.TakeDamage(SpellToCast.DamageAmount);
            if (StatusEffect != null)
            {
@@ -75,12 +76,13 @@ public class Spell : MonoBehaviour
            SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
            SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, 0.3f);
            Destroy(this.gameObject);
-           Health enemyHealth = other.GetComponentInParent<Health>();
-           enemyHealth.TakeDamage(SpellToCast.DamageAmount);
+           Health playerHealth = other.GetComponentInParent<Health>();
+           playerHealth.Heal(SpellToCast.HealAmount);
+           playerHealth.TakeDamage(SpellToCast.DamageAmount);
            if (StatusEffect != null)
            {
-               StatusEffectable enemyStatus =  other.GetComponentInParent<StatusEffectable>();
-               enemyStatus.ApplyEffect(StatusEffect);
+               StatusEffectable playerStatus =  other.GetComponentInParent<StatusEffectable>();
+               playerStatus.ApplyEffect(StatusEffect);
            }
        }
    }

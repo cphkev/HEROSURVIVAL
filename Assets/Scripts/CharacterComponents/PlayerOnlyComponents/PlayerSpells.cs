@@ -100,9 +100,10 @@ namespace Scripts.CharacterComponents.PlayerOnly
         private void CastSpell(Spell spell)
         {
             playerMana.SpendMana(spell.SpellToCast.ManaCost);
-            SoundFXManager.Instance.PlaySoundFX(spell.SpellToCast.CastSound, castPoint, 1f);
+            if(spell.SpellToCast.CastSound!=null) SoundFXManager.Instance.PlaySoundFX(spell.SpellToCast.CastSound, castPoint, 1f);
             Spell newSpell = Instantiate(spell, castPoint.position, castPoint.rotation);
-            newSpell.Initialize("Enemy");
+            SetTargetTag(newSpell);
+            
             currentCastTimer = 0;
             currentSpellName = "";
         }
@@ -144,6 +145,18 @@ namespace Scripts.CharacterComponents.PlayerOnly
             Debug.Log("No more spell slots available");
         }
 
+        private void SetTargetTag(Spell newSpell)
+        {
+            if (!newSpell.SpellToCast.TargetSelf)
+            {
+                newSpell.Initialize("Enemy");
+            }
+            else
+            {
+                newSpell.Initialize("Player");
+            }   
+            
+        }
         public float CurrentCastTimer
         {
             get => currentCastTimer;

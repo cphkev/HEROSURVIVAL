@@ -49,8 +49,6 @@ namespace Scripts.CharacterComponents
          }
         }
 
-
-
         // Method to heal the character
         public void Heal(int amount)
         {
