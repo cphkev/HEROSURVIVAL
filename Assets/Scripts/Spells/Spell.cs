@@ -11,7 +11,13 @@ public class Spell : MonoBehaviour
    
    private SphereCollider myCollider;
    private Rigidbody myRigidbody;
-    
+   
+   private string targetTag;
+   
+   public void Initialize(string target)
+   {
+       targetTag = target;
+   }
     private void Awake()
     {
          myCollider = GetComponent<SphereCollider>();
@@ -20,6 +26,8 @@ public class Spell : MonoBehaviour
          
          myRigidbody = GetComponent<Rigidbody>();
          myRigidbody.isKinematic = true;
+         
+         Debug.Log(targetTag);
          
          Destroy(this.gameObject, SpellToCast.Lifetime);
     }
@@ -33,9 +41,20 @@ public class Spell : MonoBehaviour
    
    private void OnTriggerEnter(Collider other)
    {
+       if(targetTag == "Enemy")
+       {
+           hitEnemy(other);
+       }
+       else if (targetTag == "Player")
+       {
+           hitPlayer(other);
+       }
+   }
+
+   private void hitEnemy(Collider other)
+   {
        if (other.CompareTag("Enemy"))
        {
-           
            SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
            SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, 1f);
            Destroy(this.gameObject);
@@ -46,9 +65,23 @@ public class Spell : MonoBehaviour
                StatusEffectable enemyStatus =  other.GetComponentInParent<StatusEffectable>();
                enemyStatus.ApplyEffect(StatusEffect);
            }
-           
-           
-
+       }
+   }
+   
+   private void hitPlayer(Collider other)
+   {
+       if (other.CompareTag("Player"))
+       {
+           SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
+           SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, 0.3f);
+           Destroy(this.gameObject);
+           Health enemyHealth = other.GetComponentInParent<Health>();
+           enemyHealth.TakeDamage(SpellToCast.DamageAmount);
+           if (StatusEffect != null)
+           {
+               StatusEffectable enemyStatus =  other.GetComponentInParent<StatusEffectable>();
+               enemyStatus.ApplyEffect(StatusEffect);
+           }
        }
    }
    

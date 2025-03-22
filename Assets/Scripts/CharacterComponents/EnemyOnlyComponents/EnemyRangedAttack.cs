@@ -53,9 +53,13 @@ public class EnemyRangedAttack : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Delay before spawning fireball (adjust based on animation)
 
         // Instantiate fireball
+     
         GameObject fireball = Instantiate(fireballPrefab, firePoint.position, firePoint.rotation);
         Spell spell = fireball.GetComponent<Spell>();
-
+        spell.Initialize("Player");
+        SoundFXManager.Instance.PlaySoundFX(spell.SpellToCast.CastSound, firePoint, 0.3f);
+        
+        
         if (spell != null)
         {
             spell.SpellToCast = enemyFireballSpellData;

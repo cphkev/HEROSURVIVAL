@@ -101,7 +101,8 @@ namespace Scripts.CharacterComponents.PlayerOnly
         {
             playerMana.SpendMana(spell.SpellToCast.ManaCost);
             SoundFXManager.Instance.PlaySoundFX(spell.SpellToCast.CastSound, castPoint, 1f);
-            Instantiate(spell, castPoint.position, castPoint.rotation);
+            Spell newSpell = Instantiate(spell, castPoint.position, castPoint.rotation);
+            newSpell.Initialize("Enemy");
             currentCastTimer = 0;
             currentSpellName = "";
         }
@@ -123,14 +124,12 @@ namespace Scripts.CharacterComponents.PlayerOnly
             {
                 if (spells[i] == null)
                 {
-                    Debug.Log("This works for sure");
                     spells[i] = spell;
                     
                     // Update button image
                     Image buttonImage = playerSpellButtons[i].transform.Find("SpellIcon")?.GetComponent<Image>();
                     if (buttonImage != null && spell.SpellToCast.SpellIcon != null)
                     {
-                        Debug.Log("This works");
                         buttonImage.sprite = spell.SpellToCast.SpellIcon;
                         buttonImage.enabled = true; // Ensure it's visible
                     }
