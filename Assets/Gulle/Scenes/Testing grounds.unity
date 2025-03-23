@@ -2690,6 +2690,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3387062033414662305, guid: 84acd50c2276cb645989f15c90447164, type: 3}
+      propertyPath: maxEnemies
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3660618666387953857, guid: 84acd50c2276cb645989f15c90447164, type: 3}
       propertyPath: m_Name
       value: GateOfGatesBetter
@@ -5553,7 +5557,7 @@ PrefabInstance:
     - target: {fileID: 8328303730776081244, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
       propertyPath: spell3
       value: 
-      objectReference: {fileID: 9148794809046109082, guid: 5120815573e14e74db1e0dc2d06231d8, type: 3}
+      objectReference: {fileID: 8924044585074877072, guid: 2abccca6ddaf17c4caf473080e920b45, type: 3}
     - target: {fileID: 8328303730776081244, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
       propertyPath: spell4
       value: 
