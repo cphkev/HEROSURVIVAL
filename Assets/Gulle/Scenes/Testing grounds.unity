@@ -5947,11 +5947,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: stepHeight
-      value: 0.7
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: stepSmooth
-      value: 0.7
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: groundCheck

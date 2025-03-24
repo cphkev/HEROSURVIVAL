@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float stepHeight = 0.5f;
     public float stepSmooth = 0.1f;
 
+    public bool IsCasting = false;
+    public bool IsHoldingSpell = false;
    
     
     private Vector3 velocity;
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
     animator.SetFloat("MoveX", moveInput.x);
     animator.SetFloat("MoveY", moveInput.y);
 
+
     // If there is input, calculate whether we're backpedaling or running
     if (moveDirection.magnitude > 0.1f)
     {
@@ -71,6 +74,7 @@ public class PlayerController : MonoBehaviour
         // If no movement input, reset backpedaling
         animator.SetBool("IsBackpedaling", false);
     }
+    
 }
     
 
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         RotateTowardsMouse();
         HandleStepClimb();
+        HandleCasting();
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -96,8 +101,16 @@ public class PlayerController : MonoBehaviour
     return Vector3.zero;
 }
 
-   private void MovePlayer()
+    private void MovePlayer()
 {
+    
+    if (IsCasting) 
+    {
+        // Stop movement when casting
+        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+        return;
+    }
+    
     // Get input from the player (e.g., WASD or left stick)
     Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
 
@@ -147,6 +160,49 @@ public class PlayerController : MonoBehaviour
         transform.position += Vector3.up * stepSmooth;
     }
 
+    }
+
+     private void HandleCasting()
+    {
+        // Check if spell button is being held
+        if (playerInput.actions["Spell0"].ReadValue<float>() > 0.1f ||
+            playerInput.actions["Spell1"].ReadValue<float>() > 0.1f ||
+            playerInput.actions["Spell2"].ReadValue<float>() > 0.1f ||
+            playerInput.actions["Spell3"].ReadValue<float>() > 0.1f)
+        {
+            IsHoldingSpell = true;
+        }
+        else
+        {
+            IsHoldingSpell = false;
+        }
+
+        // Starts or stops casting based on input
+        if (IsHoldingSpell)
+        {
+            if (!IsCasting)
+            {
+                StartCasting();
+            }
+        }
+        else
+        {
+            if (IsCasting)
+            {
+                StopCasting();
+            }
+        }
+    }
+    private void StartCasting()
+    {
+        IsCasting = true;
+        animator.SetBool("IsCasting", true); // Trigger casting animation
+    }
+
+    private void StopCasting()
+    {
+        IsCasting = false;
+        animator.SetBool("IsCasting", false);
     }
 
   
