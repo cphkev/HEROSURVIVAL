@@ -9,21 +9,25 @@ namespace Scripts.CharacterComponents
         public TextMeshPro text;
         public float lifetime = 1f;
         public float floatSpeed = 1f;
-        public Color critColor = Color.yellow;
         public Color normalColor = new Color(1f, 0.75f, 0f); // Gold-like color
 
         private float elapsedTime;
         private Vector3 startOffset;
         private float floatDirection;
 
+        void Awake()
+{
+    text = GetComponentInChildren<TextMeshPro>();
+    if (text == null)
+    {
+        Debug.LogError("TextMeshPro component is missing in DamageNumbers prefab!");
+    }
+}
+
+
         void Start()
         {
-            text = GetComponent<TextMeshPro>();
-            if (text == null)
-            {
-                Debug.LogError("TextMeshPro component missing on DamageNumbers GameObject!");
-                return;
-            }
+            if (text == null) return;
 
             // **Randomized spawn position offset**
             float xOffset = Random.Range(-0.5f, 0.5f);
@@ -44,14 +48,23 @@ namespace Scripts.CharacterComponents
             transform.position += (Vector3.up * floatSpeed + Vector3.right * floatDirection * 0.2f) * Time.deltaTime;
         }
 
-        public void SetDamage(int damageAmount, bool isCrit = false)
+        public void SetDamage(int damageAmount)
         {
-            text.text = damageAmount.ToString();
-            text.color = isCrit ? critColor : normalColor;
+            if (text == null)
+            {
+                Debug.LogError("TextMeshPro is NULL in SetDamage!");
+                return;
+            }
 
-            // **Slightly bigger on crit hits**
-            float scaleMultiplier = isCrit ? 1.8f : 1.5f;
+            Debug.Log($"Damage Set: {damageAmount}");
+            text.text = damageAmount.ToString();
+            text.color = normalColor;
+
+            // **Scale effect**
+            float scaleMultiplier = 1.5f;
             text.transform.localScale = Vector3.one * scaleMultiplier;
+            text.ForceMeshUpdate(); // Force TMP to refresh the text
+            
             StartCoroutine(ShrinkEffect());
         }
 
