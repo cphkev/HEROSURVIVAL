@@ -23,14 +23,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837812307168907829}
-  m_LocalRotation: {x: -0, y: 0.9990718, z: -0, w: 0.0430777}
+  m_LocalRotation: {x: 0, y: 0.9990717, z: 0, w: 0.04307894}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.8140584, y: 1.814059, z: 1.8140584}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6822844300210051699}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 175.062, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3313291426040785201}
   - component: {fileID: 7733413799105444221}
   m_Layer: 0
-  m_Name: TextMeshPro
+  m_Name: DmgNumberText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6438061561920746832, guid: 36ae227f04537e74ab39dbfb062073c4, type: 2}
+  - {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,10 +139,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 36ae227f04537e74ab39dbfb062073c4, type: 2}
-  m_sharedMaterial: {fileID: -6438061561920746832, guid: 36ae227f04537e74ab39dbfb062073c4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

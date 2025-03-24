@@ -734,8 +734,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Fireball
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 36ae227f04537e74ab39dbfb062073c4, type: 2}
-  m_sharedMaterial: {fileID: -6438061561920746832, guid: 36ae227f04537e74ab39dbfb062073c4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
