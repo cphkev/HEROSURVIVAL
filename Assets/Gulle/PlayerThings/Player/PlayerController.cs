@@ -81,7 +81,6 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         RotateTowardsMouse();
         HandleStepClimb();
-
     }
 
     private Vector3 GetMouseWorldPosition()

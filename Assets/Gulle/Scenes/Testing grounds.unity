@@ -904,10 +904,6 @@ PrefabInstance:
       propertyPath: normalColor.g
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1594234333031320522, guid: 091b1ff181c2c0c4987e5c85a0d46b0b, type: 3}
-      propertyPath: normalColor.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1837812307168907829, guid: 091b1ff181c2c0c4987e5c85a0d46b0b, type: 3}
       propertyPath: m_Name
       value: DamageNumberPrefab
