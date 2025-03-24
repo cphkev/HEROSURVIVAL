@@ -135,6 +135,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 8374546e51f9aef46b43e39e8b9bbb20, type: 3}
+    - target: {fileID: 3519124159674216998, guid: fe9a4ee8d05ae454780eb452e4443887, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 41805a196d2c5794e9cbca377ee39d4a, type: 3}
+    - target: {fileID: 3519124159674216998, guid: fe9a4ee8d05ae454780eb452e4443887, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 41805a196d2c5794e9cbca377ee39d4a, type: 3}
     - target: {fileID: 7562813458134692808, guid: fe9a4ee8d05ae454780eb452e4443887, type: 3}
       propertyPath: m_Name
       value: MusicManager
@@ -593,7 +601,7 @@ PrefabInstance:
       value: MeowiesIdle
       objectReference: {fileID: 0}
     - target: {fileID: 5828979002318216439, guid: 97889c37b14dd184aae06f6d4f2e96f9, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: de0a4ac3f53ed51498eda4fd9fd574d5, type: 2}
     - target: {fileID: 5866666021909216657, guid: 97889c37b14dd184aae06f6d4f2e96f9, type: 3}
@@ -2039,7 +2047,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -809828480950454423, guid: 91bb461671c33b24ab82b3d73224c4d5, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b3d3ba4f3bc5ea3439c92ae1c68891da, type: 2}
     - target: {fileID: 919132149155446097, guid: 91bb461671c33b24ab82b3d73224c4d5, type: 3}
@@ -2293,7 +2301,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4747917413154575537, guid: ef1ce669094636749a457881ffa426fa, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b3d3ba4f3bc5ea3439c92ae1c68891da, type: 2}
     - target: {fileID: 919132149155446097, guid: ef1ce669094636749a457881ffa426fa, type: 3}
@@ -2301,7 +2309,7 @@ PrefabInstance:
       value: CasterIdle
       objectReference: {fileID: 0}
     - target: {fileID: 5064880245253675553, guid: ef1ce669094636749a457881ffa426fa, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4d1f774cbcb02744eab7f236a5c0b860, type: 2}
     - target: {fileID: 5866666021909216657, guid: ef1ce669094636749a457881ffa426fa, type: 3}
@@ -2998,7 +3006,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 4a90441b93163524a878d5ce0bd48340, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b3d3ba4f3bc5ea3439c92ae1c68891da, type: 2}
     - target: {fileID: 919132149155446097, guid: 4a90441b93163524a878d5ce0bd48340, type: 3}
@@ -3074,7 +3082,7 @@ PrefabInstance:
       value: -2.21
       objectReference: {fileID: 0}
     - target: {fileID: -4683669308469848369, guid: d9a21053f6ae3c1428057ed370dac9cc, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b3d3ba4f3bc5ea3439c92ae1c68891da, type: 2}
     - target: {fileID: 919132149155446097, guid: d9a21053f6ae3c1428057ed370dac9cc, type: 3}
