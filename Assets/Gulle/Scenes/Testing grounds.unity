@@ -5930,12 +5930,44 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6302897575949604, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302897575949604, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: gravity
+      value: -1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: IsCasting
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: moveSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: stepHeight
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: stepSmooth
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 50774814472806027, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 193157625651635568, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: m_Name
