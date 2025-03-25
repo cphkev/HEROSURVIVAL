@@ -69,4 +69,16 @@ public class SceneLoader : MonoBehaviour
         LoadScene("Win");
     }
 
+   
+
+    public void QuitGame()
+{
+    #if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false; // Stop play mode in Unity Editor
+    #else
+    Application.Quit(); // Quit the application in a build
+    #endif
+    Debug.Log("Game is quitting...");
+}
+
 }
