@@ -6025,6 +6025,14 @@ PrefabInstance:
       propertyPath: 'playerSpellButtons.Array.data[3]'
       value: 
       objectReference: {fileID: 127188999544384323}
+    - target: {fileID: 6109865745394614844, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: maxHP
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109865745394614844, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
+      propertyPath: currentHP
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8028745903504852754, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: m_LocalPosition.y
       value: 34.279995

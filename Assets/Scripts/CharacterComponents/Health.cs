@@ -62,16 +62,31 @@ namespace Scripts.CharacterComponents
         }
         
         public void Die()
-        {
-            var destructibles = GetComponents<IDestructible>();
-            foreach (var destructible in destructibles)
-            {
-                destructible.OnDestruction();
-            }
-            
-            Destroy(gameObject);
-            
-        }
+{
+    var destructibles = GetComponents<IDestructible>();
+    foreach (var destructible in destructibles)
+    {
+        destructible.OnDestruction();
+    }
+
+    // Find SceneLoader and trigger death transition
+    SceneLoader sceneLoader = FindObjectOfType<SceneLoader>();
+    if (sceneLoader != null)
+    {
+        sceneLoader.OnPlayerDeath(gameObject);
+    }
+    else
+    {
+        Debug.LogError("SceneLoader not found in the scene!");
+    }
+
+    // Only destroy non-player objects
+    if (!gameObject.CompareTag("Player")) 
+    {
+        Destroy(gameObject);
+    }
+}
+
         
         
     }
