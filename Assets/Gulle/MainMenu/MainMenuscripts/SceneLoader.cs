@@ -56,10 +56,7 @@ public class SceneLoader : MonoBehaviour
 
     public void OnPlayerDeath(GameObject player)
     {
-        if (player.CompareTag("Player")) 
-        {
-            LoadScene("DeathScene"); 
-        }
+        LoadScene("DeathScene"); 
     }
 
 }
