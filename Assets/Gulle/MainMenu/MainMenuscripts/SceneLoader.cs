@@ -58,5 +58,15 @@ public class SceneLoader : MonoBehaviour
     {
         LoadScene("DeathScene"); 
     }
+    public void OnGateDeath(GameObject player)
+    {
+        StartCoroutine(DelayedWinScene());
+    }
+
+    private IEnumerator DelayedWinScene()
+    {
+        yield return new WaitForSeconds(4.5f);
+        LoadScene("Win");
+    }
 
 }

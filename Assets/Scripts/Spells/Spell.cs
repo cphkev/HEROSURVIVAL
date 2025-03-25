@@ -41,48 +41,34 @@ public class Spell : MonoBehaviour
    private void OnTriggerEnter(Collider other)
    {
        //Debug.Log("Spell collided with " + other.name);
-       if(targetTag == "Enemy")
+       if (SpellToCast.TargetGate)
        {
-           hitEnemy(other);
+           hitTarget(other, "Gate", 1f);
+       }
+       else if(targetTag == "Enemy")
+       {
+           hitTarget(other, "Enemy", 1f);
        }
        else if (targetTag == "Player")
        {
-           hitPlayer(other);
+           hitTarget(other, "Player", 0.3f);
        }
    }
 
-   private void hitEnemy(Collider other)
+   private void hitTarget(Collider other, string target, float vol)
    {
-       if (other.CompareTag("Enemy"))
+       if (other.CompareTag(target))
        {
            SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
-           SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, 1f);
+           if(SpellToCast.ImpactSound!=null) SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, vol);
            Destroy(this.gameObject);
-           Health enemyHealth = other.GetComponentInParent<Health>();
-           enemyHealth.Heal(SpellToCast.HealAmount);
-           enemyHealth.TakeDamage(SpellToCast.DamageAmount);
+           Health targetHealth = other.GetComponentInParent<Health>();
+           targetHealth.Heal(SpellToCast.HealAmount);
+           targetHealth.TakeDamage(SpellToCast.DamageAmount);
            if (StatusEffect != null)
            {
-               StatusEffectable enemyStatus =  other.GetComponentInParent<StatusEffectable>();
-               enemyStatus.ApplyEffect(StatusEffect);
-           }
-       }
-   }
-   
-   private void hitPlayer(Collider other)
-   {
-       if (other.CompareTag("Player"))
-       {
-           SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
-           SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, 0.3f);
-           Destroy(this.gameObject);
-           Health playerHealth = other.GetComponentInParent<Health>();
-           playerHealth.Heal(SpellToCast.HealAmount);
-           playerHealth.TakeDamage(SpellToCast.DamageAmount);
-           if (StatusEffect != null)
-           {
-               StatusEffectable playerStatus =  other.GetComponentInParent<StatusEffectable>();
-               playerStatus.ApplyEffect(StatusEffect);
+               StatusEffectable targetStatus =  other.GetComponentInParent<StatusEffectable>();
+               targetStatus.ApplyEffect(StatusEffect);
            }
        }
    }

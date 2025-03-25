@@ -77,6 +77,9 @@ namespace Scripts.CharacterComponents
             if (sceneLoader != null && gameObject.CompareTag("Player"))
             {
                 sceneLoader.OnPlayerDeath(gameObject);
+            }else if(sceneLoader != null && gameObject.CompareTag("Gate"))
+            {
+                sceneLoader.OnGateDeath(gameObject);
             }
             else
             {
