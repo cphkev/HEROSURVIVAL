@@ -13,7 +13,7 @@ public partial class EnemyNavigateAction : Action
     private NavMeshAgent _agent;
     private GameObject _self;
     
-    [SerializeField] private float moveSpeed = 10f;
+   
     protected override Status OnStart()
     {
         _self = GameObject; // Get the enemy GameObject
@@ -26,7 +26,7 @@ public partial class EnemyNavigateAction : Action
         _agent = _self.GetComponent<NavMeshAgent>();
         if (_agent == null)
         {
-       //     Debug.LogError("NavMeshAgent component missing!");
+            //     Debug.LogError("NavMeshAgent component missing!");
             return Status.Failure;
         }
 
@@ -40,7 +40,6 @@ public partial class EnemyNavigateAction : Action
 
         Target.Value = player;
         
-       // _agent.speed = moveSpeed;
         
         return Status.Running;
     }
@@ -53,12 +52,11 @@ public partial class EnemyNavigateAction : Action
             return Status.Failure;
         }
         float distance = Vector3.Distance(_self.transform.position, Target.Value.transform.position);
-        float stopDistance = _agent.stoppingDistance > 0 ? _agent.stoppingDistance : 1.5f; // Default stopping distance
-//        Debug.Log($"Distance to target: {distance}, Stopping Distance: {stopDistance}");
+        float stopDistance = _agent.stoppingDistance > 0 ? _agent.stoppingDistance : 2f; // Default stopping distance
         
         if (distance <= stopDistance)
         {
-          //  Debug.Log("Enemy reached stopping distance. Transitioning to attack.");
+         
             _agent.ResetPath();
             return Status.Success;
         }

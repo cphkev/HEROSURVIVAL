@@ -50,7 +50,7 @@ public class EnemyRangedAttack : MonoBehaviour
             animator.SetBool("IsCasting", true);
         }
 
-        yield return new WaitForSeconds(0.5f); // Delay before spawning fireball (adjust based on animation)
+        yield return new WaitForSeconds(0.5f); // Delay before spawning fireball
 
         // Instantiate fireball
      

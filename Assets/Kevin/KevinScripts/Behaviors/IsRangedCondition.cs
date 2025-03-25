@@ -28,12 +28,11 @@ public partial class IsRangedCondition : Condition
         {
             IsRanged.Value = true;
             return true;
-        }
-        else
-        {
-            IsRanged.Value = false;
-            return false;
-        }
+        }   
+        
+        IsRanged.Value = false;
+        return false;
+        
     }
 
   
