@@ -62,6 +62,16 @@ public class Spell : MonoBehaviour
            SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
            if(SpellToCast.ImpactSound!=null) SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, vol);
            Destroy(this.gameObject);
+           if (SpellToCast.Force != 0)
+           {
+               Rigidbody targetRigidbody = other.GetComponentInParent<Rigidbody>();
+               if (targetRigidbody != null)
+               {
+                   Vector3 forceDirection = (other.transform.position - transform.position).normalized;
+                   targetRigidbody.AddForce(forceDirection * SpellToCast.Force, ForceMode.Impulse);
+                   Debug.Log("Applying force to: " + other.name);
+               }
+           }
            Health targetHealth = other.GetComponentInParent<Health>();
            targetHealth.Heal(SpellToCast.HealAmount);
            targetHealth.TakeDamage(SpellToCast.DamageAmount);

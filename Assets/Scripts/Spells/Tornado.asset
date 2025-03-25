@@ -15,6 +15,7 @@ MonoBehaviour:
   SpellName: Tornado
   SpellIcon: {fileID: 21300000, guid: 6430c84c691b3f44693569d4143df74e, type: 3}
   DamageAmount: 20
+  HealAmount: 0
   ManaCost: 10
   Lifetime: 5
   Speed: 10
@@ -24,3 +25,6 @@ MonoBehaviour:
   CastSound: {fileID: 8300000, guid: 0c481cb0b0864284da77740a54f670da, type: 3}
   ImpactSound: {fileID: 8300000, guid: dbdf6ba7f51ee7e4593c594c6d546195, type: 3}
   ImpactEffect: {fileID: 0}
+  TargetSelf: 0
+  TargetGate: 0
+  Force: 40

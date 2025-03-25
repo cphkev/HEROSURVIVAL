@@ -2831,6 +2831,10 @@ PrefabInstance:
       propertyPath: maxEnemies
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3387062033414662305, guid: 84acd50c2276cb645989f15c90447164, type: 3}
+      propertyPath: meleeEnemyPrefab
+      value: 
+      objectReference: {fileID: 7959276417317977961, guid: ebbd76e3674edb9469db7c05fed10801, type: 3}
     - target: {fileID: 3660618666387953857, guid: 84acd50c2276cb645989f15c90447164, type: 3}
       propertyPath: m_Name
       value: GateOfGatesBetter

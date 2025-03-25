@@ -18,5 +18,5 @@ public class SpellScriptableObject : ScriptableObject
     public GameObject ImpactEffect;
     public bool TargetSelf = false;
     public bool TargetGate = false;
-
+    public float Force = 0;
 }
