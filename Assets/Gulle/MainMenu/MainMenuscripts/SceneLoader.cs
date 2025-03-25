@@ -56,10 +56,17 @@ public class SceneLoader : MonoBehaviour
 
     public void OnPlayerDeath(GameObject player)
     {
-        if (player.CompareTag("Player")) 
-        {
-            LoadScene("DeathScene"); 
-        }
+        LoadScene("DeathScene"); 
+    }
+    public void OnGateDeath(GameObject player)
+    {
+        StartCoroutine(DelayedWinScene());
+    }
+
+    private IEnumerator DelayedWinScene()
+    {
+        yield return new WaitForSeconds(4.5f);
+        LoadScene("Win");
     }
 
 }

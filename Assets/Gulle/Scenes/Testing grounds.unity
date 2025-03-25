@@ -618,6 +618,26 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 855597923}
   m_SourcePrefab: {fileID: 100100000, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
+--- !u!1 &202326862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3660618666387953857, guid: 84acd50c2276cb645989f15c90447164, type: 3}
+  m_PrefabInstance: {fileID: 1439844621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &202326868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202326862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5f115470c4b3f8e56341b0417106a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 9999
+  maxHP: 9999
+  damageNumberPrefab: {fileID: 1837812307168907829, guid: 091b1ff181c2c0c4987e5c85a0d46b0b, type: 3}
 --- !u!1001 &208577023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2806,6 +2826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateOfGatesBetter
       objectReference: {fileID: 0}
+    - target: {fileID: 3660618666387953857, guid: 84acd50c2276cb645989f15c90447164, type: 3}
+      propertyPath: m_TagString
+      value: Gate
+      objectReference: {fileID: 0}
     - target: {fileID: 4145266472329380475, guid: 84acd50c2276cb645989f15c90447164, type: 3}
       propertyPath: m_LocalPosition.x
       value: 108.69627
@@ -2846,10 +2870,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4984020310832367213, guid: 84acd50c2276cb645989f15c90447164, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3660618666387953857, guid: 84acd50c2276cb645989f15c90447164, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 202326868}
   m_SourcePrefab: {fileID: 100100000, guid: 84acd50c2276cb645989f15c90447164, type: 3}
 --- !u!1 &1452266910
 GameObject:
@@ -5685,7 +5716,7 @@ PrefabInstance:
     - target: {fileID: 8328303730776081244, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
       propertyPath: spell8
       value: 
-      objectReference: {fileID: 1205127624110317241, guid: f2053cc8cc46a244b9cb546cbf02359a, type: 3}
+      objectReference: {fileID: 3225021824734935957, guid: aded84e3b573eb54a8c55e59720ab09d, type: 3}
     - target: {fileID: 8659893126862604789, guid: d77fd819b04245b429f8504682d46ce8, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -6027,11 +6058,11 @@ PrefabInstance:
       objectReference: {fileID: 127188999544384323}
     - target: {fileID: 6109865745394614844, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: maxHP
-      value: 5
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6109865745394614844, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: currentHP
-      value: 5
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8028745903504852754, guid: 0cfb973b38f3ede47b49648c5089a398, type: 3}
       propertyPath: m_LocalPosition.y

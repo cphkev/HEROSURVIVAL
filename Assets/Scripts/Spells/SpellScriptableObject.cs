@@ -17,5 +17,6 @@ public class SpellScriptableObject : ScriptableObject
     public AudioClip ImpactSound;
     public GameObject ImpactEffect;
     public bool TargetSelf = false;
+    public bool TargetGate = false;
 
 }
