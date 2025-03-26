@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 6926472766299042486}
   - component: {fileID: 1961747621109586165}
   - component: {fileID: 6167047344735984200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FinalEnemyRangedPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}

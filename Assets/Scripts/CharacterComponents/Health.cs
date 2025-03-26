@@ -86,6 +86,11 @@ namespace Scripts.CharacterComponents
                 Debug.LogError("SceneLoader not found in the scene!");
             }
 
+            if (KillCounter.Instance != null && gameObject.CompareTag("Enemy"))
+            {
+            KillCounter.Instance.RegisterKill(gameObject);
+            }
+
             // Only destroy non-player objects
             if (!gameObject.CompareTag("Player"))
             {

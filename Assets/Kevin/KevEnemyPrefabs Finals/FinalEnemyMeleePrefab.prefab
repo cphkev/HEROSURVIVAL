@@ -2312,7 +2312,7 @@ GameObject:
   - component: {fileID: 4856774959089787929}
   - component: {fileID: 1110945650514458892}
   - component: {fileID: 3018924599401060644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FinalEnemyMeleePrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
