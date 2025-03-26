@@ -17,6 +17,7 @@ MonoBehaviour:
   DamageAmount: 9999
   HealAmount: 0
   ManaCost: 0
+  Price: 4
   Lifetime: 2
   Speed: 30
   SpellRadius: 3
@@ -27,3 +28,4 @@ MonoBehaviour:
   ImpactEffect: {fileID: 5898677291976404120, guid: 40986a51c010efe469e160242039f66a, type: 3}
   TargetSelf: 0
   TargetGate: 1
+  Force: 0
