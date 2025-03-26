@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     
     public static GameManager Instance; // Singleton instance
+    public bool ReadyToSpawn = false;
     
     void Awake()
     {
@@ -22,11 +23,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    void Update()
     {
+        
+       if(KillCounter.Instance.KillCount % 5 == 0 && ReadyToSpawn)
+       {
+           ReadyToSpawn = false;
+           SpawnWave();
+           LevelUp();
+       }
+       
+       if (!ReadyToSpawn && KillCounter.Instance.KillCount % 5 != 0)
+       {
+           ReadyToSpawn = true;
+       }
        
     }
 
+    private void SpawnWave()
+    {
+        GameObject gate = GameObject.FindGameObjectWithTag("Gate");
+        if (gate != null)
+        {
+            gate.GetComponent<EnemySpawner>().StartSpawning();
+        }
+    }
 
-   
+    private void LevelUp()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            player.GetComponent<Stats>().GainStats();
+        }
+    }
+    
 }

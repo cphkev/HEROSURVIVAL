@@ -16,7 +16,8 @@ MonoBehaviour:
   SpellIcon: {fileID: 21300000, guid: 27a7665f2ad7340409821c0ce2d9169c, type: 3}
   DamageAmount: 50
   HealAmount: 0
-  ManaCost: 40
+  ManaCost: 0
+  Price: 0
   Lifetime: 15
   Speed: 10
   SpellRadius: 4

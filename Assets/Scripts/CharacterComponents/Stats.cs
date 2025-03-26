@@ -46,5 +46,15 @@ namespace Scripts.CharacterComponents
             this.intelligence = intelligence;
             this.luck = luck;
         }
+        
+        // Method to increase stats
+        public void GainStats()
+        {
+            strength += 3;
+            dexterity += 3;
+            intelligence += 3;
+            luck += 3;
+        }
+        
     }
 }

@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellName: Frostbolt
   SpellIcon: {fileID: 21300000, guid: b9e97c5bb73889641a8996c70ab62452, type: 3}
-  DamageAmount: 15
+  DamageAmount: 20
+  HealAmount: 0
   ManaCost: 5
+  Price: 0
   Lifetime: 3
   Speed: 10
   SpellRadius: 0.5
@@ -24,3 +26,6 @@ MonoBehaviour:
   CastSound: {fileID: 8300000, guid: 9d626fd6b22971c4282dd45bff4ed626, type: 3}
   ImpactSound: {fileID: 8300000, guid: b905d56c8f212264993691d78fed932f, type: 3}
   ImpactEffect: {fileID: 6977003996470764070, guid: e2f523984ce4cbd4db0a738f604e1004, type: 3}
+  TargetSelf: 0
+  TargetGate: 0
+  Force: 0

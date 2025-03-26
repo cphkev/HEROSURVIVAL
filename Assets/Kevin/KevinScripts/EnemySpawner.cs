@@ -42,6 +42,7 @@ public class EnemySpawner : MonoBehaviour
     
     public void StartSpawning()
     {
+        currentEnemies = 0;
         portal.SetActive(true);
         // Start spawning enemies
         MakeSpawnOrder();

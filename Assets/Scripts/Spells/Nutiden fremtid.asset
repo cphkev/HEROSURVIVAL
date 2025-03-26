@@ -17,12 +17,12 @@ MonoBehaviour:
   DamageAmount: 9999
   HealAmount: 0
   ManaCost: 0
-  Price: 4
+  Price: 5
   Lifetime: 2
   Speed: 30
   SpellRadius: 3
   Cooldown: 0
-  CastTime: 1
+  CastTime: 5
   CastSound: {fileID: 8300000, guid: 927b1022f86dddf46a2e9c35eb5f92be, type: 3}
   ImpactSound: {fileID: 8300000, guid: 7474f1d968da7f843819287e56f36989, type: 3}
   ImpactEffect: {fileID: 5898677291976404120, guid: 40986a51c010efe469e160242039f66a, type: 3}

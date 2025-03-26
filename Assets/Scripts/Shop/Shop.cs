@@ -24,6 +24,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private Spell spell8;
 
     public List<Spell> AllSpells;
+    
+    private bool firstPurchase = true;
+    
     void Awake()
     {
         playerInputActions = new PlayerInputActions();
@@ -101,6 +104,12 @@ public class Shop : MonoBehaviour
     {
         if (isShopOpen && slotIndex != -1 && killcount >= AllSpells[slotIndex].SpellToCast.Price)
         {
+            if(AllSpells[slotIndex].SpellToCast.Price > 0)
+            {
+                KillCounter.Instance.KillCount -= AllSpells[slotIndex].SpellToCast.Price;
+                KillCounter.Instance.UpdateKillUI();
+            }
+            
             BuySpell(slotIndex); 
         }
         else
@@ -131,6 +140,10 @@ public class Shop : MonoBehaviour
         {
             playerSpells.EquipSpell(spellToBuy); // Equip the spell in the right slot
             Debug.Log($"Player bought {spellToBuy.SpellToCast.SpellName}!");
+            if (firstPurchase)
+            { 
+                SpawnFirstWave();
+            }
         }
         else
         {
@@ -175,5 +188,15 @@ public class Shop : MonoBehaviour
         AllSpells.Add(spell6);
         AllSpells.Add(spell7);
         AllSpells.Add(spell8);
+    }
+
+    private void SpawnFirstWave()
+    {
+        firstPurchase = false;
+        GameObject gate = GameObject.FindGameObjectWithTag("Gate");
+        if (gate != null)
+        {
+            gate.GetComponent<EnemySpawner>().StartSpawning();
+        }
     }
 }

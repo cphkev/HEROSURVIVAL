@@ -7,7 +7,11 @@ public class KillCounter : MonoBehaviour
     public TMP_Text killCountText;
     private int killCount = 0;
     
-    public int KillCount => killCount;
+    public int KillCount
+    {
+        get => killCount;
+        set => killCount = value;
+    }
 
     private void Awake()
     {
@@ -30,7 +34,7 @@ public class KillCounter : MonoBehaviour
         }
     }
 
-    private void UpdateKillUI()
+    public void UpdateKillUI()
     {
         if (killCountText != null)
         {
