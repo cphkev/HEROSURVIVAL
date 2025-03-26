@@ -3568,7 +3568,7 @@ GameObject:
   - component: {fileID: 1205597701}
   - component: {fileID: 1205597700}
   m_Layer: 7
-  m_Name: Sphere
+  m_Name: MiniMapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5703,7 +5703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4749211357866941087, guid: c7a1e64480e9d9e46bb69e6217c3e333, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7242,6 +7242,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateOfGatesBetter
       objectReference: {fileID: 0}
+    - target: {fileID: 8850618350541135802, guid: bbffb72b6c30aa440956b77b7a97dc9a, type: 3}
+      propertyPath: meleeEnemyPrefab
+      value: 
+      objectReference: {fileID: 5470529278587832881, guid: 4d9a11cfad7d0a0409759dfababe8922, type: 3}
+    - target: {fileID: 8850618350541135802, guid: bbffb72b6c30aa440956b77b7a97dc9a, type: 3}
+      propertyPath: rangedEnemyPrefab
+      value: 
+      objectReference: {fileID: 593086104176382155, guid: 3cff966d2a6a3fa4ab8a07c709f99738, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
