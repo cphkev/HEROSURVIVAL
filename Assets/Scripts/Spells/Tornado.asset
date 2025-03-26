@@ -27,4 +27,4 @@ MonoBehaviour:
   ImpactEffect: {fileID: 0}
   TargetSelf: 0
   TargetGate: 0
-  Force: 40
+  Force: 20

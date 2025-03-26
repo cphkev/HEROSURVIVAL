@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 518552b1a2421be458fbca7b82f3ec70, type: 3}
-  m_Name: DOTEffect
+  m_Name: BurnEffect
   m_EditorClassIdentifier: 
-  DOTAmount: 5
+  DOTAmount: 1
+  HOTAmount: 0
   TickSpeed: 1
-  MovementPenalty: 0
-  Lifetime: 3
-  EffectParticles: {fileID: 0}
+  MovementPenalty: -1
+  Lifetime: 10
+  EffectParticles: {fileID: 6165489611793850767, guid: e59ae6cff3962254fb23f61650b7cb1c, type: 3}

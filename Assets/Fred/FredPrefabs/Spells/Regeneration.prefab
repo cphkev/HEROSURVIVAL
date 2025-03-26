@@ -95,4 +95,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpellToCast: {fileID: 11400000, guid: a707334d669463640849c0f14e607582, type: 2}
-  StatusEffect: {fileID: 0}
+  StatusEffect: {fileID: 11400000, guid: 1f798fcf58542874a8d6721730a57244, type: 2}

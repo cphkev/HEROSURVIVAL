@@ -27,4 +27,4 @@ MonoBehaviour:
   ImpactEffect: {fileID: 8534684038429508989, guid: bfe5b16e3a48a0747a20c7b5ee0ee8f6, type: 3}
   TargetSelf: 0
   TargetGate: 0
-  Force: -10
+  Force: -5

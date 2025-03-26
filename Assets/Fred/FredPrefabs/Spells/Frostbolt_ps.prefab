@@ -9824,7 +9824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpellToCast: {fileID: 11400000, guid: 84ea91ce50a73b44490c54a2d12381e2, type: 2}
-  StatusEffect: {fileID: 0}
+  StatusEffect: {fileID: 11400000, guid: 7b9139ef0bea59c409ff208838764595, type: 2}
 --- !u!1 &3781559485692147973
 GameObject:
   m_ObjectHideFlags: 0
