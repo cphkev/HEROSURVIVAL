@@ -14,4 +14,4 @@ Kevin Løvstad Schou - cph-ks427@cphbusiness.dk
 
 Frederik Per Moestrup - cph-fm124@cphbusiness.dk
 
-Gustav Heiner Henriksen - 
+Gustav Heiner Henriksen - cph-gh117@cphbusiness.dk
