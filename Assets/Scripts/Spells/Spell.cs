@@ -93,7 +93,6 @@ public class Spell : MonoBehaviour
 
    private void AddForce(Collider other)
    {
-       // Find the NavMeshAgent instead of Rigidbody
        NavMeshAgent agent = other.GetComponentInParent<NavMeshAgent>();
        if (agent != null)
        {
@@ -109,12 +108,7 @@ public class Spell : MonoBehaviour
        
        for (int i = 0; i < pushCount; i++)
        {
-           Debug.Log($"Pushing target {i + 1}/10");
-
-           // Apply 1/10th of the force
            agent.Move(direction * (force / 10));
-           
-           if(i== pushCount) Destroy(this.gameObject);
            yield return new WaitForSeconds(pushInterval); // Wait before next push
        }
        
