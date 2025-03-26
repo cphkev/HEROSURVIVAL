@@ -50,7 +50,7 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < shopSlotButtons.Count; i++)
         {
             int buttonIndex = i; 
-            shopSlotButtons[i].onClick.AddListener(() => BuyFromShop(buttonIndex)); 
+            shopSlotButtons[i].onClick.AddListener(() => BuyFromShop(buttonIndex, KillCounter.Instance.KillCount)); 
         }
     }
 
@@ -97,9 +97,9 @@ public class Shop : MonoBehaviour
         }
     }
 
-    private void BuyFromShop(int slotIndex)
+    private void BuyFromShop(int slotIndex, int killcount)
     {
-        if (isShopOpen && slotIndex != -1) 
+        if (isShopOpen && slotIndex != -1 && killcount >= AllSpells[slotIndex].SpellToCast.Price)
         {
             BuySpell(slotIndex); 
         }

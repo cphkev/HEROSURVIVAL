@@ -8,6 +8,7 @@ public class SpellScriptableObject : ScriptableObject
     public int DamageAmount = 10;
     public int HealAmount = 0;
     public float ManaCost = 5f;
+    public int Price = 0;
     public float Lifetime = 2f;
     public float Speed = 15f;
     public float SpellRadius = 0.5f;
