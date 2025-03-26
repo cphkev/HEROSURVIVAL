@@ -1,6 +1,7 @@
 using UnityEngine;
 using Scripts.CharacterComponents;
 
+
 public class StatusEffectable : MonoBehaviour
 {
     private StatusEffectScriptableObject currentEffect;
@@ -46,5 +47,7 @@ public class StatusEffectable : MonoBehaviour
             }
         }
     }
+    
+    
     
 }

@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using Scripts.CharacterComponents;
+using System.Collections;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -13,6 +15,7 @@ public class Spell : MonoBehaviour
    private Rigidbody myRigidbody;
    
    private string targetTag;
+   private bool alreadyHit = false;
    
    public void Initialize(string target)
    {
@@ -57,32 +60,66 @@ public class Spell : MonoBehaviour
 
    private void hitTarget(Collider other, string target, float vol)
    {
-       if (other.CompareTag(target))
+       if (other.CompareTag(target) && !alreadyHit)
        {
+           if(SpellToCast.Force == 0) alreadyHit = true;
            SpawnEffect(SpellToCast.ImpactEffect, transform.position, Quaternion.identity, 4f);
-           if(SpellToCast.ImpactSound!=null) SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, vol);
-           Destroy(this.gameObject);
+           if (SpellToCast.ImpactSound != null) SoundFXManager.Instance.PlaySoundFX(SpellToCast.ImpactSound, transform, vol);
+           
+
            if (SpellToCast.Force != 0)
            {
-               Rigidbody targetRigidbody = other.GetComponentInParent<Rigidbody>();
-               if (targetRigidbody != null)
-               {
-                   Vector3 forceDirection = (other.transform.position - transform.position).normalized;
-                   targetRigidbody.AddForce(forceDirection * SpellToCast.Force, ForceMode.Impulse);
-                   Debug.Log("Applying force to: " + other.name);
-               }
+               Destroy(this.gameObject, 0.6f);
+               AddForce(other);
+           }else
+           {
+               Destroy(this.gameObject);
            }
+           
            Health targetHealth = other.GetComponentInParent<Health>();
-           targetHealth.Heal(SpellToCast.HealAmount);
-           targetHealth.TakeDamage(SpellToCast.DamageAmount);
+           targetHealth?.Heal(SpellToCast.HealAmount);
+           targetHealth?.TakeDamage(SpellToCast.DamageAmount);
+
+           
            if (StatusEffect != null)
            {
-               StatusEffectable targetStatus =  other.GetComponentInParent<StatusEffectable>();
-               targetStatus.ApplyEffect(StatusEffect);
+               StatusEffectable targetStatus = other.GetComponentInParent<StatusEffectable>();
+               targetStatus?.ApplyEffect(StatusEffect);
            }
+
+           
        }
    }
-   
+
+   private void AddForce(Collider other)
+   {
+       // Find the NavMeshAgent instead of Rigidbody
+       NavMeshAgent agent = other.GetComponentInParent<NavMeshAgent>();
+       if (agent != null)
+       {
+           Vector3 forceDirection = (other.transform.position - transform.position).normalized;
+           StartCoroutine(PushTarget(agent, forceDirection, SpellToCast.Force));
+       }
+   }
+
+   private IEnumerator PushTarget(NavMeshAgent agent, Vector3 direction, float force)
+   {
+       int pushCount = 10; // Number of times to apply force
+       float pushInterval = 0.5f / pushCount; // 10 pushes over 0.5s → 0.05s per push
+       
+       for (int i = 0; i < pushCount; i++)
+       {
+           Debug.Log($"Pushing target {i + 1}/10");
+
+           // Apply 1/10th of the force
+           agent.Move(direction * (force / 10));
+           
+           if(i== pushCount) Destroy(this.gameObject);
+           yield return new WaitForSeconds(pushInterval); // Wait before next push
+       }
+       
+   }
+  
    private void SpawnEffect(GameObject effectPrefab, Vector3 position, Quaternion rotation, float lifetime)
    {
        if (effectPrefab != null)
@@ -91,6 +128,5 @@ public class Spell : MonoBehaviour
            Destroy(effectInstance, lifetime);
        }
    }
-   
    
 }
