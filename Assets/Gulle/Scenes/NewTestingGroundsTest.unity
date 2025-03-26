@@ -2062,11 +2062,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 98.66
+      value: 98.92
       objectReference: {fileID: 0}
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 35.29
+      value: 35.02
       objectReference: {fileID: 0}
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2074,23 +2074,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5129977
+      value: 0.45360747
       objectReference: {fileID: 0}
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5129978
+      value: -0.45360762
       objectReference: {fileID: 0}
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.4866552
+      value: -0.54243916
       objectReference: {fileID: 0}
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.48665527
+      value: 0.54243916
       objectReference: {fileID: 0}
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -3.019
+      value: 10.193
       objectReference: {fileID: 0}
     - target: {fileID: 1592874781794500759, guid: 22e179fc37821024ea776b53f5241ef9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2696,6 +2696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60423b7df47d5c45adba5cff9269dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReadyToSpawn: 0
 --- !u!4 &1126714560
 Transform:
   m_ObjectHideFlags: 0
